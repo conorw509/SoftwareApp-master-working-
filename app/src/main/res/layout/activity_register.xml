@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register"
+    android:background="#42f4cb">
+<LinearLayout
+
+    android:paddingTop="100dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/RegName"
+
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/edittextstyle"
+        android:hint="Name"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
+
+
+    <EditText
+        android:id="@+id/RegUserName"
+
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@drawable/edittextstyle"
+        android:hint="Username"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
+
+    <EditText
+        android:id="@+id/RegPword"
+
+        android:layout_width="299dp"
+        android:layout_height="66dp"
+        android:layout_gravity="center"
+        android:background="@drawable/edittextstyle"
+        android:hint="Password"
+        android:paddingTop="10dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
+
+    <Button
+
+        android:id="@+id/RegBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/buttonstyleselector"
+        android:gravity="center"
+        android:text="Register"
+        android:textColor="#fff" />
+
+
+
+
+
+
+
+
+</LinearLayout>
+
+
+
+    </android.support.constraint.ConstraintLayout>
