@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +37,15 @@ public class Login extends AppCompatActivity {
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN =2;
     GoogleApiClient mGoogleApiClient;
-  FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseAuth.AuthStateListener mAuthListener;
+    private  EditText emailField;
+    private EditText passField;
 
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
@@ -50,8 +54,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
       // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        final EditText etLogUsrName = (EditText) findViewById(R.id.LoginUserName);
-        final EditText eLogPword = (EditText) findViewById(R.id.RegPword);
+         emailField = (EditText) findViewById(R.id.emailFieldEnt);
+         passField = (EditText) findViewById(R.id.RegPword);
         final Button etLogBtn = (Button) findViewById(R.id.LoginBtn);
         final TextView regLink = (TextView) findViewById(R.id.RegisterBtn); // register link
 
@@ -70,6 +74,8 @@ public class Login extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         //end
+
+
 
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
@@ -96,6 +102,14 @@ startActivity(new Intent(Login.this,home.class));
         };
 
 
+etLogBtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+
+        startEmailSignIn();
+    }
+});
+
 
 
         regLink.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +121,6 @@ Login.this.startActivity(registerIntent);
 
             }
         });
-
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -126,15 +139,26 @@ Login.this.startActivity(registerIntent);
                 .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
                 .build();
 
-
-
-
-
-
-
-
     }
 
+    private void startEmailSignIn(){
+        String email = emailField.getText().toString();
+        String password = passField.getText().toString();
+
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(Login.this,"Fields are empty",Toast.LENGTH_LONG).show();
+
+        } else{
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override //checks status of task thats proceeded
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(Login.this, "Sign in Problem", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+    }
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -183,6 +207,5 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
                         // ...
                     }
                 });
-
     }
 }

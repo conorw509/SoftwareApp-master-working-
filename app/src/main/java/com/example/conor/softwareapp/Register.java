@@ -23,6 +23,8 @@ public class Register extends AppCompatActivity {
         final Button bRegister = (Button) findViewById(R.id.RegBtn);
         final TextView view = (TextView) findViewById(R.id.LoginBk);
 
+
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

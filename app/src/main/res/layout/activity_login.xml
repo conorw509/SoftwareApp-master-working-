@@ -18,17 +18,18 @@
        android:orientation="vertical">
 
 
-
-
        <EditText
-           android:textColor="#fff"
-           android:id="@+id/LoginUserName"
+           android:id="@+id/emailFieldEnt"
            android:layout_width="300dp"
            android:layout_height="60dp"
            android:layout_gravity="center"
            android:background="@drawable/edittextstyle"
-           android:hint="Username"
-           android:textColorHint="#fff" />
+           android:hint="Email"
+           android:textColor="#fff"
+           android:textColorHint="#fff"
+          />
+
+
 
        <EditText
 android:textColor="#fff"
@@ -38,6 +39,7 @@ android:textColor="#fff"
            android:layout_gravity="center"
            android:background="@drawable/edittextstyle"
            android:hint="Password"
+           android:inputType="textPassword"
            android:paddingTop="10dp"
            android:textColorHint="#fff" />
 
