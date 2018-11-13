@@ -13,7 +13,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
+   <!-- <EditText
         android:id="@+id/RegName"
 
         android:layout_width="300dp"
@@ -22,7 +22,8 @@
         android:background="@drawable/edittextstyle"
         android:hint="Name"
         android:textColor="#fff"
-        android:textColorHint="#fff" />
+        android:textColorHint="#fff" />-->
+
 
 
     <EditText
@@ -44,6 +45,7 @@
         android:layout_gravity="center"
         android:background="@drawable/edittextstyle"
         android:hint="Password"
+        android:inputType="textPassword"
         android:paddingTop="10dp"
         android:textColor="#fff"
         android:textColorHint="#fff" />
