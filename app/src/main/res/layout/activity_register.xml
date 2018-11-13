@@ -26,13 +26,13 @@
 
 
     <EditText
-        android:id="@+id/RegUserName"
+        android:id="@+id/RegEmail"
 
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:background="@drawable/edittextstyle"
-        android:hint="Username"
+        android:hint="Email"
         android:textColor="#fff"
         android:textColorHint="#fff" />
 
@@ -60,7 +60,16 @@
         android:textColor="#fff" />
 
 
+    <TextView
 
+        android:id="@+id/LoginBk"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="Return To Login"
+        android:textColor="#fff" />
 
 
 

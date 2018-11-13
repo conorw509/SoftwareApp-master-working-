@@ -18,11 +18,7 @@
        android:orientation="vertical">
 
 
-       <Button
-           android:id="@+id/enter"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="Button" />
+
 
        <EditText
            android:textColor="#fff"
@@ -62,13 +58,13 @@ android:textColor="#fff"
            android:layout_marginTop="20dp"
            android:layout_gravity="center"/>
 
-       <Button
+       <TextView
 
            android:id="@+id/RegisterBtn"
            android:layout_width="match_parent"
            android:layout_height="60dp"
-           android:layout_marginTop="50dp"
-           android:background="@drawable/buttonstyleselector"
+           android:layout_marginTop="20dp"
+       android:textSize="20dp"
            android:gravity="center"
            android:text="Register Here"
            android:textColor="#fff" />

@@ -51,8 +51,8 @@ public class Login extends AppCompatActivity {
         final EditText etLogUsrName = (EditText) findViewById(R.id.LoginUserName);
         final EditText eLogPword = (EditText) findViewById(R.id.RegPword);
         final Button etLogBtn = (Button) findViewById(R.id.LoginBtn);
-        final Button regLink = (Button) findViewById(R.id.RegisterBtn); // register link
-        final Button enter = (Button) findViewById(R.id.enter);
+        final TextView regLink = (TextView) findViewById(R.id.RegisterBtn); // register link
+
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
         mAuth =FirebaseAuth.getInstance();
@@ -89,17 +89,6 @@ Login.this.startActivity(registerIntent);
 
             }
         });
-
-        enter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent enterIntent = new Intent(Login.this, home.class);
-                Login.this.startActivity(enterIntent);
-
-
-            }
-        });
-
 
 
         // Configure Google Sign In
