@@ -40,6 +40,8 @@ public class Login extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListener;
     private  EditText emailField;
     private EditText passField;
+    private Button etLogBtn;
+    private TextView regLink;
 
     @Override
     protected void onStart() {
@@ -53,11 +55,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-      // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
          emailField = (EditText) findViewById(R.id.emailFieldEnt);
          passField = (EditText) findViewById(R.id.RegPword);
-        final Button etLogBtn = (Button) findViewById(R.id.LoginBtn);
-        final TextView regLink = (TextView) findViewById(R.id.RegisterBtn); // register link
+         etLogBtn = (Button) findViewById(R.id.LoginBtn);
+         regLink = (TextView) findViewById(R.id.RegisterBtn); // register link
 
 //test crashanalytics button
         Button crashButton = new Button(this);
@@ -68,40 +69,32 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-
         addContentView(crashButton, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        //end
-
+        //end of crash analytics
 
 
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-
         mAuth =FirebaseAuth.getInstance();
 
-
-signInButton.setOnClickListener(new View.OnClickListener() {
+//on click of google sign in button
+        signInButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         signIn();
     }
 });
-
-
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
 startActivity(new Intent(Login.this,home.class));
                 }
-
             }
         };
 
-
+//on click of email login button
 etLogBtn.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -109,9 +102,7 @@ etLogBtn.setOnClickListener(new View.OnClickListener() {
         startEmailSignIn();
     }
 });
-
-
-
+//on click bringing to register page
         regLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,13 +112,13 @@ Login.this.startActivity(registerIntent);
 
             }
         });
-
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
+//google authentication
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
