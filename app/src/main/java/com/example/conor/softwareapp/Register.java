@@ -88,6 +88,13 @@ public class Register extends AppCompatActivity{
             return;
         }
 
+        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            etEmail.setError("Please enter a Valid email");
+            etEmail.requestFocus();
+            return;
+
+        }
+
         if(password.isEmpty()){
             etPass.setError("Please enter a Password");
             etPass.requestFocus();

@@ -137,9 +137,9 @@ Login.this.startActivity(registerIntent);
         String password = passField.getText().toString();
 
 
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+        if(TextUtils.isEmpty(email) && TextUtils.isEmpty(password)) {
             Toast.makeText(Login.this,"Fields are empty",Toast.LENGTH_LONG).show();
-
+return;
         }
 
         if(email.isEmpty()){
