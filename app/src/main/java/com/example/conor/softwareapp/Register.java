@@ -37,7 +37,6 @@ public class Register extends AppCompatActivity{
     private  ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,6 @@ public class Register extends AppCompatActivity{
         etEmail = (EditText) findViewById(R.id.RegEmail);
         etPass = (EditText) findViewById(R.id.RegPword);
         view =(TextView) findViewById(R.id.LoginBk);
-
 
 
         //back to login button
@@ -71,23 +69,45 @@ public class Register extends AppCompatActivity{
 
     }
 
-
-
     private void registerUser() {
         String email = etEmail.getText().toString().trim();
         String password = etPass.getText().toString().trim();
 
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(Register.this, "Please enter an Email", Toast.LENGTH_LONG).show();
+
+
+        if(email.isEmpty() && password.isEmpty()){
+       Toast.makeText(Register.this,"Fields are empty",Toast.LENGTH_LONG).show();
+       return;
+        }
+
+
+
+        if(email.isEmpty()){
+            etEmail.setError("Please enter an Email");
+            etEmail.requestFocus();
             return;
         }
 
-        if (TextUtils.isEmpty(password)) {
-
-            Toast.makeText(Register.this, "Please enter a Password", Toast.LENGTH_LONG).show();
+        if(password.isEmpty()){
+            etPass.setError("Please enter a Password");
+            etPass.requestFocus();
             return;
-
         }
+
+        if(password.length() <6){
+            etPass.setError("Minimum Length of password must be 6");
+            etPass.requestFocus();
+            return;
+        }
+
+
+       /* if(isValidPassword(password)){
+            //Toast.makeText(Register.this,"Please enter a valid Password",Toast.LENGTH_LONG).show();
+            return;
+        }*/
+
+
+
         progressBar.setProgress(100);
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -95,16 +115,16 @@ public class Register extends AppCompatActivity{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Register.this, "User Registered", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(Register.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
+
                         }
                     }
                 });
-
-
     }
 
-    }
+
 
 
 
@@ -184,7 +204,9 @@ mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new O
             });
         }
 
-    }
+    }*/
+
+
 //check for valid password
     public boolean isValidPassword(final String password) {
 
@@ -200,5 +222,5 @@ mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new O
 
     }
 
-}*/
+}
 
