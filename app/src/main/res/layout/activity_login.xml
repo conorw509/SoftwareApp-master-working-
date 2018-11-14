@@ -53,12 +53,6 @@ android:textColor="#fff"
            android:text="Login"
            android:textColor="#fff" />
 
-       <com.google.android.gms.common.SignInButton
-           android:id="@+id/sign_in_button"
-           android:layout_width="match_parent"
-           android:layout_height="60dp"
-           android:layout_marginTop="20dp"
-           android:layout_gravity="center"/>
 
        <TextView
 
