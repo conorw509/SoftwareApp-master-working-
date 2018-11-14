@@ -51,6 +51,7 @@ public class Register extends AppCompatActivity{
         etEmail = (EditText) findViewById(R.id.RegEmail);
         etPass = (EditText) findViewById(R.id.RegPword);
         view =(TextView) findViewById(R.id.LoginBk);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 
         //back to login button

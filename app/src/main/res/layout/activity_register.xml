@@ -96,7 +96,6 @@
         android:text="Register"
         android:textColor="#fff" />
 
-
     <TextView
 
         android:id="@+id/LoginBk"
