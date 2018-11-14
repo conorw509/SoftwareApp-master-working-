@@ -36,6 +36,8 @@ public class Register extends AppCompatActivity{
     private TextView view;
     private  ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private String email;
+    private  String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +72,9 @@ public class Register extends AppCompatActivity{
     }
 
     private void registerUser() {
-        String email = etEmail.getText().toString().trim();
-        String password = etPass.getText().toString().trim();
+
+        email = etEmail.getText().toString().trim();
+        password = etPass.getText().toString().trim();
 
 
 
@@ -87,13 +90,13 @@ public class Register extends AppCompatActivity{
             etEmail.requestFocus();
             return;
         }
-
+/*
         if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             etEmail.setError("Please enter a Valid email");
             etEmail.requestFocus();
             return;
 
-        }
+        }*/
 
         if(password.isEmpty()){
             etPass.setError("Please enter a Password");
@@ -116,13 +119,30 @@ public class Register extends AppCompatActivity{
 
 
         progressBar.setProgress(100);
+        progressBar.setVisibility(view.VISIBLE);
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(Register.this, "User Registered", Toast.LENGTH_LONG).show();
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()) {
+
+                                        Toast.makeText(Register.this, "Please check your email for verifications", Toast.LENGTH_LONG).show();
+
+                                    }
+                                    else{
+                                        Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
+                                    }
+                                }
+                            });
                         }
+
                         else{
                             Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
 
