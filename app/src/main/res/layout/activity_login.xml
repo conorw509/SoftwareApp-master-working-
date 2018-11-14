@@ -53,12 +53,17 @@ android:textColor="#fff"
            android:text="Login"
            android:textColor="#fff" />
 
-       <com.google.android.gms.common.SignInButton
-           android:id="@+id/sign_in_button"
+       <Button
+           android:id="@+id/BackToLoginBtn"
            android:layout_width="match_parent"
            android:layout_height="60dp"
            android:layout_marginTop="20dp"
-           android:layout_gravity="center"/>
+           android:background="@drawable/buttonstyleselector"
+           android:gravity="center"
+           android:text="Back"
+           android:textColor="#fff" />
+
+
 
        <TextView
 
@@ -68,7 +73,7 @@ android:textColor="#fff"
            android:layout_marginTop="20dp"
        android:textSize="20dp"
            android:gravity="center"
-           android:text="Register Here"
+           android:text="Register with email address"
            android:textColor="#fff" />
 
 

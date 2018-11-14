@@ -37,7 +37,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() == null){
-                    startActivity(new Intent(home.this,Login.class));
+                    startActivity(new Intent(home.this,LoginInHome.class));
                 }
             }
         };
