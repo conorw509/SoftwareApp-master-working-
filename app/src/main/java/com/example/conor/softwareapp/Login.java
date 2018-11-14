@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
     private EditText emailField;
     private EditText passField;
     private Button etLogBtn;
+    private  Button backBtn;
     private TextView regLink;
    // private ProgressBar progressBar;
 
@@ -43,6 +44,7 @@ public class Login extends AppCompatActivity {
         passField = (EditText) findViewById(R.id.RegPword);
         etLogBtn = (Button) findViewById(R.id.LoginBtn);
         regLink = (TextView) findViewById(R.id.RegisterBtn);
+        backBtn =(Button) findViewById(R.id.BackToLoginBtn);
 
         // progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -95,6 +97,7 @@ public class Login extends AppCompatActivity {
                     @Override //checks status of task thats proceeded
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
                             if (mAuth.getCurrentUser().isEmailVerified()) {
                                 startActivity(new Intent(Login.this, home.class));
 
@@ -119,6 +122,18 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Login.this, Register.class);
+                Login.this.startActivity(registerIntent);
+
+
+            }
+        });
+
+//back to start up screen
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerIntent = new Intent(Login.this, LoginInHome.class);
                 Login.this.startActivity(registerIntent);
 
 
