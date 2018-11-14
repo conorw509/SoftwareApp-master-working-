@@ -5,11 +5,15 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
+import android.view.ViewParent;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,84 +21,39 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class Register extends AppCompatActivity {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    private EditText etName;
-    private  EditText etEmail;
-    private  Button bRegister;
+public class Register extends AppCompatActivity{
+
+    //private EditText etName;
+
+    private EditText etEmail;
+    private Button bRegister;
     private EditText etPass;
-    private  TextView view;
+    private TextView view;
+    private  ProgressBar progressBar;
     private FirebaseAuth mAuth;
-    private ProgressDialog PD;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-      // etName = (EditText) findViewById(R.id.RegName);
-       etEmail = (EditText) findViewById(R.id.RegEmail);
-       etPass = (EditText) findViewById(R.id.RegPword);
-       bRegister = (Button) findViewById(R.id.RegBtn);
-       view = (TextView) findViewById(R.id.LoginBk);
-
-
-
-        PD = new ProgressDialog(this);
-        PD.setMessage("Loading...");
-        PD.setCancelable(true);
-        PD.setCanceledOnTouchOutside(false);
-
         mAuth = FirebaseAuth.getInstance();
+        progressBar = new ProgressBar(this);
 
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(Register.this, home.class));
-            finish();
-        }
+        bRegister = (Button) findViewById(R.id.RegBtn);
+        etEmail = (EditText) findViewById(R.id.RegEmail);
+        etPass = (EditText) findViewById(R.id.RegPword);
+        view =(TextView) findViewById(R.id.LoginBk);
 
 
-        bRegister.setOnClickListener(new View.OnClickListener() {
-            @Override            public void onClick(View view) {
-                final String email = etEmail.getText().toString();
-                final String password = etPass.getText().toString();
-               // final String name = etName.getText().toString();
 
-                try {
-                    if (password.length() > 0 && email.length() > 0) {
-                        PD.show();
-                        mAuth.createUserWithEmailAndPassword(email, password)
-
-                                .addOnCompleteListener( Register.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()) {
-                                            Toast.makeText(
-                                                    Register.this,
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_LONG).show();
-                                            Log.v("error", task.getResult().toString());
-                                        } else {
-                                            Intent intent = new Intent(Register.this, home.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                        PD.dismiss();
-                                    }
-                                });
-                    } else {
-                        Toast.makeText(
-                                Register.this,
-                                "Fill All Fields",
-                                Toast.LENGTH_LONG).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-//back to login
+        //back to login button
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +62,143 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
 
+    }
+
+
+
+    private void registerUser() {
+        String email = etEmail.getText().toString().trim();
+        String password = etPass.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(Register.this, "Please enter an Email", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+
+            Toast.makeText(Register.this, "Please enter a Password", Toast.LENGTH_LONG).show();
+            return;
 
         }
-}
+        progressBar.setProgress(100);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Register.this, "User Registered", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(Register.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
+    }
+
+    }
+
+
+
+
+
+/*
+        private void createUser(){
+
+            email = etEmail.getText().toString();
+            password = etPass.getText().toString();
+
+            if(email.isEmpty()){
+                etEmail.setError("Please enter an Email");
+                etEmail.requestFocus();
+                return;
+            }
+
+            if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                etEmail.setError("Please enter a Valid email");
+                etEmail.requestFocus();
+                return;
+
+            }
+
+            if(password.length() <6){
+                etPass.setError("Minimum Length of password must be 6");
+                etPass.requestFocus();
+                return;
+            }
+
+
+
+            if(password.isEmpty()){
+                etPass.setError("Please enter a Password");
+                etPass.requestFocus();
+                return;
+            }
+
+              /*  if(isValidPassword(password)){
+                etPass.setError("Please enter a valid password");
+                etPass.requestFocus();
+                return;
+            }*/
+
+/*
+mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+    @Override
+    public void onComplete(@NonNull Task<AuthResult> task) {
+
+        if(task.isSuccessful()){
+            Toast.makeText(Register.this,"User Registered Successfully",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(Register.this,"Something went wrong",Toast.LENGTH_LONG).show();
+        }
+
+    }
+});
+        }
+
+
+
+//send email verification
+    private void sendEmailVerfication(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null){
+
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+
+                        Toast.makeText(Register.this,"Please Check email for verification",Toast.LENGTH_SHORT).show();
+                        FirebaseAuth.getInstance().signOut();
+                    }
+                }
+            });
+        }
+
+    }
+//check for valid password
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+
+}*/
+

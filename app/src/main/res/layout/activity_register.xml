@@ -25,7 +25,6 @@
         android:textColorHint="#fff" />-->
 
 
-
     <EditText
         android:id="@+id/RegEmail"
 
@@ -61,7 +60,43 @@
         android:text="Register"
         android:textColor="#fff" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Password must be at least 6 characters and contain:"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="One Capital Letter"
+        android:textColor="#fff"
+        android:layout_marginTop="5dp"
 
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="One Number"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="One Symbol Character"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginTop="5dp"
+
+        />
     <TextView
 
         android:id="@+id/LoginBk"

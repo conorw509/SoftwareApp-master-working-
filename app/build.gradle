@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:11.6.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
 
+
 }
 //apply  'com.google.gms.google-services'//firebase
 
