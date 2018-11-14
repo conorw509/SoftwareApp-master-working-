@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="One Capital Letter"
+        android:text="Password must have at least one Capital Letter"
         android:textColor="#fff"
         android:layout_marginTop="5dp"
 
@@ -69,7 +69,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="One Number"
+        android:text="Password must have at least one Number"
         android:textColor="#fff"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
@@ -79,7 +79,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="One Symbol Character"
+        android:text="Password must have at least one Symbol"
         android:textStyle="bold"
         android:textColor="#fff"
         android:layout_marginTop="5dp"
