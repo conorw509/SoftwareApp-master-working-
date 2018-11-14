@@ -136,10 +136,26 @@ Login.this.startActivity(registerIntent);
         String email = emailField.getText().toString();
         String password = passField.getText().toString();
 
+
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(Login.this,"Fields are empty",Toast.LENGTH_LONG).show();
 
-        } else{
+        }
+
+        if(email.isEmpty()){
+            emailField.setError("Please enter an Email");
+            emailField.requestFocus();
+            return;
+        }
+
+        if(password.isEmpty()){
+            passField.setError("Please enter a Password");
+            passField.requestFocus();
+            return;
+        }
+
+
+        else{
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override //checks status of task thats proceeded
                 public void onComplete(@NonNull Task<AuthResult> task) {
