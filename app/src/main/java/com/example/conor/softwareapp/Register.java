@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends AppCompatActivity{
+public class Register extends AppCompatActivity {
 
     //private EditText etName;
 
@@ -34,10 +34,10 @@ public class Register extends AppCompatActivity{
     private Button bRegister;
     private EditText etPass;
     private TextView view;
-    private  ProgressBar progressBar;
+    // private  ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private String email;
-    private  String password;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,11 @@ public class Register extends AppCompatActivity{
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        progressBar = new ProgressBar(this);
-
         bRegister = (Button) findViewById(R.id.RegBtn);
         etEmail = (EditText) findViewById(R.id.RegEmail);
         etPass = (EditText) findViewById(R.id.RegPword);
-        view =(TextView) findViewById(R.id.LoginBk);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        view = (TextView) findViewById(R.id.LoginBk);
+        //  progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 
         //back to login button
@@ -77,35 +75,32 @@ public class Register extends AppCompatActivity{
         email = etEmail.getText().toString().trim();
         password = etPass.getText().toString().trim();
 
-
-
-        if(email.isEmpty() && password.isEmpty()){
-       Toast.makeText(Register.this,"Fields are empty",Toast.LENGTH_LONG).show();
-       return;
+        if (email.isEmpty() && password.isEmpty()) {
+            Toast.makeText(Register.this, "Fields are empty", Toast.LENGTH_LONG).show();
+            return;
         }
 
 
-
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             etEmail.setError("Please enter an Email");
             etEmail.requestFocus();
             return;
         }
-/*
-        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+
+    /*    if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             etEmail.setError("Please enter a Valid email");
             etEmail.requestFocus();
             return;
 
         }*/
 
-        if(password.isEmpty()){
+        if (password.isEmpty()) {
             etPass.setError("Please enter a Password");
             etPass.requestFocus();
             return;
         }
 
-        if(password.length() <6){
+        if (password.length() < 6) {
             etPass.setError("Minimum Length of password must be 6");
             etPass.requestFocus();
             return;
@@ -118,9 +113,8 @@ public class Register extends AppCompatActivity{
         }*/
 
 
-
-        progressBar.setProgress(100);
-        progressBar.setVisibility(view.VISIBLE);
+        // progressBar.setProgress(100);
+        //progressBar.setVisibility(view.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -131,32 +125,23 @@ public class Register extends AppCompatActivity{
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
-                                    if(task.isSuccessful()) {
+                                    if (task.isSuccessful()) {
 
                                         Toast.makeText(Register.this, "Please check your email for verifications", Toast.LENGTH_LONG).show();
 
-                                    }
-                                    else{
+                                    } else {
                                         Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
                                     }
                                 }
                             });
-                        }
-
-                        else{
+                        } else {
                             Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
 
                         }
                     }
                 });
     }
-
-
-
-
-
-
 
 /*
         private void createUser(){
@@ -234,8 +219,7 @@ mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new O
 
     }*/
 
-
-//check for valid password
+    //check for valid password
     public boolean isValidPassword(final String password) {
 
         Pattern pattern;
