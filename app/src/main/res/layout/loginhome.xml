@@ -4,19 +4,39 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
     android:background="#42f4cb"
-    >
+    tools:context=".Login">
+
+
+
 
     <LinearLayout
-        android:paddingTop="100dp"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="100dp">
+        <TextView
+            android:id="@+id/textGrid"
+            android:text="My Mental Health"
+            android:textSize="34dp"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="40dp"/>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/symbol"
+
+            />
 
         <Button
             android:id="@+id/GoToLogin"
@@ -32,23 +52,23 @@
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_gravity="center"/>
+            android:text="Google sign in" />
 
         <TextView
 
             android:id="@+id/RegisterBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Register with email address"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:textSize="20dp" />
 
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

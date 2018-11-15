@@ -43,12 +43,12 @@ public class LoginInHome extends AppCompatActivity {
     private TextView regLink;
     // private ProgressBar progressBar;
 
-    @Override
+   /* @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+      //  mAuth.addAuthStateListener(mAuthListener);
     }
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,27 +59,6 @@ public class LoginInHome extends AppCompatActivity {
         // progressBar = (ProgressBar) findViewById(R.id.progressBar);
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mAuth = FirebaseAuth.getInstance();
-
-
-        //on click of google sign in button
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
-
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
-                if (firebaseAuth.getCurrentUser() != null) {
-                    startActivity(new Intent(LoginInHome.this, home.class));
-                }
-            }
-        };
-
 
 //on click bringing to register page
         regLink.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +80,27 @@ public class LoginInHome extends AppCompatActivity {
 
             }
         });
+
+
+        //on click of google sign in button
+     /*   signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });*/
+/*
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (firebaseAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(LoginInHome.this, home.class));
+                }
+            }
+        };
+
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -169,6 +169,6 @@ public class LoginInHome extends AppCompatActivity {
 
                         // ...
                     }
-                });
+                });*/
     }
 }

@@ -1,3 +1,7 @@
+
+
+<!--"#f23557"--> -color of buttons
+
 /*
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override

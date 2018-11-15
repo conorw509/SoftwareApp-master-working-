@@ -1,9 +1,11 @@
 package com.example.conor.softwareapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,6 +17,7 @@ public class home extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
+   // CardView cardView;
 
     @Override
     protected void onStart() {
@@ -32,6 +35,9 @@ public class home extends AppCompatActivity {
         final Button support = (Button) findViewById(R.id.supportBtn);
         final Button audio = (Button) findViewById(R.id.audioBtn);
         Button signOut = (Button)  findViewById(R.id.LogOut);
+      //  cardView = (CardView) findViewById(R.id.cardViewChat);
+
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -56,6 +62,7 @@ public class home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent journalIntent = new Intent(home.this, journal.class);
                 home.this.startActivity(journalIntent);
+               // cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
             }
         });
         chat.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +71,7 @@ public class home extends AppCompatActivity {
 
                 Intent chatIntent = new Intent(home.this, chat.class);
                 home.this.startActivity(chatIntent);
+                //cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
 
             }
         });
@@ -74,6 +82,7 @@ public class home extends AppCompatActivity {
 
                 Intent supportIntent = new Intent(home.this, support.class);
                 home.this.startActivity(supportIntent);
+               // cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
 
             }
         });
@@ -84,6 +93,7 @@ public class home extends AppCompatActivity {
 
                 Intent audioIntent = new Intent(home.this, audio.class);
                 home.this.startActivity(audioIntent);
+              //  cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
 
             }
         });
