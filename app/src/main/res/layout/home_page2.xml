@@ -12,7 +12,21 @@
 
     >
 
+    <Button
+        android:id="@+id/LogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyleselector"
+        android:text="LogOut"
+        android:textColor="#ffffff" />
 
+    <Button
+        android:id="@+id/Options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyleselector"
+        android:text="Options"
+        android:textColor="#ffffff" />
 
     <RelativeLayout
         android:layout_weight="2"
@@ -34,13 +48,7 @@
     </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/LogOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonstyleselector"
-        android:text="LogOut"
-        android:textColor="#ffffff" />
+
 
     <GridLayout
         android:columnCount="2"
@@ -81,16 +89,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
-                    android:drawableTop="@drawable/chaticon" />
+                    android:drawableTop="@drawable/chaticon"
+                    tools:text="CHAT"
+                    android:textColor="#000000"/>
                 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:text="Chat"/>
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -120,17 +128,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
-                    android:drawableTop="@drawable/diaryicon" />
+                    android:drawableTop="@drawable/diaryicon"
+                    tools:text="JOURNAL"
+                    android:textColor="#000000"/>
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:text="Journal"/>
+
 
             </LinearLayout>
 
@@ -160,16 +163,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
-                    android:drawableTop="@drawable/musicicon" />
+                    android:drawableTop="@drawable/musicicon"
+                    tools:text="AUDIO"
+                    android:textColor="#000000"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="20dp"
-                    android:text="Audio"
-                    android:textStyle="bold" />
+
 
             </LinearLayout>
 
@@ -199,17 +197,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
-                    android:drawableTop="@drawable/supporticon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Support"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:drawableTop="@drawable/supporticon"
+                    tools:text="SUPPORT"
+                    android:textColor="#000000"/>
 
             </LinearLayout>
 
