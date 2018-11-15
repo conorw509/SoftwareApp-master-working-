@@ -128,7 +128,7 @@ public class Register extends AppCompatActivity {
 
                                     if (task.isSuccessful()) {
 
-                                        Toast.makeText(Register.this, "Please check your email for verifications", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
 
                                     } else {
                                         Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();

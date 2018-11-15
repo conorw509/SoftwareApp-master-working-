@@ -103,12 +103,16 @@ public class Login extends AppCompatActivity {
                                 startActivity(new Intent(Login.this, home.class));
 
                             }
-                            else if(!task.isSuccessful()){
+
+                            else {
                                 Toast.makeText(Login.this, "Please verify your email", Toast.LENGTH_LONG).show();
                             }
 
 
-                        } else {
+
+
+                        }
+                        else if (!task.isSuccessful()) {
                             Toast.makeText(Login.this, "Sign in Problem", Toast.LENGTH_LONG).show();
                         }
                     }

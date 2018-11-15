@@ -37,7 +37,7 @@ public class LoginInHome extends AppCompatActivity {
     SignInButton signInButton;
     FirebaseAuth mAuth;
     GoogleApiClient mGoogleApiClient;
-   FirebaseAuth.AuthStateListener mAuthListener;
+  // FirebaseAuth.AuthStateListener mAuthListener;
     private final static int RC_SIGN_IN = 2;
     private Button etLogBtn;
     private TextView regLink;
@@ -46,7 +46,10 @@ public class LoginInHome extends AppCompatActivity {
    @Override
     protected void onStart() {
         super.onStart();
-       mAuth.addAuthStateListener(mAuthListener);
+
+       FirebaseUser currentUser = mAuth.getCurrentUser();
+
+      // mAuth.addAuthStateListener(mAuthListener);
     }
 
 
@@ -88,11 +91,12 @@ public class LoginInHome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signIn();
+
             }
         });
 
 
-       mAuthListener = new FirebaseAuth.AuthStateListener() {
+       /*mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
@@ -100,7 +104,7 @@ public class LoginInHome extends AppCompatActivity {
                     startActivity(new Intent(LoginInHome.this, home.class));
                 }
             }
-        };
+        };*/
 
 
         // Configure Google Sign In
@@ -132,10 +136,7 @@ public class LoginInHome extends AppCompatActivity {
     }
 
 
-    private void signOut(){
 
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -165,12 +166,18 @@ public class LoginInHome extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("Tag", "signInWithCredential:success");
+                           // Log.d("Tag", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            Intent i =new Intent(getApplicationContext(),home.class);
+                            startActivity(i);
+                            finish();
+                            Toast.makeText(LoginInHome.this,"User Logged in with google",Toast.LENGTH_LONG).show();
+
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInWithCredential:failure", task.getException());
+                          //  Log.w("TAG", "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginInHome.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
                             //updateUI(null);
                         }

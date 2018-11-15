@@ -16,15 +16,15 @@ import com.google.firebase.auth.FirebaseAuth;
 public class home extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListener;
+    //FirebaseAuth.AuthStateListener mAuthListener;
    // CardView cardView;
 
-    @Override
-    protected void onStart() {
+   // @Override
+  /*  protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,19 +40,21 @@ public class home extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+      /*  mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() == null){
                     startActivity(new Intent(home.this,LoginInHome.class));
                 }
             }
-        };
+        };*/
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
+                Intent journalIntent = new Intent(home.this, LoginInHome.class);
+                home.this.startActivity(journalIntent);
 
             }
         });
