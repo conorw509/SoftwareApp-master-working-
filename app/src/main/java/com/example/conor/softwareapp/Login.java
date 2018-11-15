@@ -65,6 +65,7 @@ public class Login extends AppCompatActivity {
         //end of crash analytics
 
 
+
 //on click of email login button
         etLogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +102,8 @@ public class Login extends AppCompatActivity {
                             if (mAuth.getCurrentUser().isEmailVerified()) {
                                 startActivity(new Intent(Login.this, home.class));
 
-                            } else {
+                            }
+                            else if(!task.isSuccessful()){
                                 Toast.makeText(Login.this, "Please verify your email", Toast.LENGTH_LONG).show();
                             }
 

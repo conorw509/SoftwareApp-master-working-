@@ -20,13 +20,12 @@
         android:text="LogOut"
         android:textColor="#ffffff" />
 
-    <Button
-        android:id="@+id/Options"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonstyleselector"
-        android:text="Options"
-        android:textColor="#ffffff" />
+<Spinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/buttonstyleselector">
+
+</Spinner>
 
     <RelativeLayout
         android:layout_weight="2"
@@ -90,15 +89,16 @@
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
                     android:drawableTop="@drawable/chaticon"
-                    tools:text="CHAT"
-                    android:textColor="#000000"/>
-                
+                />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textStyle="bold" />
+                    android:text="CHAT"
+                    android:textSize="20dp"/>
+
+
+
 
             </LinearLayout>
 
@@ -129,10 +129,13 @@
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
                     android:drawableTop="@drawable/diaryicon"
-                    tools:text="JOURNAL"
-                    android:textColor="#000000"/>
+                  />
 
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JOURNAL"
+                    android:textSize="20dp"/>
 
 
             </LinearLayout>
@@ -164,8 +167,13 @@
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
                     android:drawableTop="@drawable/musicicon"
-                    tools:text="AUDIO"
-                    android:textColor="#000000"/>
+
+                   />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AUDIO"
+                    android:textSize="20dp"/>
 
 
 
@@ -198,8 +206,14 @@
                     android:layout_gravity="center_horizontal"
                     android:background="#ffffff"
                     android:drawableTop="@drawable/supporticon"
-                    tools:text="SUPPORT"
-                    android:textColor="#000000"/>
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUPPORT"
+                    android:textSize="20dp"/>
 
             </LinearLayout>
 

@@ -37,18 +37,19 @@ public class LoginInHome extends AppCompatActivity {
     SignInButton signInButton;
     FirebaseAuth mAuth;
     GoogleApiClient mGoogleApiClient;
-    FirebaseAuth.AuthStateListener mAuthListener;
+   FirebaseAuth.AuthStateListener mAuthListener;
     private final static int RC_SIGN_IN = 2;
     private Button etLogBtn;
     private TextView regLink;
     // private ProgressBar progressBar;
 
-   /* @Override
+   @Override
     protected void onStart() {
         super.onStart();
-      //  mAuth.addAuthStateListener(mAuthListener);
+       mAuth.addAuthStateListener(mAuthListener);
     }
-*/
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +61,8 @@ public class LoginInHome extends AppCompatActivity {
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mAuth = FirebaseAuth.getInstance();
 
-//on click bringing to register page
+
+        //on click bringing to register page
         regLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,21 +79,20 @@ public class LoginInHome extends AppCompatActivity {
                 Intent registerIntent = new Intent(LoginInHome.this, Login.class);
                 LoginInHome.this.startActivity(registerIntent);
 
-
             }
         });
 
 
         //on click of google sign in button
-     /*   signInButton.setOnClickListener(new View.OnClickListener() {
+       signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
-        });*/
-/*
+        });
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+       mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
@@ -107,6 +108,7 @@ public class LoginInHome extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
 
 //google authentication
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -127,6 +129,12 @@ public class LoginInHome extends AppCompatActivity {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+
+    private void signOut(){
+
+
     }
 
     @Override
@@ -169,6 +177,6 @@ public class LoginInHome extends AppCompatActivity {
 
                         // ...
                     }
-                });*/
+                });
     }
 }
