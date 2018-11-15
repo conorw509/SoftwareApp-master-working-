@@ -70,7 +70,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="Password must be at least 6 characters and contain:"
+        android:text="Password must be at least 6 characters with no spaces"
         android:layout_marginTop="15dp"
         android:textStyle="bold"
         android:textColor="#fff"
@@ -98,7 +98,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="Password must have at least one Symbol"
+        android:text="Password must have at least one Special Character"
         android:textStyle="bold"
         android:textColor="#fff"
         android:layout_marginTop="5dp"
