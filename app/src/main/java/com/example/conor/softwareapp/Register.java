@@ -27,6 +27,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity {
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
 
     //private EditText etName;
 
@@ -80,31 +90,32 @@ public class Register extends AppCompatActivity {
             return;
         }
 
+        else {
+            if (email.isEmpty()) {
+                etEmail.setError("Please enter an Email");
+                etEmail.requestFocus();
+                return;
+            }
 
-        if (email.isEmpty()) {
-            etEmail.setError("Please enter an Email");
-            etEmail.requestFocus();
-            return;
+            if (password.isEmpty()) {
+                etPass.setError("Please enter a Password");
+                etPass.requestFocus();
+                return;
+            }
         }
 
-    /*    if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            etEmail.setError("Please enter a Valid email");
-            etEmail.requestFocus();
-            return;
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                etEmail.setError("Please enter a Valid email");
+                etEmail.requestFocus();
+                return;
 
-        }*/
+            }
 
-        if (password.isEmpty()) {
-            etPass.setError("Please enter a Password");
-            etPass.requestFocus();
-            return;
-        }
-
-        if (password.length() < 6) {
-            etPass.setError("Minimum Length of password must be 6");
-            etPass.requestFocus();
-            return;
-        }
+                if (!PASSWORD_PATTERN.matcher(password).matches()) {
+                    etPass.setError("Password is to weak");
+                    etEmail.requestFocus();
+                    return;
+            }
 
 
        /* if(isValidPassword(password)){
@@ -113,36 +124,36 @@ public class Register extends AppCompatActivity {
         }*/
 
 
-        // progressBar.setProgress(100);
-        //progressBar.setVisibility(view.VISIBLE);
+            // progressBar.setProgress(100);
+            //progressBar.setVisibility(view.VISIBLE);
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
 
-                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
 
-                                    if (task.isSuccessful()) {
+                                        if (task.isSuccessful()) {
 
-                                        Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
 
-                                    } else {
-                                        Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
+                                        }
                                     }
-                                }
-                            });
-                        } else {
-                            Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
+                                });
+                            } else {
+                                Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
 
+                            }
                         }
-                    }
-                });
-    }
+                    });
+        }
 
 /*
         private void createUser(){
@@ -220,20 +231,7 @@ mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new O
 
     }*/
 
-    //check for valid password
-    public boolean isValidPassword(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
-
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
 
     }
 
-}
 
