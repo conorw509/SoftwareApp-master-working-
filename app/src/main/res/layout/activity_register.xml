@@ -95,15 +95,7 @@
 
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:text="Password must have at least one Special Character"
-        android:textStyle="bold"
-        android:textColor="#fff"
-        android:layout_marginTop="5dp"
 
-        />
     <Button
 
         android:id="@+id/RegBtn"

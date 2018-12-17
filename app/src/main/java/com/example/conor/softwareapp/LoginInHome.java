@@ -71,6 +71,7 @@ public class LoginInHome extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginInHome.this, Register.class);
                 LoginInHome.this.startActivity(registerIntent);
+                finish();
 
 
             }
@@ -81,6 +82,7 @@ public class LoginInHome extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(LoginInHome.this, Login.class);
                 LoginInHome.this.startActivity(registerIntent);
+                finish();
 
             }
         });

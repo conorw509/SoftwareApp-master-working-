@@ -55,6 +55,7 @@ public class home extends AppCompatActivity {
                 mAuth.signOut();
                 Intent journalIntent = new Intent(home.this, LoginInHome.class);
                 home.this.startActivity(journalIntent);
+                finish();
 
             }
         });
@@ -66,6 +67,7 @@ public class home extends AppCompatActivity {
                 Intent journalIntent = new Intent(home.this, journal.class);
                 home.this.startActivity(journalIntent);
                // cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
+                finish();
             }
         });
         chat.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +77,7 @@ public class home extends AppCompatActivity {
                 Intent chatIntent = new Intent(home.this, chat.class);
                 home.this.startActivity(chatIntent);
                 //cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
+                finish();
 
             }
         });
@@ -97,6 +100,7 @@ public class home extends AppCompatActivity {
                 Intent audioIntent = new Intent(home.this, audio.class);
                 home.this.startActivity(audioIntent);
               //  cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
+                finish();
 
             }
         });

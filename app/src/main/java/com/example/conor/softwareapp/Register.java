@@ -33,7 +33,7 @@ public class Register extends AppCompatActivity {
                     "(?=.*[a-z])" +         //at least 1 lower case letter
                     "(?=.*[A-Z])" +         //at least 1 upper case letter
                     "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                 //   "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
                     ".{6,}" +               //at least 6 characters
                     "$");
@@ -68,6 +68,7 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Register.this, LoginInHome.class);
                 Register.this.startActivity(intent);
+                finish();
             }
         });
 
@@ -75,6 +76,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
+
+
             }
         });
 

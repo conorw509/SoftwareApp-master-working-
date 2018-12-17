@@ -50,6 +50,7 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        /*
 //test crashanalytics button
         Button crashButton = new Button(this);
         crashButton.setText("Crash!");
@@ -62,7 +63,7 @@ public class Login extends AppCompatActivity {
         addContentView(crashButton, new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        //end of crash analytics
+        //end of crash analytics*/
 
 
 
@@ -101,6 +102,7 @@ public class Login extends AppCompatActivity {
 
                             if (mAuth.getCurrentUser().isEmailVerified()) {
                                 startActivity(new Intent(Login.this, home.class));
+                                finish();
 
                             }
 
@@ -129,6 +131,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Login.this, Register.class);
                 Login.this.startActivity(registerIntent);
+                finish();
 
 
             }
@@ -141,6 +144,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Login.this, LoginInHome.class);
                 Login.this.startActivity(registerIntent);
+                finish();
 
 
             }
