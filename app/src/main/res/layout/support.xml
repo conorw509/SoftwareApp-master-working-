@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#42f4cb"
+    android:weightSum="10"
+
+    >
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
+        android:id="@+id/LogOutSupport"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="280dp" />
-</android.support.constraint.ConstraintLayout>
+        android:background="@drawable/buttonstyleselector"
+        android:text="LogOut"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/BackToHomeSupport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyleselector"
+        android:text="Back To Home"
+        android:textColor="#ffffff" />
+
+
+
+</LinearLayout>

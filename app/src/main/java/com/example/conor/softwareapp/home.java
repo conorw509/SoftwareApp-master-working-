@@ -70,6 +70,7 @@ public class home extends AppCompatActivity {
                 finish();
             }
         });
+
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
