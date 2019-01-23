@@ -90,6 +90,7 @@ public class home extends AppCompatActivity {
                 Intent supportIntent = new Intent(home.this, support.class);
                 home.this.startActivity(supportIntent);
                // cardView.setCardBackgroundColor(Color.parseColor("#b70505"));
+                finish();
 
             }
         });

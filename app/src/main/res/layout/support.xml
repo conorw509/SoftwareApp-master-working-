@@ -28,6 +28,15 @@
         android:text="Back To Home"
         android:textColor="#ffffff" />
 
+    <TextView
+        android:id="@+id/supportViw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="Support"
+        android:textColor="#ffffff"
+        android:textSize="34dp"
+        android:visibility="visible" />
 
 
 </LinearLayout>
