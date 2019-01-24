@@ -3,6 +3,7 @@ package com.example.conor.softwareapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -24,9 +25,9 @@ public class support extends AppCompatActivity {
 
        final Button signOut = (Button)  findViewById(R.id.LogOutSupport);
        final Button backToHome = (Button)  findViewById(R.id.BackToHomeSupport);
-      // final TextView txtView = (TextView) findViewById(R.id.supportTxt);
+       final TextView txtView = (TextView) findViewById(R.id.row1);
 
-      // txtView.setGravity(Gravity.CENTER_HORIZONTAL);
+      txtView.setMovementMethod(LinkMovementMethod.getInstance());
 
         mAuth = FirebaseAuth.getInstance();
 
