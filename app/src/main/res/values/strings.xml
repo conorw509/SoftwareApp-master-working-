@@ -2,7 +2,7 @@
     <string name="app_name">SoftwareApp</string>
 
     <string name="LinkToSite">
-        <a href = "www.google.com"> First Link
+        <a href = "http://www.google.com"> First Link
 
         </a>
     </string>
