@@ -67,7 +67,7 @@
                 android:gravity="end"
                 android:text="Website"
                 android:textColor="#ffffff"
-                android:textSize="33dp" />
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/numberViw"
@@ -79,7 +79,7 @@
 
                 android:text="Direct Call"
                 android:textColor="#ffffff"
-                android:textSize="33dp" />
+                android:textSize="25dp" />
 
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                                 android:layout_marginRight="40dp"
                                 android:layout_weight="50"
                                 android:background="#42f4cb"
-                                android:drawableTop="@mipmap/Call"
+                                android:drawableTop="@mipmap/call"
 
                                 android:gravity="end"
 
@@ -138,270 +138,37 @@
 
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/row3"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="14dp"
                                 android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
+                                android:layout_weight="50"
 
-                            <TextView
+                                android:gravity="end"
+                                android:text="@string/LinkToSite"
+                                android:textColor="#CC0066"
+                                android:textSize="15dp" />
+
+                            <Button
                                 android:id="@+id/row4"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
+                                android:layout_height="50dp"
                                 android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:layout_weight="50"
-                                android:layout_marginRight="40dp"
+                                android:background="#42f4cb"
+                                android:drawableTop="@mipmap/call"
+
                                 android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row6"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
 
 
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row7"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row10"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row11"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row12"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
+                                />
 
 
                         </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row14"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row15"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row16"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row17"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/row18"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/row19"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/test3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:layout_marginRight="40dp"
-                                android:gravity="end"
-                                android:text="Website"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                            <TextView
-                                android:id="@+id/test4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="50"
-                                android:gravity="end"
-                                android:layout_marginRight="40dp"
-                                android:text="Number"
-                                android:textColor="#ffffff"
-                                android:textSize="27dp" />
-
-                        </TableRow>
-
-
-
-
-
-
 
 
 

@@ -30,7 +30,7 @@ import java.net.URI;
 public class support extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private int callPermissionCode = 1;
+    private final int REQUEST_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class support extends AppCompatActivity {
         final Button signOut = (Button) findViewById(R.id.LogOutSupport);
         final Button backToHome = (Button) findViewById(R.id.BackToHomeSupport);
         final TextView txtView = (TextView) findViewById(R.id.row1);
-        final TextView num1 = (TextView) findViewById(R.id.row2);
+        final Button num1 = (Button) findViewById(R.id.row2);
 
         txtView.setMovementMethod(LinkMovementMethod.getInstance());
 
@@ -50,22 +50,16 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               /* if (ContextCompat.checkSelfPermission(support.this,
-                        Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-
-                    Toast.makeText(support.this, "Permission to use call feature is already granted",
-                            Toast.LENGTH_LONG).show();
-                    //Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    //callIntent.setData(Uri.parse("0857827701"));
-                    //startActivity(callIntent);
+                //if (ContextCompat.checkSelfPermission(support.this,
+                  //      Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
 
 
-                } else {
+                             makePhoneCall1();
+              //  }
+                /*else {
 
                     requestCallpermission();
                 }*/
-
-
             }
         });
 
@@ -95,8 +89,21 @@ public class support extends AppCompatActivity {
 
 
     }
-/*
-    private void requestCallpermission() {
+
+
+    private void makePhoneCall1() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(support.this,
+                        new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+            } else {
+                String dial ="0857827701";
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+            }
+    }
+
+   /* private void requestCallpermission() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
             new AlertDialog.Builder(this).setTitle("Permission Needed").setMessage("Permission is needed to make the call")
@@ -104,7 +111,7 @@ public class support extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            ActivityCompat.requestPermissions(support.this, new String[]{Manifest.permission.CALL_PHONE}, callPermissionCode);
+                            ActivityCompat.requestPermissions(support.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
                         }
                     })
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -116,33 +123,18 @@ public class support extends AppCompatActivity {
                     })
                     .create().show();
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, callPermissionCode);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
     }*/
-
-
-    private void makePhoneCall() {
-
-        if (ContextCompat.checkSelfPermission(support.this,
-                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(support.this,
-                        new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-            } else {
-                String dial = "tel:" + number;
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
-            }
-
-    }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        if (requestCode == callPermissionCode) {
+        if (requestCode == REQUEST_CALL) {
 
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(this,"Permission Granted",Toast.LENGTH_LONG).show();
+                makePhoneCall1();
             }
             else{
                 Toast.makeText(this,"Permission Denied",Toast.LENGTH_LONG).show();
