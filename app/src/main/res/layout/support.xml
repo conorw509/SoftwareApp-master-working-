@@ -63,10 +63,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
                 android:layout_marginRight="40dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
                 android:gravity="end"
                 android:text="Website"
-                android:textColor="#ff3333"
+                android:textColor="#ffffff"
                 android:textSize="33dp" />
 
             <TextView
@@ -76,9 +76,9 @@
                 android:layout_weight="50"
                 android:gravity="end"
                 android:layout_marginRight="40dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+
                 android:text="Number"
-                android:textColor="#ff3333"
+                android:textColor="#ffffff"
                 android:textSize="33dp" />
 
         </LinearLayout>
@@ -115,7 +115,7 @@
                             android:gravity="end"
                             android:text="@string/LinkToSite"
                             android:textColor="#CC0066"
-                            android:textSize="25dp" />
+                            android:textSize="15dp" />
 
                         <TextView
                             android:id="@+id/row2"
@@ -123,9 +123,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="50"
                             android:gravity="end"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+
                             android:layout_marginRight="40dp"
-                            android:text="Number"
+                            android:text="0857827701"
                             android:textColor="#ffffff"
                             android:textSize="25dp" />
 
