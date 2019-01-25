@@ -77,7 +77,7 @@
                 android:gravity="end"
                 android:layout_marginRight="40dp"
 
-                android:text="Number"
+                android:text="Direct Call"
                 android:textColor="#ffffff"
                 android:textSize="33dp" />
 
@@ -103,33 +103,37 @@
 
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/row1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:layout_marginRight="40dp"
+                            <TextView
+                                android:id="@+id/row1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="14dp"
+                                android:layout_marginRight="40dp"
+                                android:layout_weight="50"
 
-                            android:gravity="end"
-                            android:text="@string/LinkToSite"
-                            android:textColor="#CC0066"
-                            android:textSize="15dp" />
+                                android:gravity="end"
+                                android:text="@string/LinkToSite"
+                                android:textColor="#CC0066"
+                                android:textSize="15dp" />
 
-                        <TextView
-                            android:id="@+id/row2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:gravity="end"
+                            <Button
+                                android:id="@+id/row2"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginRight="40dp"
+                                android:layout_weight="50"
+                                android:background="#42f4cb"
+                                android:drawableTop="@mipmap/Call"
 
-                            android:layout_marginRight="40dp"
-                            android:text="0857827701"
-                            android:textColor="#ffffff"
-                            android:textSize="25dp" />
+                                android:gravity="end"
 
-                    </TableRow>
+
+                                />
+
+
+                        </TableRow>
 
 
                         <TableRow
