@@ -10,6 +10,8 @@
     android:background="#42f4cb"
     android:weightSum="10"
 
+
+
     >
 
     <TextView
@@ -42,7 +44,6 @@
         android:textColor="#ffffff" />
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,8 +62,8 @@
                 android:id="@+id/webViw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="50"
                 android:layout_marginRight="40dp"
+                android:layout_weight="50"
 
                 android:gravity="end"
                 android:text="Website"
@@ -73,9 +74,9 @@
                 android:id="@+id/numberViw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="65dp"
                 android:layout_weight="50"
                 android:gravity="end"
-                android:layout_marginRight="40dp"
 
                 android:text="Direct Call"
                 android:textColor="#ffffff"
@@ -83,101 +84,304 @@
 
         </LinearLayout>
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingVertical="50dp"
+            android:weightSum="100">
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="100"
-                android:paddingVertical="50dp">
+                android:layout_weight="1"
+                android:scrollbars="none">
 
-                <ScrollView
+
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content">
 
 
-                    <TableLayout
+                    <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TableRow
+                        <TextView
+                            android:id="@+id/row1"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
 
-                            <TextView
-                                android:id="@+id/row1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="14dp"
-                                android:layout_marginRight="40dp"
-                                android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
 
-                                android:gravity="end"
-                                android:text="@string/LinkToSite"
-                                android:textColor="#CC0066"
-                                android:textSize="15dp" />
+                        <Button
+                            android:id="@+id/row2"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
 
-                            <Button
-                                android:id="@+id/row2"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_marginRight="40dp"
-                                android:layout_weight="50"
-                                android:background="#42f4cb"
-                                android:drawableTop="@mipmap/call"
-
-                                android:gravity="end"
+                            android:gravity="end"
 
 
-                                />
+                            />
 
 
-                        </TableRow>
+                    </TableRow>
 
 
-                        <TableRow
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="70dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
 
-                            <TextView
-                                android:id="@+id/row3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="14dp"
-                                android:layout_marginRight="40dp"
-                                android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite2"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
 
-                                android:gravity="end"
-                                android:text="@string/LinkToSite"
-                                android:textColor="#CC0066"
-                                android:textSize="15dp" />
+                        <Button
 
-                            <Button
-                                android:id="@+id/row4"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:layout_marginRight="40dp"
-                                android:layout_weight="50"
-                                android:background="#42f4cb"
-                                android:drawableTop="@mipmap/call"
+                            android:id="@+id/row6"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
 
-                                android:gravity="end"
+                            android:gravity="end"
 
 
-                                />
+                            />
+
+                    </TableRow>
 
 
-                        </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="45dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+
+                            android:gravity="end"
+                            android:text="@string/LinkToSite3"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/row8"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+
+                            android:gravity="end"
+
+
+                            />
+
+                    </TableRow>
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+
+                            android:gravity="end"
+                            android:text="@string/LinkToSite4"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/row10"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+
+                            android:gravity="end"
+
+
+                            />
+
+                    </TableRow>
 
 
 
-                    </TableLayout>
-                </ScrollView>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="48dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+
+                            android:gravity="end"
+                            android:text="@string/LinkToSite6"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/row14"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+
+                            android:gravity="end"
 
 
-            </LinearLayout>
+                            />
 
+                    </TableRow>
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+
+                            android:gravity="end"
+                            android:text="@string/LinkToSite5"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/row12"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+
+                            android:gravity="end"
+
+
+                            />
+
+                    </TableRow>
+
+
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row15"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+
+                            android:gravity="end"
+                            android:text="@string/LinkToSite7"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/row16"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+
+                            android:gravity="end"
+
+                            />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/row17"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                      android:text="@string/LinkToSite8"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:id="@+id/row18"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+                            android:gravity="end"
+
+                            />
+
+                    </TableRow>
+
+
+                </TableLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>

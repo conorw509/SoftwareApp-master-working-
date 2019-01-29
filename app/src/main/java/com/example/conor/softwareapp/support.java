@@ -41,20 +41,25 @@ public class support extends AppCompatActivity {
         final Button backToHome = (Button) findViewById(R.id.BackToHomeSupport);
         final TextView txtView = (TextView) findViewById(R.id.row1);
         final Button num1 = (Button) findViewById(R.id.row2);
+        final Button num3 = (Button) findViewById(R.id.row6);
+        final Button num4 = (Button) findViewById(R.id.row8);
+        final Button num5 = (Button) findViewById(R.id.row10);
+        final Button num6 = (Button) findViewById(R.id.row14);
+        final Button num7 = (Button) findViewById(R.id.row12);
+        final Button num8 = (Button) findViewById(R.id.row16);
+        final Button num9 = (Button) findViewById(R.id.row18);
 
         txtView.setMovementMethod(LinkMovementMethod.getInstance());
 
         mAuth = FirebaseAuth.getInstance();
 
+        //mental health ireland
         num1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //if (ContextCompat.checkSelfPermission(support.this,
                   //      Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-
-
-                             makePhoneCall1();
+                makePhoneCall1();
               //  }
                 /*else {
 
@@ -62,6 +67,76 @@ public class support extends AppCompatActivity {
                 }*/
             }
         });
+
+        //ICAP
+        num3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall3();
+
+            }
+            });
+
+        //pieta house
+        num4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall4();
+
+            }
+        });
+
+        //samaritans
+        num5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall5();
+
+            }
+        });
+
+        //reach out
+        num6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall6();
+
+            }
+        });
+
+        //aware
+        num7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall7();
+
+            }
+        });
+        //see change
+        num8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall8();
+
+            }
+        });
+
+        //mental first aid
+        num9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                makePhoneCall5();
+
+            }
+        });
+
 
 
         signOut.setOnClickListener(new View.OnClickListener() {
@@ -98,12 +173,103 @@ public class support extends AppCompatActivity {
                 ActivityCompat.requestPermissions(support.this,
                         new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
             } else {
-                String dial ="0857827701";
+                String dial ="(01) 284 1166";
                 startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
             }
     }
 
-   /* private void requestCallpermission() {
+    private void makePhoneCall3() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(support.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial ="01 230 35 36";
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+        }
+    }
+
+    private void makePhoneCall4() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(support.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial ="(01) 458 5490";
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+        }
+    }
+
+    private void makePhoneCall5() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(support.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial ="116 123";
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+        }
+    }
+
+    private void makePhoneCall6() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(support.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial ="(01) 764 5666";
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+        }
+    }
+
+    private void makePhoneCall7() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(support.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial ="(01) 661 7211";
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+        }
+    }
+
+    private void makePhoneCall8() {
+
+        if (ContextCompat.checkSelfPermission(support.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(support.this,
+                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String dial ="01 541 3715";
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+dial)));
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == REQUEST_CALL) {
+
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this,"Permission Granted",Toast.LENGTH_LONG).show();
+                makePhoneCall1();
+            }
+            else{
+                Toast.makeText(this,"Permission Denied",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
+
+    }
+       /* private void requestCallpermission() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
             new AlertDialog.Builder(this).setTitle("Permission Needed").setMessage("Permission is needed to make the call")
@@ -126,23 +292,4 @@ public class support extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
     }*/
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        if (requestCode == REQUEST_CALL) {
-
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this,"Permission Granted",Toast.LENGTH_LONG).show();
-                makePhoneCall1();
-            }
-            else{
-                Toast.makeText(this,"Permission Denied",Toast.LENGTH_LONG).show();
-            }
-
-
-        }
-
-
-    }
 }
