@@ -35,7 +35,7 @@
         android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/BackToHomeaudio"
+        android:id="@+id/BackToHomeAudio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonstyleselector"

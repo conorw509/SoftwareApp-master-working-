@@ -20,7 +20,7 @@ public class audio extends AppCompatActivity {
         setContentView(R.layout.audio);
 
         final Button signOut = (Button) findViewById(R.id.LogOutAudio);
-        final Button backToHome = (Button) findViewById(R.id.BackToHomeaudio);
+        final Button backToHome = (Button) findViewById(R.id.BackToHomeAudio);
 
 
         signOut.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,7 @@ public class audio extends AppCompatActivity {
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
+
                 Intent logOutIntent = new Intent(audio.this, home.class);
                 audio.this.startActivity(logOutIntent);
                 finish();

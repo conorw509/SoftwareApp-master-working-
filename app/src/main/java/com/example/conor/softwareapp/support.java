@@ -154,7 +154,7 @@ public class support extends AppCompatActivity {
         backToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
+
                 Intent logOutIntent = new Intent(support.this, home.class);
                 support.this.startActivity(logOutIntent);
                 finish();
