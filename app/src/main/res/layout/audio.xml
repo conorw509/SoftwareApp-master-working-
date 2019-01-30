@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#42f4cb"
+    android:weightSum="10"
+
+
+
+    >
+
+    <TextView
+        android:id="@+id/AudioView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="Audio"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff"
+        android:textSize="34dp"
+        android:visibility="visible" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/LogOutAudio"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="192dp" />
-</android.support.constraint.ConstraintLayout>
+        android:background="@drawable/buttonstyleselector"
+        android:text="LogOut"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/BackToHomeaudio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyleselector"
+        android:layout_marginTop="5dp"
+        android:text="Back To Home"
+        android:textColor="#ffffff" />
+
+
+
+</LinearLayout>
