@@ -27,13 +27,14 @@ import java.util.ArrayList;
 public class audio extends AppCompatActivity {
 
 
-    private FirebaseAuth mAuth;
+
 
     private ListView listView;
     private Button pre,play,next,stop;
     private MediaPlayer mediaPlayer;
     private SeekBar seekBar;
-    private ArrayList<File> list;
+    private FirebaseAuth mAuth;
+   // private ArrayList<File> list;
     int cur =0;
 
 
@@ -42,20 +43,19 @@ public class audio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audio);
         listView= findViewById(R.id.mainList);
+        mAuth = FirebaseAuth.getInstance();
 
         //music objects
         music music1 = new music("Calm Harp Music","John");
         music music2 = new music("test","test");
 
+        //music list
         ArrayList<music> musicList = new ArrayList<>();
         musicList.add(music1);
         musicList.add(music2);
 
         musicListAdapter adapter = new musicListAdapter(this,R.layout.custom_listview,musicList);
         listView.setAdapter(adapter);
-
-
-
 
        // pre.findViewById(R.id.prev);
         //play.findViewById(R.id.play);
@@ -67,13 +67,14 @@ public class audio extends AppCompatActivity {
         final Button backToHome = (Button) findViewById(R.id.BackToHomeAudio);
 
 
-
+        //test button dont think its working
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
                 Intent logOutIntent = new Intent(audio.this, LoginInHome.class);
                 audio.this.startActivity(logOutIntent);
+
                 finish();
 
             }
