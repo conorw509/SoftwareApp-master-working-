@@ -41,22 +41,28 @@ public class audio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audio);
-
-        music[] musicArray = {new music("Calming Harp Music","Alexander Blu"),
-                              new music("test","test")
-
-        };
-
-        ListAdapter listAdapter = new ArrayAdapter<music>(this,android.R.layout.simple_list_item_1,musicArray);
         listView= findViewById(R.id.mainList);
-        listView.setAdapter(listAdapter);
+
+        //music objects
+        music music1 = new music("Calm Harp Music","John");
+        music music2 = new music("test","test");
+
+        ArrayList<music> musicList = new ArrayList<>();
+        musicList.add(music1);
+        musicList.add(music2);
+
+        musicListAdapter adapter = new musicListAdapter(this,R.layout.custom_listview,musicList);
+        listView.setAdapter(adapter);
 
 
-        pre.findViewById(R.id.prev);
-        play.findViewById(R.id.play);
-        next.findViewById(R.id.next);
-        stop.findViewById(R.id.stop);
-        seekBar.findViewById(R.id.seekBar);
+
+
+       // pre.findViewById(R.id.prev);
+        //play.findViewById(R.id.play);
+        //next.findViewById(R.id.next);
+        //stop.findViewById(R.id.stop);
+        //seekBar.findViewById(R.id.seekBar);
+
         final Button signOut = (Button) findViewById(R.id.LogOutAudio);
         final Button backToHome = (Button) findViewById(R.id.BackToHomeAudio);
 
