@@ -1,11 +1,14 @@
 package com.example.conor.softwareapp;
 
 import android.content.Context;
+import android.support.annotation.AnimatorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -16,6 +19,15 @@ public class musicListAdapter extends ArrayAdapter<music> {
 
 private Context mContext;
 private int mResource;
+private int lastPos = -1;
+
+
+    static class ViewHolder {
+        TextView name;
+        TextView artist;
+
+    }
+
 
     public musicListAdapter(Context context, int resource,ArrayList<music> objects) {
         super(context, resource, objects);
@@ -31,15 +43,37 @@ private int mResource;
         String artist = getItem(position).getArtist();
 
         music music = new music(songName,artist);
+        final View result;
+        ViewHolder holder;
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource,parent,false);
+        if(convertView == null){
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            convertView = inflater.inflate(mResource,parent,false);
+            holder = new ViewHolder();
+            holder.name = (TextView) convertView.findViewById(R.id.view1);
+            holder.artist = (TextView) convertView.findViewById(R.id.view2);
+            result = convertView;
+            convertView.setTag(holder);
+        }
+        else{
+            holder = (ViewHolder) convertView.getTag();
+            result = convertView;
+        }
 
-        TextView textName = (TextView) convertView.findViewById(R.id.view1);
-        TextView  textArt = (TextView)convertView.findViewById(R.id.view2);
+       // TextView textName = (TextView) convertView.findViewById(R.id.view1);
+        //TextView  textArt = (TextView)convertView.findViewById(R.id.view2);
 
-        textName.setText(songName);
-        textArt.setText(artist);
+        //textName.setText(songName);
+        //textArt.setText(artist);
+
+        Animation animation = AnimationUtils.loadAnimation(mContext,
+
+                (position>lastPos) ? R.anim.load_down_anim :R.anim.load_up_anim);
+        result.startAnimation(animation);
+        lastPos = position;
+        holder.name.setText(songName);
+        holder.artist.setText(artist);
+
 
         return  convertView;
 
