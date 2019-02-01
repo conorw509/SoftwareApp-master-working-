@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,9 +23,12 @@ private int mResource;
 private int lastPos = -1;
 
 
+
     static class ViewHolder {
         TextView name;
         TextView artist;
+
+
 
     }
 
@@ -42,7 +46,9 @@ private int lastPos = -1;
         String songName = getItem(position).getSongName();
         String artist = getItem(position).getArtist();
 
-        music music = new music(songName,artist);
+
+
+       // music music = new music(songName,artist);
         final View result;
         ViewHolder holder;
 
@@ -52,6 +58,7 @@ private int lastPos = -1;
             holder = new ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.view1);
             holder.artist = (TextView) convertView.findViewById(R.id.view2);
+
             result = convertView;
             convertView.setTag(holder);
         }
@@ -73,6 +80,8 @@ private int lastPos = -1;
         lastPos = position;
         holder.name.setText(songName);
         holder.artist.setText(artist);
+
+
 
 
         return  convertView;

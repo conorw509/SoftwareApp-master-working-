@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:11.6.0'
     implementation 'com.google.firebase:firebase-core:11.6.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7', changing: true
 
 

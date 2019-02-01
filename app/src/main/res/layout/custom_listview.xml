@@ -13,31 +13,63 @@
 
 
     >
-    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="35">
     <TextView
         android:gravity="center"
         android:textAlignment="center"
         android:text="Music"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:id="@+id/view1"
-        android:layout_weight="66.6"
+
 
         />
-    
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="33.3">
 
         <TextView
             android:gravity="center"
             android:textAlignment="center"
             android:text="Artist"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:id="@+id/view2"
+
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="65">
+
+        <ImageView
+            android:gravity="center"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:text="test1"
+         android:layout_weight="32.5"
+            android:layout_height="match_parent"
+            android:src="@drawable/play_btn"
+            android:id="@+id/view3"
+
+
+            />
+
+        <ImageView
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="test"
+            android:layout_weight="32.5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/stop_blue"
+            android:id="@+id/view4"
 
 
             />

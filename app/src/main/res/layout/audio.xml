@@ -61,32 +61,6 @@
     android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp">
-    <Button
-        android:id="@+id/prev"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Previous"/>
-
-    <Button
-        android:id="@+id/play"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Play"/>
-
-    <Button
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Next"
-        />
-
-    <Button
-        android:id="@+id/stop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stop" />
-
 
 
 </LinearLayout>
