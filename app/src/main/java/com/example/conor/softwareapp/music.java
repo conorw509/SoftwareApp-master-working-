@@ -6,11 +6,11 @@ public class music {
     private String imagePlay_Pause;
     private String imageStop;
 
-    public music(String songName, String artist, String imagePlay_Pause, String imageStop) {
+    public music(String songName, String artist){//String imagePlay_Pause, String imageStop) {
         this.songName = songName;
         this.artist = artist;
-        this.imagePlay_Pause = imagePlay_Pause;
-        this.imageStop = imageStop;
+       // this.imagePlay_Pause = imagePlay_Pause;
+        //this.imageStop = imageStop;
 
     }
 
