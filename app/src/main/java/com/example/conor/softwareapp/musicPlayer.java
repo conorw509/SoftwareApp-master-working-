@@ -24,7 +24,6 @@ public class musicPlayer extends AppCompatActivity {
     private int totalTime;
     private boolean initialStage = true;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,23 +48,26 @@ public class musicPlayer extends AppCompatActivity {
         try {
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/Calming-harp-music.mp3?alt=media&token=a0d99b45-a1d0-487d-8b9f-3076afb01724");
-           // mediaPlayer.prepareAsync();
+            // mediaPlayer.prepareAsync();
             mediaPlayer.prepare();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
 
                     mediaPlayer.start();
+                    playBtn.setBackgroundResource(R.drawable.pause);
+
 
                     playBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (mediaPlayer.isPlaying()) {
                                 mediaPlayer.pause();
-
+                                playBtn.setBackgroundResource(R.drawable.play_btn);
 
                             } else {
                                 mediaPlayer.start();
+                                playBtn.setBackgroundResource(R.drawable.pause);
 
                             }
                         }
