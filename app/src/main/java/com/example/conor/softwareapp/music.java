@@ -9,9 +9,6 @@ public class music {
     public music(String songName, String artist){//String imagePlay_Pause, String imageStop) {
         this.songName = songName;
         this.artist = artist;
-       // this.imagePlay_Pause = imagePlay_Pause;
-        //this.imageStop = imageStop;
-
     }
 
     public String getSongName() {

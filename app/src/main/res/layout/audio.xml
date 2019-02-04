@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -65,12 +64,6 @@
 
 </LinearLayout>
 
-    <SeekBar
-        android:layout_marginTop="10dp"
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@android:color/holo_blue_bright"/>
 
     <ListView
         android:id="@+id/mainList"
