@@ -44,13 +44,39 @@
             android:layout_marginLeft="240dp"
             android:text="-1:50" />
     </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+  >
+
+
+    <Button
+        android:id="@+id/previous"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/prev"
+        android:layout_marginLeft="80dp"
+        />
 
     <Button
         android:id="@+id/playBtn"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/play_btn" />
+        android:layout_marginTop="20dp"
+        android:background="@drawable/play_btn"
+       />
 
+    <Button
+        android:id="@+id/next"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/next"
+        />
+
+
+</LinearLayout>
 
 </LinearLayout>

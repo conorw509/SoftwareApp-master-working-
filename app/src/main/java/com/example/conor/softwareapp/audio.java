@@ -1,29 +1,18 @@
 package com.example.conor.softwareapp;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SeekBar;
-import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.IOException;
 import java.util.ArrayList;
-
 
 public class audio extends AppCompatActivity {
 
     private ListView listView;
-    private MediaPlayer mediaPlayer;
-    private SeekBar seekBar;
     private Button signOut;
     private Button backToHome;
     private FirebaseAuth mAuth;
@@ -86,45 +75,7 @@ public class audio extends AppCompatActivity {
                     finish();
 
                 }
-
-
             }
         });
-
-
-    }
-
-    public void playSong1(View v) {
-
-        try {
-
-            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/Calming-harp-music.mp3?alt=media&token=a0d99b45-a1d0-487d-8b9f-3076afb01724");
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mp.start();
-                }
-            });
-            mediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-
-    }
-
-    public void playSong2(View v) {
-        try {
-            mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/Calming-piano-music.mp3?alt=media&token=97c3694a-e2d4-4af8-9dfb-b286dfad06af");
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mp.start();
-                }
-            });
-            mediaPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
