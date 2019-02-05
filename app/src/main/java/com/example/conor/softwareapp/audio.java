@@ -2,6 +2,7 @@ package com.example.conor.softwareapp;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -37,7 +40,7 @@ public class audio extends AppCompatActivity {
 
         //music objects
         music music1 = new music("Calm Harp Music", "John");
-        music music2 = new music("Calming Piano Music","joe");
+        music music2 = new music("Calming Piano Music", "joe");
 
         //music list
         final ArrayList<music> musicList = new ArrayList<>();
@@ -73,17 +76,22 @@ public class audio extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
 
-                if (position == 0) {
+                if (position != -1) {
 
-                    Intent goToPlayer = new Intent(audio.this, musicPlayer.class);
+                    Intent goToPlayer = new Intent(getApplicationContext(), musicPlayer.class);
+                    goToPlayer.putExtra("position",position);
                     audio.this.startActivity(goToPlayer);
                     finish();
 
                 }
+
+
             }
         });
+
+
     }
 
     public void playSong1(View v) {
