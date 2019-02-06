@@ -40,9 +40,8 @@ public class musicPlayer extends AppCompatActivity {
 
         //mediaPlayer
         mediaPlayer = new MediaPlayer();
-        mediaPlayer.setLooping(true);
-        mediaPlayer.seekTo(0);
-        totalTime = mediaPlayer.getDuration();
+
+
 
         position = getIntent().getExtras().getInt("songPosition", 0);
         arrayList = getIntent().getExtras().getStringArrayList("urls");
@@ -52,7 +51,6 @@ public class musicPlayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
-                mediaPlayer.release();
                 Intent backToAudio = new Intent(musicPlayer.this, audio.class);
                 musicPlayer.this.startActivity(backToAudio);
                 finish();
@@ -102,8 +100,6 @@ public class musicPlayer extends AppCompatActivity {
             playSong(songUrl);
         }
 
-        //setting position bar
-        positionBar.setMax(totalTime);
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -129,7 +125,7 @@ public class musicPlayer extends AppCompatActivity {
                 while (mediaPlayer != null) {
                     try {
                         Message msg = new Message();
-                   //     msg.what = mediaPlayer.getCurrentPosition();
+                       msg.what = mediaPlayer.getCurrentPosition();
                         handler.sendMessage(msg);
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -176,6 +172,10 @@ public class musicPlayer extends AppCompatActivity {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
 
+                    mediaPlayer.setLooping(true);
+                    mediaPlayer.seekTo(0);
+                    totalTime = mediaPlayer.getDuration();
+                    positionBar.setMax(totalTime);
                     mediaPlayer.start();
                     playBtn.setBackgroundResource(R.drawable.pause);
 
@@ -193,11 +193,10 @@ public class musicPlayer extends AppCompatActivity {
                         }
                     });
 
-
                     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-                            mediaPlayer.reset();
+
                             mediaPlayer.release();
                         }
                     });
