@@ -1,6 +1,5 @@
 package com.example.conor.softwareapp;
 
-import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -51,25 +50,38 @@ public class musicPlayer extends AppCompatActivity {
         mediaPlayer.seekTo(0);
         totalTime = mediaPlayer.getDuration();
 
-//        if (mediaPlayer != null) {
-//            mediaPlayer.pause();
-//            mediaPlayer.release();
-//        }
-
-
         position = getIntent().getExtras().getInt("songPosition", 0);
         arrayList = getIntent().getExtras().getStringArrayList("urls");
         songUrl = arrayList.get(position).toString();
 
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                if(position < arrayList.size()-1){
+                    songUrl = arrayList.get(position+1).toString();
+                    playSong(songUrl);
+                    position = position+1;
+                }
+            }
+        });
+
         if (position == 0) {
             songUrl = arrayList.get(position).toString();
             playSong(songUrl);
+            songName.setText("FirstSong");
         }
 
         if(position ==1) {
             songUrl = arrayList.get(position).toString();
             playSong(songUrl);
+            songName.setText("SecondSong");
         }
+
+
+
         //setting position bar
         positionBar.setMax(totalTime);
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -166,6 +178,7 @@ public class musicPlayer extends AppCompatActivity {
                             }
                         }
                     });
+
 
                     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
