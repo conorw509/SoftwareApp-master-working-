@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,6 +65,26 @@ public class musicPlayer extends AppCompatActivity {
                     songUrl = arrayList.get(position+1).toString();
                     playSong(songUrl);
                     position = position+1;
+                }else{
+
+                    playSong(songUrl);
+                    Toast.makeText(musicPlayer.this,"End Of Audio",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                if(position > 0){
+                    songUrl = arrayList.get(position-1).toString();
+                    playSong(songUrl);
+                    position = position-1;
+                }else{
+                    playSong(songUrl);
+                    Toast.makeText(musicPlayer.this,"Cant Go Back Further",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -71,16 +92,12 @@ public class musicPlayer extends AppCompatActivity {
         if (position == 0) {
             songUrl = arrayList.get(position).toString();
             playSong(songUrl);
-            songName.setText("FirstSong");
         }
 
         if(position ==1) {
             songUrl = arrayList.get(position).toString();
             playSong(songUrl);
-            songName.setText("SecondSong");
         }
-
-
 
         //setting position bar
         positionBar.setMax(totalTime);
@@ -89,7 +106,6 @@ public class musicPlayer extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
-
                     mediaPlayer.seekTo(progress);
                     positionBar.setProgress(progress);
                 }
@@ -97,12 +113,10 @@ public class musicPlayer extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 
@@ -150,8 +164,7 @@ public class musicPlayer extends AppCompatActivity {
 
         return timeLabel;
     }
-
-
+    
     public void playSong(String songUrl) {
 
         try {
