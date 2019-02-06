@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class audio extends AppCompatActivity {
@@ -16,6 +19,7 @@ public class audio extends AppCompatActivity {
     private Button signOut;
     private Button backToHome;
     private FirebaseAuth mAuth;
+    ArrayList<music> musicList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +35,10 @@ public class audio extends AppCompatActivity {
         music music1 = new music("Calm Harp Music", "John");
         music music2 = new music("Calming Piano Music", "joe");
 
-        //music list
-        final ArrayList<music> musicList = new ArrayList<>();
-        musicList.add(music1);
-        musicList.add(music2);
+        //adding Objects
+         (musicList).add(music1);
+         (musicList).add(music2);
+
 
         musicListAdapter adapter = new musicListAdapter(this, R.layout.custom_listview, musicList);
         listView.setAdapter(adapter);
@@ -70,7 +74,7 @@ public class audio extends AppCompatActivity {
                 if (position != -1) {
 
                     Intent goToPlayer = new Intent(getApplicationContext(), musicPlayer.class);
-                    goToPlayer.putExtra("position",position);
+                    goToPlayer.putExtra("position", position);
                     audio.this.startActivity(goToPlayer);
                     finish();
 
@@ -78,4 +82,10 @@ public class audio extends AppCompatActivity {
             }
         });
     }
+
+//    public ArrayList<music> GetArrayList()
+//    {
+//        return musicList;
+//    }
+
 }
