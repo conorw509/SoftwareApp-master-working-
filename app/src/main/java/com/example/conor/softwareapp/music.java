@@ -6,7 +6,7 @@ public class music {
     private String url;
 ;
 
-    public music(String songName, String artist){//String url){
+    public music(String songName, String artist){//,String url){
         this.songName = songName;
         this.artist = artist;
        // this.url = url;
@@ -28,11 +28,4 @@ public class music {
         this.artist = artist;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }
