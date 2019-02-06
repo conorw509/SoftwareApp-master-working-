@@ -1,5 +1,6 @@
 package com.example.conor.softwareapp;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,26 +12,17 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.sql.DataSource;
-
 public class musicPlayer extends AppCompatActivity {
 
-    private Button playBtn;
-    private Button nextBtn;
-    private Button prevBtn;
+    private Button playBtn,audioBtn,nextBtn,prevBtn;
     private SeekBar positionBar;
-    private TextView elapsedTimeLabel;
-    private TextView remainingTime;
-    private TextView songName;
+    private TextView elapsedTimeLabel,remainingTime,songName;
     private MediaPlayer mediaPlayer;
-    private int totalTime;
-    ArrayList<String> arrayList;
-    private int position;
-    private int currentSongIndex = 0;
+    private int totalTime,position;
+    private ArrayList<String> arrayList;
     private String songUrl;
 
     @Override
@@ -44,6 +36,7 @@ public class musicPlayer extends AppCompatActivity {
         elapsedTimeLabel = (TextView) findViewById(R.id.timeLapsed);
         remainingTime = (TextView) findViewById(R.id.timeRemain);
         songName = (TextView) findViewById(R.id.songName);
+        audioBtn = (Button) findViewById(R.id.BackToAudio);
 
         //mediaPlayer
         mediaPlayer = new MediaPlayer();
@@ -55,6 +48,16 @@ public class musicPlayer extends AppCompatActivity {
         arrayList = getIntent().getExtras().getStringArrayList("urls");
         songUrl = arrayList.get(position).toString();
 
+        audioBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                Intent backToAudio = new Intent(musicPlayer.this, audio.class);
+                musicPlayer.this.startActivity(backToAudio);
+                finish();
+            }
+        });
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +113,6 @@ public class musicPlayer extends AppCompatActivity {
                     positionBar.setProgress(progress);
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
@@ -127,7 +129,7 @@ public class musicPlayer extends AppCompatActivity {
                 while (mediaPlayer != null) {
                     try {
                         Message msg = new Message();
-                        msg.what = mediaPlayer.getCurrentPosition();
+                   //     msg.what = mediaPlayer.getCurrentPosition();
                         handler.sendMessage(msg);
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -154,7 +156,6 @@ public class musicPlayer extends AppCompatActivity {
     };
 
     public String createTimeLabel(int time) {
-
         String timeLabel = " ";
         int min = time / 1000 / 60;
         int sec = time / 1000 % 60;
@@ -164,7 +165,7 @@ public class musicPlayer extends AppCompatActivity {
 
         return timeLabel;
     }
-    
+
     public void playSong(String songUrl) {
 
         try {
@@ -202,7 +203,6 @@ public class musicPlayer extends AppCompatActivity {
                     });
                 }
             });
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -6,6 +6,15 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+
+    <Button
+        android:id="@+id/BackToAudio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyleselector"
+        android:layout_marginTop="5dp"
+        android:text="Back To Audio"
+        android:textColor="#ffffff" />
     <ImageView
         android:layout_width="222dp"
         android:layout_height="207dp"
