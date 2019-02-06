@@ -38,6 +38,7 @@ public class musicListAdapter extends ArrayAdapter<music> {
         String songName = getItem(position).getSongName();
         String artist = getItem(position).getArtist();
 
+
         final View result;
         final ViewHolder holder;
 
@@ -66,33 +67,7 @@ public class musicListAdapter extends ArrayAdapter<music> {
 
         holder.name.setText(songName);
         holder.artist.setText(artist);
-//        holder.start_pause.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                if (mediaPlayer.isPlaying()) {
-//                    mediaPlayer.pause();
-//                    holder.start_pause.setImageResource(R.drawable.pause);
-//
-//                } else {
-//                    mediaPlayer.start();
-//                    holder.start_pause.setImageResource(R.drawable.play_btn);
-//                }
-//                mediaPlayer.start();
-//            }
-//        });
-//
-//        holder.stop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!flag) {
-//                    mediaPlayer.stop();
-//                    mediaPlayer.release();
-//                    flag = true;
-//                }
-//                holder.stop.setImageResource(R.drawable.stop_blue);
-//            }
-//        });
+
         return convertView;
 
     }

@@ -3,12 +3,13 @@ package com.example.conor.softwareapp;
 public class music {
     private String songName;
     private String artist;
-    private String imagePlay_Pause;
-    private String imageStop;
+    private String url;
+;
 
-    public music(String songName, String artist){//String imagePlay_Pause, String imageStop) {
+    public music(String songName, String artist){//,String url){
         this.songName = songName;
         this.artist = artist;
+       // this.url = url;
     }
 
     public String getSongName() {
@@ -27,19 +28,4 @@ public class music {
         this.artist = artist;
     }
 
-    public String getImagePlay_Pause() {
-        return imagePlay_Pause;
-    }
-
-    public void setImagePlay_Pause(String imagePlay_Pause) {
-        this.imagePlay_Pause = imagePlay_Pause;
-    }
-
-    public String getImageStop() {
-        return imageStop;
-    }
-
-    public void setImageStop(String imageStop) {
-        this.imageStop = imageStop;
-    }
 }

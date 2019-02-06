@@ -1,5 +1,6 @@
 package com.example.conor.softwareapp;
 
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -10,7 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.sql.DataSource;
 
 public class musicPlayer extends AppCompatActivity {
 
@@ -23,13 +28,15 @@ public class musicPlayer extends AppCompatActivity {
     private TextView songName;
     private MediaPlayer mediaPlayer;
     private int totalTime;
+    ArrayList<String> arrayList;
     private int position;
+    private int currentSongIndex = 0;
+    private String songUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.music_player);
-
         playBtn = (Button) findViewById(R.id.playBtn);
         nextBtn = (Button) findViewById(R.id.next);
         prevBtn = (Button) findViewById(R.id.previous);
@@ -44,12 +51,33 @@ public class musicPlayer extends AppCompatActivity {
         mediaPlayer.seekTo(0);
         totalTime = mediaPlayer.getDuration();
 
+//        if (mediaPlayer != null) {
+//            mediaPlayer.pause();
+//            mediaPlayer.release();
+//        }
+
+
+        position = getIntent().getExtras().getInt("songPosition", 0);
+        arrayList = getIntent().getExtras().getStringArrayList("urls");
+        songUrl = arrayList.get(position).toString();
+
+        if (position == 0) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+
+        if(position ==1) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
         //setting position bar
         positionBar.setMax(totalTime);
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
+
                     mediaPlayer.seekTo(progress);
                     positionBar.setProgress(progress);
                 }
@@ -66,7 +94,7 @@ public class musicPlayer extends AppCompatActivity {
             }
         });
 
-        //Thread to update position
+        // Thread to update position
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -82,121 +110,9 @@ public class musicPlayer extends AppCompatActivity {
                 }
             }
         }).start();
-
-        position = getIntent().getExtras().getInt("position");
-
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                position++;
-                System.out.println(position);
-            }
-        });
-
-        prevBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(position < 0){
-                   position++;
-
-                }else{
-                    position--;
-                    System.out.println(position);
-                }
-            }
-        });
-
-        if (position == 0) {
-            try {
-                songName.setText("FirstSong");
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/Calming-harp-music.mp3?alt=media&token=a0d99b45-a1d0-487d-8b9f-3076afb01724");
-                mediaPlayer.prepare();
-                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-
-                        mediaPlayer.start();
-                        playBtn.setBackgroundResource(R.drawable.pause);
-
-                        playBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (mediaPlayer.isPlaying()) {
-                                    mediaPlayer.pause();
-                                    playBtn.setBackgroundResource(R.drawable.play_btn);
-
-                                } else {
-                                    mediaPlayer.start();
-                                    playBtn.setBackgroundResource(R.drawable.pause);
-
-                                }
-                            }
-                        });
-
-                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-
-                            }
-                        });
-                    }
-                });
-
-            } catch (
-                    IOException e)
-
-            {
-                e.printStackTrace();
-            }
-        }
-
-        if (position == 1) {
-            try {
-                songName.setText("SecondSong");
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mediaPlayer.setDataSource("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/Calming-piano-music.mp3?alt=media&token=97c3694a-e2d4-4af8-9dfb-b286dfad06af");
-                mediaPlayer.prepare();
-                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-
-                        mediaPlayer.start();
-                        playBtn.setBackgroundResource(R.drawable.pause);
-                        playBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (mediaPlayer.isPlaying()) {
-                                    mediaPlayer.pause();
-                                    playBtn.setBackgroundResource(R.drawable.play_btn);
-
-                                } else {
-                                    mediaPlayer.start();
-                                    playBtn.setBackgroundResource(R.drawable.pause);
-
-                                }
-                            }
-                        });
-                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-
-                            }
-                        });
-                    }
-                });
-
-            } catch (
-                    IOException e)
-
-            {
-                e.printStackTrace();
-            }
-        }
     }
 
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             int currentPosition = msg.what;
@@ -222,12 +138,52 @@ public class musicPlayer extends AppCompatActivity {
 
         return timeLabel;
     }
-//    public void DetailClick(View v) {
-//        ListView lv = getListView();
-//        int position = lv.getPositionForView(v);
-//    }
 
+
+    public void playSong(String songUrl) {
+
+        try {
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.setDataSource(songUrl);
+            mediaPlayer.prepare();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+
+                    mediaPlayer.start();
+                    playBtn.setBackgroundResource(R.drawable.pause);
+
+                    playBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.pause();
+                                playBtn.setBackgroundResource(R.drawable.play_btn);
+
+                            } else {
+                                mediaPlayer.start();
+                                playBtn.setBackgroundResource(R.drawable.pause);
+                            }
+                        }
+                    });
+
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mediaPlayer.reset();
+                            mediaPlayer.release();
+                        }
+                    });
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
 
 
 
