@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 
 public class musicPlayer extends AppCompatActivity {
 
-    private Button playBtn,audioBtn,nextBtn,prevBtn;
+    private Button playBtn, audioBtn, nextBtn, prevBtn;
     private SeekBar positionBar;
-    private TextView elapsedTimeLabel,remainingTime,songName;
+    private TextView elapsedTimeLabel, remainingTime, songName;
     private MediaPlayer mediaPlayer;
-    private int totalTime,position;
+    private int totalTime, position;
     private ArrayList<String> arrayList;
     private String songUrl;
 
@@ -40,8 +41,6 @@ public class musicPlayer extends AppCompatActivity {
 
         //mediaPlayer
         mediaPlayer = new MediaPlayer();
-
-
 
         position = getIntent().getExtras().getInt("songPosition", 0);
         arrayList = getIntent().getExtras().getStringArrayList("urls");
@@ -62,14 +61,14 @@ public class musicPlayer extends AppCompatActivity {
             public void onClick(View v) {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
-                if(position < arrayList.size()-1){
-                    songUrl = arrayList.get(position+1).toString();
+                if (position < arrayList.size() - 1) {
+                    songUrl = arrayList.get(position + 1).toString();
                     playSong(songUrl);
-                    position = position+1;
-                }else{
+                    position = position + 1;
+                } else {
 
                     playSong(songUrl);
-                    Toast.makeText(musicPlayer.this,"End Of Audio",Toast.LENGTH_LONG).show();
+                    Toast.makeText(musicPlayer.this, "End Of Audio", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -79,27 +78,81 @@ public class musicPlayer extends AppCompatActivity {
             public void onClick(View v) {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
-                if(position > 0){
-                    songUrl = arrayList.get(position-1).toString();
+                if (position > 0) {
+                    songUrl = arrayList.get(position - 1).toString();
                     playSong(songUrl);
-                    position = position-1;
-                }else{
+                    position = position - 1;
+                } else {
                     playSong(songUrl);
-                    Toast.makeText(musicPlayer.this,"Cant Go Back Further",Toast.LENGTH_LONG).show();
+                    Toast.makeText(musicPlayer.this, "Cant Go Back Further", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
+        //song position on ListView Click
         if (position == 0) {
             songUrl = arrayList.get(position).toString();
             playSong(songUrl);
         }
-
-        if(position ==1) {
+        if (position == 1) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 2) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 3) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 4) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 5) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 6) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 7) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 8) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 9) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 10) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 11) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 12) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 13) {
+            songUrl = arrayList.get(position).toString();
+            playSong(songUrl);
+        }
+        if (position == 14) {
             songUrl = arrayList.get(position).toString();
             playSong(songUrl);
         }
 
+
+        //seekBar Click
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -125,7 +178,7 @@ public class musicPlayer extends AppCompatActivity {
                 while (mediaPlayer != null) {
                     try {
                         Message msg = new Message();
-                       msg.what = mediaPlayer.getCurrentPosition();
+                        msg.what = mediaPlayer.getCurrentPosition();
                         handler.sendMessage(msg);
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -196,7 +249,6 @@ public class musicPlayer extends AppCompatActivity {
                     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mp) {
-
                             mediaPlayer.release();
                         }
                     });
