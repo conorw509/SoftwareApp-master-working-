@@ -6,13 +6,13 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,11 +20,12 @@ public class musicPlayer extends AppCompatActivity {
 
     private Button playBtn, audioBtn, nextBtn, prevBtn;
     private SeekBar positionBar;
-    private TextView elapsedTimeLabel, remainingTime, songName;
+    private TextView elapsedTimeLabel, remainingTime, songName,artist;
     private MediaPlayer mediaPlayer;
     private int totalTime, position;
     private ArrayList<String> arrayList;
-    private String songUrl;
+    private ArrayList<music> musicArtistList;
+    private String songUrl, songNameDisplay,artistDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class musicPlayer extends AppCompatActivity {
         elapsedTimeLabel = (TextView) findViewById(R.id.timeLapsed);
         remainingTime = (TextView) findViewById(R.id.timeRemain);
         songName = (TextView) findViewById(R.id.songName);
+        artist = (TextView) findViewById(R.id.artist);
         audioBtn = (Button) findViewById(R.id.BackToAudio);
 
         //mediaPlayer
@@ -44,7 +46,12 @@ public class musicPlayer extends AppCompatActivity {
 
         position = getIntent().getExtras().getInt("songPosition", 0);
         arrayList = getIntent().getExtras().getStringArrayList("urls");
-        songUrl = arrayList.get(position).toString();
+        songUrl = arrayList.get(position);
+
+        musicArtistList = getIntent().getExtras().getParcelableArrayList("music/art");
+        songNameDisplay = musicArtistList.get(position).getSongName();
+        artistDisplay = musicArtistList.get(position).getArtist();
+
 
         audioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +69,11 @@ public class musicPlayer extends AppCompatActivity {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
                 if (position < arrayList.size() - 1) {
-                    songUrl = arrayList.get(position + 1).toString();
+                    songUrl = arrayList.get(position + 1);
+                    songNameDisplay = musicArtistList.get(position + 1).getSongName();
+                    songName.setText(songNameDisplay);
+                    artistDisplay = musicArtistList.get(position + 1).getArtist();
+                    artist.setText(artistDisplay);
                     playSong(songUrl);
                     position = position + 1;
                 } else {
@@ -79,7 +90,11 @@ public class musicPlayer extends AppCompatActivity {
                 mediaPlayer.stop();
                 mediaPlayer.reset();
                 if (position > 0) {
-                    songUrl = arrayList.get(position - 1).toString();
+                    songUrl = arrayList.get(position - 1);
+                    songNameDisplay = musicArtistList.get(position - 1).getSongName();
+                    songName.setText(songNameDisplay);
+                    artistDisplay = musicArtistList.get(position - 1).getArtist();
+                    artist.setText(artistDisplay);
                     playSong(songUrl);
                     position = position - 1;
                 } else {
@@ -91,66 +106,95 @@ public class musicPlayer extends AppCompatActivity {
 
         //song position on ListView Click
         if (position == 0) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 1) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 2) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 3) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 4) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 5) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 6) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 7) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 8) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 9) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 10) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 11) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 12) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 13) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
         if (position == 14) {
-            songUrl = arrayList.get(position).toString();
+            songName.setText(songNameDisplay);
+            artist.setText(artistDisplay);
+            songUrl = arrayList.get(position);
             playSong(songUrl);
         }
-
 
         //seekBar Click
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -162,6 +206,7 @@ public class musicPlayer extends AppCompatActivity {
                     positionBar.setProgress(progress);
                 }
             }
+
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
@@ -246,12 +291,6 @@ public class musicPlayer extends AppCompatActivity {
                         }
                     });
 
-                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            mediaPlayer.release();
-                        }
-                    });
                 }
             });
         } catch (IOException e) {

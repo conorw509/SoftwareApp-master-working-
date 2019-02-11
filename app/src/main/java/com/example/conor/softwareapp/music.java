@@ -1,15 +1,15 @@
 package com.example.conor.softwareapp;
 
-public class music {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class music implements Parcelable {
     private String songName;
     private String artist;
-    private String url;
-;
 
-    public music(String songName, String artist){//,String url){
+    public music(String songName, String artist){
         this.songName = songName;
         this.artist = artist;
-       // this.url = url;
     }
 
     public String getSongName() {
@@ -24,8 +24,31 @@ public class music {
         return artist;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.songName);
+        dest.writeString(this.artist);
+    }
+
+    protected music(Parcel in) {
+        this.songName = in.readString();
+        this.artist = in.readString();
+    }
+
+    public static final Parcelable.Creator<music> CREATOR = new Parcelable.Creator<music>() {
+        @Override
+        public music createFromParcel(Parcel source) {
+            return new music(source);
+        }
+
+        @Override
+        public music[] newArray(int size) {
+            return new music[size];
+        }
+    };
 }

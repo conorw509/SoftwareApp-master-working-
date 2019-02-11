@@ -44,9 +44,9 @@ public class audio extends AppCompatActivity {
         music music10 = new music("Mid-Tempo Relaxation", "Relaxing Music");
         music music11 = new music("Lightness Within-Calm Version", "Michael Fesser");
         music music12 = new music("Main Theme-'Slow Version Piano'", "Fairy Tale Soundtrack");
-        music music13 = new music("Brothers-'Piano Theme'", "Full Metal Alchemist OST");
+        music music13 = new music("Brothers-'Piano Theme'", "Full Metal Alchemist Soundtrack");
         music music14 = new music("Piano Ballad", "Senbonzakura");
-        music music15 = new music("Face My Fear-'Orchestral Version", "Utada Hikaru");
+        music music15 = new music("Face My Fear-'Orchestral Version'", "Utada Hikaru");
 
         //adding Objects
         (musicList).add(music1);
@@ -129,10 +129,9 @@ public class audio extends AppCompatActivity {
                 if (position != -1) {
 
                     Intent goToPlayer = new Intent(getApplicationContext(), musicPlayer.class);
-                    goToPlayer.putExtra("songPosition", position).putExtra("urls", urls);
+                    goToPlayer.putExtra("songPosition", position).putExtra("urls", urls).putParcelableArrayListExtra("music/art", musicList);
                     audio.this.startActivity(goToPlayer);
                     finish();
-
                 }
             }
         });
