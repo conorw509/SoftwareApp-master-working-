@@ -17,8 +17,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.ProviderQueryResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -39,7 +42,7 @@ public class Register extends AppCompatActivity {
     private Button bRegister;
     private TextView view;
     private FirebaseAuth mAuth;
-    private String email, password, user, fireBaseEmail;
+    private String email, password, user;
     private DatabaseReference reference;
     private FirebaseDatabase database;
     private FirebaseUser firebaseUser;
@@ -56,6 +59,8 @@ public class Register extends AppCompatActivity {
         etPass = (EditText) findViewById(R.id.RegPword);
         userName = (EditText) findViewById(R.id.userName);
         view = (TextView) findViewById(R.id.LoginBk);
+
+
 
         //back to login button
         view.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +121,6 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             firebaseUser = mAuth.getCurrentUser();
-                            fireBaseEmail = firebaseUser.getEmail();
                             final String userId = firebaseUser.getUid();
                             reference = database.getReference("Users").child(userId);
                             HashMap<String, String> hashMap = new HashMap<>();
@@ -134,15 +138,16 @@ public class Register extends AppCompatActivity {
                                         Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
 
                                     } else {
-                                        Toast.makeText(Register.this, "Unable", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
                         } else {
                             if (!task.isSuccessful()) {
                                 checkEmail();
+                                checkUserName();
                             } else {
-                                Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Register.this, "Registration failed, please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -153,17 +158,33 @@ public class Register extends AppCompatActivity {
         mAuth.fetchProvidersForEmail(etEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
             @Override
             public void onComplete(@NonNull Task<ProviderQueryResult> task) {
-
                 boolean check = !task.getResult().getProviders().isEmpty();
                 if (check) {
-
-                    Toast.makeText(Register.this, "Email Already In use Please use a different email", Toast.LENGTH_LONG).show();
-
+                    etEmail.setError("Email Already In use Please use a different email");
+                    etEmail.requestFocus();
+                    return;
                 }
             }
         });
+    }
 
+    public void checkUserName() {
+        reference = database.getReference().child("Users");
 
+        reference.orderByChild("userName").equalTo(user)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            userName.setError("Username Already in use please choose a different username");
+                            userName.requestFocus();
+                            return;
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 }
 
