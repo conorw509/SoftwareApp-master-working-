@@ -74,6 +74,8 @@ public class Register extends AppCompatActivity {
                 password = etPass.getText().toString().trim();
                 user = userName.getText().toString().trim();
 
+              //  reference.child("Users").child("userName").equalTo(user);
+
                 if (email.isEmpty() && password.isEmpty() && user.isEmpty()) {
                     Toast.makeText(Register.this, "Fields are empty", Toast.LENGTH_LONG).show();
                     return;
@@ -121,12 +123,13 @@ public class Register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             firebaseUser = mAuth.getCurrentUser();
                             final String userId = firebaseUser.getUid();
-                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+                            reference = database.getReference("Users").child(userId);
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userId);
                             hashMap.put("userName", userName);
                             hashMap.put("imageUrl", "default");
                             reference.setValue(hashMap);
+
 
                             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
