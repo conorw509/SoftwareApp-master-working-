@@ -31,14 +31,12 @@ public class LoginInHome extends AppCompatActivity {
     private final static int RC_SIGN_IN = 2;
     private Button etLogBtn;
     private TextView regLink;
-
-
+    
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +86,16 @@ public class LoginInHome extends AppCompatActivity {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
                         Toast.makeText(LoginInHome.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-
                     }
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
     }
 
-
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -114,7 +109,6 @@ public class LoginInHome extends AppCompatActivity {
             } else {
                 Toast.makeText(LoginInHome.this, "Authorization Failure", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
