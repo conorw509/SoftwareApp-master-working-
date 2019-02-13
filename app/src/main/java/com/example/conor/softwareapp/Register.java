@@ -1,29 +1,24 @@
 package com.example.conor.softwareapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.ViewParent;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.regex.Matcher;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Register extends AppCompatActivity {
@@ -33,33 +28,32 @@ public class Register extends AppCompatActivity {
                     "(?=.*[a-z])" +         //at least 1 lower case letter
                     "(?=.*[A-Z])" +         //at least 1 upper case letter
                     "(?=.*[a-zA-Z])" +      //any letter
-                 //   "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    //   "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
                     ".{6,}" +               //at least 6 characters
                     "$");
 
-    //private EditText etName;
-
-    private EditText etEmail;
+    private EditText etEmail, etPass, userName;
     private Button bRegister;
-    private EditText etPass;
     private TextView view;
-    // private  ProgressBar progressBar;
     private FirebaseAuth mAuth;
-    private String email;
-    private String password;
+    private String email, password, user;
+    private DatabaseReference reference;
+    private  FirebaseDatabase database;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("Users");
         bRegister = (Button) findViewById(R.id.RegBtn);
         etEmail = (EditText) findViewById(R.id.RegEmail);
         etPass = (EditText) findViewById(R.id.RegPword);
+        userName = (EditText) findViewById(R.id.userName);
         view = (TextView) findViewById(R.id.LoginBk);
-        //  progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
 
         //back to login button
@@ -75,166 +69,143 @@ public class Register extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
 
+                email = etEmail.getText().toString().trim();
+                password = etPass.getText().toString().trim();
+                user = userName.getText().toString().trim();
 
-            }
-        });
+                if (email.isEmpty() && password.isEmpty() && user.isEmpty()) {
+                    Toast.makeText(Register.this, "Fields are empty", Toast.LENGTH_LONG).show();
+                    return;
+                } else {
+                    if (email.isEmpty()) {
+                        etEmail.setError("Please enter an Email");
+                        etEmail.requestFocus();
+                        return;
+                    }
 
-    }
-
-    private void registerUser() {
-
-        email = etEmail.getText().toString().trim();
-        password = etPass.getText().toString().trim();
-
-        if (email.isEmpty() && password.isEmpty()) {
-            Toast.makeText(Register.this, "Fields are empty", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        else {
-            if (email.isEmpty()) {
-                etEmail.setError("Please enter an Email");
-                etEmail.requestFocus();
-                return;
-            }
-
-            if (password.isEmpty()) {
-                etPass.setError("Please enter a Password");
-                etPass.requestFocus();
-                return;
-            }
-        }
-
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                etEmail.setError("Please enter a Valid email");
-                etEmail.requestFocus();
-                return;
-
-            }
-
+                    if (password.isEmpty()) {
+                        etPass.setError("Please enter a Password");
+                        etPass.requestFocus();
+                        return;
+                    }
+                    if (user.isEmpty()) {
+                        userName.setError("Please enter a Username");
+                        userName.requestFocus();
+                        return;
+                    }
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    etEmail.setError("Please enter a Valid email");
+                    etEmail.requestFocus();
+                    return;
+                }
                 if (!PASSWORD_PATTERN.matcher(password).matches()) {
                     etPass.setError("Password is to weak");
                     etEmail.requestFocus();
                     return;
-            }
-
-
-       /* if(isValidPassword(password)){
-            //Toast.makeText(Register.this,"Please enter a valid Password",Toast.LENGTH_LONG).show();
-            return;
-        }*/
-
-
-            // progressBar.setProgress(100);
-            //progressBar.setVisibility(view.VISIBLE);
-
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-
-                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        if (task.isSuccessful()) {
-
-                                            Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
-
-                                        } else {
-                                            Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-
-                                        }
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
-
-                            }
-                        }
-                    });
-        }
-
-/*
-        private void createUser(){
-
-            email = etEmail.getText().toString();
-            password = etPass.getText().toString();
-
-            if(email.isEmpty()){
-                etEmail.setError("Please enter an Email");
-                etEmail.requestFocus();
-                return;
-            }
-
-            if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                etEmail.setError("Please enter a Valid email");
-                etEmail.requestFocus();
-                return;
-
-            }
-
-            if(password.length() <6){
-                etPass.setError("Minimum Length of password must be 6");
-                etPass.requestFocus();
-                return;
-            }
-
-
-
-            if(password.isEmpty()){
-                etPass.setError("Please enter a Password");
-                etPass.requestFocus();
-                return;
-            }
-
-              /*  if(isValidPassword(password)){
-                etPass.setError("Please enter a valid password");
-                etPass.requestFocus();
-                return;
-            }*/
-
-/*
-mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-    @Override
-    public void onComplete(@NonNull Task<AuthResult> task) {
-
-        if(task.isSuccessful()){
-            Toast.makeText(Register.this,"User Registered Successfully",Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(Register.this,"Something went wrong",Toast.LENGTH_LONG).show();
-        }
-
-    }
-});
-        }
-
-
-
-//send email verification
-    private void sendEmailVerfication(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(user != null){
-
-            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-
-                        Toast.makeText(Register.this,"Please Check email for verification",Toast.LENGTH_SHORT).show();
-                        FirebaseAuth.getInstance().signOut();
-                    }
+                } else {
+                    registerUser(user,email, password);
                 }
-            });
-        }
-
-    }*/
-
-
+            }
+        });
     }
+
+    private void registerUser(final String userName,String email, String password) {
+
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            firebaseUser = mAuth.getCurrentUser();
+                            final String userId = firebaseUser.getUid();
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("id", userId);
+                            hashMap.put("userName", userName);
+                            hashMap.put("imageUrl", "default");
+                            reference.setValue(hashMap);
+
+                            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+
+                                    } else {
+                                        Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
+                                    }
+                                }
+                            });
+                        } else {
+                            Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d("TAG", "createUserWithEmail:onComplete:" + task.isSuccessful());
+//                        if (task.isSuccessful()) {
+//
+//                            //firebaseUser = mAuth.getCurrentUser();
+////                            final String userId = firebaseUser.getUid();
+////                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+////                            HashMap<String, String> hashMap = new HashMap<>();
+////                            hashMap.put("id", userId);
+////                            hashMap.put("userName", userName);
+////                            hashMap.put("imageUrl", "default");
+//
+//                          //  reference.setValue(hashMap);//.addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                //@Override
+//                              //  public void onComplete(@NonNull Task<Void> task) {
+//                                  //  if (task.isSuccessful()) {
+//                                        mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                if (task.isSuccessful()) {
+//                                                    Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+//
+//                                                } else {
+//                                                    Toast.makeText(Register.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+//                                                }
+//                                            }
+//                                        });
+//                                    //}
+//                               // }
+//                          //  });
+//
+//                        } else {
+//                            Toast.makeText(Register.this, "Registration failed,please try again", Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    }
+//                });
+//    }
+}
 
 
