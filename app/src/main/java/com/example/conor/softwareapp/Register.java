@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -59,8 +58,6 @@ public class Register extends AppCompatActivity {
         etPass = (EditText) findViewById(R.id.RegPword);
         userName = (EditText) findViewById(R.id.userName);
         view = (TextView) findViewById(R.id.LoginBk);
-
-
 
         //back to login button
         view.setOnClickListener(new View.OnClickListener() {
