@@ -31,7 +31,7 @@ public class LoginInHome extends AppCompatActivity {
     private final static int RC_SIGN_IN = 2;
     private Button etLogBtn;
     private TextView regLink;
-    
+
     @Override
     protected void onStart() {
         super.onStart();

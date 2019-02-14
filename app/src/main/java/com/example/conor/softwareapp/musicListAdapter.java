@@ -9,7 +9,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 
@@ -38,7 +37,6 @@ public class musicListAdapter extends ArrayAdapter<music> {
         String songName = getItem(position).getSongName();
         String artist = getItem(position).getArtist();
 
-
         final View result;
         final ViewHolder holder;
 
@@ -50,7 +48,6 @@ public class musicListAdapter extends ArrayAdapter<music> {
             holder.name = (TextView) convertView.findViewById(R.id.view1);
             holder.artist = (TextView) convertView.findViewById(R.id.view2);
 
-
             result = convertView;
             convertView.setTag(holder);
         } else {
@@ -59,16 +56,12 @@ public class musicListAdapter extends ArrayAdapter<music> {
         }
 
         Animation animation = AnimationUtils.loadAnimation(mContext,
-
                 (position > lastPos) ? R.anim.load_down_anim : R.anim.load_up_anim);
         result.startAnimation(animation);
         lastPos = position;
-
-
         holder.name.setText(songName);
         holder.artist.setText(artist);
 
         return convertView;
-
     }
 }

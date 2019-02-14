@@ -7,9 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 
 public class audio extends AppCompatActivity {
@@ -127,7 +125,6 @@ public class audio extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
 
                 if (position != -1) {
-
                     Intent goToPlayer = new Intent(getApplicationContext(), musicPlayer.class);
                     goToPlayer.putExtra("songPosition", position).putExtra("urls", urls).putParcelableArrayListExtra("music/art", musicList);
                     audio.this.startActivity(goToPlayer);

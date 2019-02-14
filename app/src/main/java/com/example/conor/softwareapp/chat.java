@@ -15,6 +15,5 @@ public class chat extends AppCompatActivity {
 
 
 
-
     }
 }

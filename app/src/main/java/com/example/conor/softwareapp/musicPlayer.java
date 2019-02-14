@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,12 +19,12 @@ public class musicPlayer extends AppCompatActivity {
 
     private Button playBtn, audioBtn, nextBtn, prevBtn;
     private SeekBar positionBar;
-    private TextView elapsedTimeLabel, remainingTime, songName,artist;
+    private TextView elapsedTimeLabel, remainingTime, songName, artist;
     private MediaPlayer mediaPlayer;
     private int totalTime, position;
     private ArrayList<String> arrayList;
     private ArrayList<music> musicArtistList;
-    private String songUrl, songNameDisplay,artistDisplay;
+    private String songUrl, songNameDisplay, artistDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +46,9 @@ public class musicPlayer extends AppCompatActivity {
         position = getIntent().getExtras().getInt("songPosition", 0);
         arrayList = getIntent().getExtras().getStringArrayList("urls");
         songUrl = arrayList.get(position);
-
         musicArtistList = getIntent().getExtras().getParcelableArrayList("music/art");
         songNameDisplay = musicArtistList.get(position).getSongName();
         artistDisplay = musicArtistList.get(position).getArtist();
-
 
         audioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +74,6 @@ public class musicPlayer extends AppCompatActivity {
                     playSong(songUrl);
                     position = position + 1;
                 } else {
-
                     playSong(songUrl);
                     Toast.makeText(musicPlayer.this, "End Of Audio", Toast.LENGTH_LONG).show();
                 }
@@ -198,7 +194,6 @@ public class musicPlayer extends AppCompatActivity {
 
         //seekBar Click
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
@@ -206,16 +201,13 @@ public class musicPlayer extends AppCompatActivity {
                     positionBar.setProgress(progress);
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
         // Thread to update position
         new Thread(new Runnable() {
             @Override
@@ -227,7 +219,6 @@ public class musicPlayer extends AppCompatActivity {
                         handler.sendMessage(msg);
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-
                     }
                 }
             }
@@ -261,7 +252,6 @@ public class musicPlayer extends AppCompatActivity {
     }
 
     public void playSong(String songUrl) {
-
         try {
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setDataSource(songUrl);
@@ -269,7 +259,6 @@ public class musicPlayer extends AppCompatActivity {
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
-
                     mediaPlayer.setLooping(true);
                     mediaPlayer.seekTo(0);
                     totalTime = mediaPlayer.getDuration();
@@ -290,7 +279,6 @@ public class musicPlayer extends AppCompatActivity {
                             }
                         }
                     });
-
                 }
             });
         } catch (IOException e) {

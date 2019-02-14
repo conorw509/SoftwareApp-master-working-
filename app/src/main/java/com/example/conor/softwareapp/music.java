@@ -7,7 +7,7 @@ public class music implements Parcelable {
     private String songName;
     private String artist;
 
-    public music(String songName, String artist){
+    public music(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
     }
