@@ -2,30 +2,22 @@
     <string name="app_name">SoftwareApp</string>
 
     <string name="LinkToSite">
-        <a href = "https://www.mentalhealthireland.ie/?gclid=Cj0KCQiAhKviBRCNARIsAAGZ7CcvEsdTcXs6_6EdpYSZQsW_5b8WoNCx9EhUP7n2_B-ED8oxJGIIV3oaAs0eEALw_wcB">
+        <a href="https://www.mentalhealthireland.ie/?gclid=Cj0KCQiAhKviBRCNARIsAAGZ7CcvEsdTcXs6_6EdpYSZQsW_5b8WoNCx9EhUP7n2_B-ED8oxJGIIV3oaAs0eEALw_wcB">
             Mental Health Ireland
 
         </a>
     </string>
 
 
-   <!-- <string name="LinkToSite1">
-        <a href = "https://www2.hse.ie/mental-health/?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FHIuG9Vjx6sW31XsWESAYbBZN1vO4bJRSqxmP7fX0ZgwHTp3c5IYgAaAn9gEALw_wcB&gclsrc=aw.ds">
-
-            HSE
-        </a>
-    </string>-->
-
-
     <string name="LinkToSite2">
-        <a href = "https://iacp.ie/?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FELb16Sq7iVqwXfAJe2SBuVP04vJptQioGwBxuxs1T3AxySV_kbf2saAg15EALw_wcB">
+        <a href="https://iacp.ie/?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FELb16Sq7iVqwXfAJe2SBuVP04vJptQioGwBxuxs1T3AxySV_kbf2saAg15EALw_wcB">
 
          ICAP
         </a>
     </string>
 
     <string name="LinkToSite3">
-        <a href = "https://www.altruism.ie/charity/pieta-house?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FH62CCT5ID6bkFbngLm-5npANOr26MNGAvoXy8pWUpLfREJNQfi9_MaAgruEALw_wcB">
+        <a href="https://www.altruism.ie/charity/pieta-house?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FH62CCT5ID6bkFbngLm-5npANOr26MNGAvoXy8pWUpLfREJNQfi9_MaAgruEALw_wcB">
 
             Pieta House
 
@@ -33,7 +25,7 @@
     </string>
 
     <string name="LinkToSite4">
-        <a href = "https://www.samaritans.org/your-community/samaritans-ireland-scotland-and-wales/samaritans-ireland?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FGu9VvFxBd1RnTxhENlIvix7oznFTDJ1m3dRapuQ1zv8WuoL3CubCUaAtp_EALw_wcB">
+        <a href="https://www.samaritans.org/your-community/samaritans-ireland-scotland-and-wales/samaritans-ireland?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FGu9VvFxBd1RnTxhENlIvix7oznFTDJ1m3dRapuQ1zv8WuoL3CubCUaAtp_EALw_wcB">
 
             Samaritans Ireland
 
@@ -42,7 +34,7 @@
 
 
     <string name="LinkToSite5">
-        <a href = "https://www.aware.ie/">
+        <a href="https://www.aware.ie/">
 
           Aware
 
@@ -50,9 +42,8 @@
     </string>
 
 
-
     <string name="LinkToSite6">
-        <a href = "https://ie.reachout.com/">
+        <a href="https://ie.reachout.com/">
 
      Reach Out
 
@@ -61,7 +52,7 @@
 
 
     <string name="LinkToSite7">
-        <a href = "https://seechange.ie/">
+        <a href="https://seechange.ie/">
 
      See Change
 
@@ -69,12 +60,19 @@
     </string>
 
     <string name="LinkToSite8">
-        <a href = "https://www.mhfaireland.ie/what-is-mental-health-first-aid">
+        <a href="https://www.mhfaireland.ie/what-is-mental-health-first-aid">
 
     Mental Health First Aid
 
         </a>
     </string>
+    <string name="nav_user">user</string>
+    <string name="nav_msg">msg</string>
+    <string name="nav_users">Users</string>
+    <string name="nav_msgs">Chat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="#42f4cb"
-    android:weightSum="10"
-
-
-
-    >
+    android:orientation="vertical"
+    android:weightSum="10">
 
     <TextView
         android:id="@+id/AudioView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="top|center"
         android:text="Audio"
-        android:layout_marginTop="10dp"
         android:textColor="#ffffff"
         android:textSize="34dp"
         android:visibility="visible" />
@@ -27,43 +21,34 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-
         android:layout_marginTop="15dp"
-
-        android:src="@drawable/music"
-
-        />
+        android:src="@drawable/music" />
 
     <Button
         android:id="@+id/LogOutAudio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/buttonstyleselector"
         android:text="LogOut"
-        android:layout_marginTop="10dp"
         android:textColor="#ffffff" />
-
 
     <Button
         android:id="@+id/BackToHomeAudio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttonstyleselector"
         android:layout_marginTop="5dp"
+        android:background="@drawable/buttonstyleselector"
         android:text="Back To Home"
         android:textColor="#ffffff" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-
-   <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
-
-
-</LinearLayout>
-
+    </LinearLayout>
 
     <ListView
         android:id="@+id/mainList"
@@ -73,7 +58,5 @@
         android:layout_weight="10"
         android:divider="@color/colorAccent"
         android:dividerHeight="2dp" />
-
-
 
 </LinearLayout>

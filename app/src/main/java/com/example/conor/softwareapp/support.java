@@ -14,11 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 
 public class support extends AppCompatActivity {
-
     private FirebaseAuth mAuth;
     private final int REQUEST_CALL = 1;
     private Button signOut, backToHome, num1, num2, num3, num4, num5, num6, num7, num8, num9;
@@ -72,7 +70,6 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makePhoneCall5();
-
             }
         });
 
@@ -81,7 +78,6 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makePhoneCall6();
-
             }
         });
 
@@ -90,7 +86,6 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makePhoneCall7();
-
             }
         });
         //see change
@@ -98,7 +93,6 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makePhoneCall8();
-
             }
         });
 
@@ -107,7 +101,6 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makePhoneCall5();
-
             }
         });
 
