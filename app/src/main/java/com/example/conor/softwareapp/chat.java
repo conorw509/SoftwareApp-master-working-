@@ -36,7 +36,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         chatFragment = new chatFragment();
         usersFragment = new usersFragment();
 
-        setFragment(chatFragment);
+        setFragment(usersFragment);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
