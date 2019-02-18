@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class chat extends AppCompatActivity implements com.example.conor.softwareapp.chatFragment.OnFragmentInteractionListener
@@ -23,6 +24,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     private FrameLayout frameLayout;
     private chatFragment chatFragment;
     private usersFragment usersFragment;
+    private ListView listView;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -32,9 +34,13 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         backToHome = (Button) findViewById(R.id.BackToHomeChat);
         frameLayout = (FrameLayout) findViewById(R.id.mainFrame);
         navigationView = (BottomNavigationView) findViewById(R.id.mainNav);
+        listView = findViewById(R.id.usersList);
         mAuth = FirebaseAuth.getInstance();
         chatFragment = new chatFragment();
         usersFragment = new usersFragment();
+
+//        usersAdapter adapter = new usersAdapter(this, R.layout.custom_listview,);
+//        listView.setAdapter(adapter);
 
         setFragment(usersFragment);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
