@@ -31,8 +31,8 @@
         <activity android:name=".support" />
         <activity android:name=".journal" />
         <activity android:name=".LoginInHome" />
-        <activity android:name=".home"></activity>
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".home" />
+        <activity android:name=".MessageActivity" />
     </application>
 
 </manifest>
