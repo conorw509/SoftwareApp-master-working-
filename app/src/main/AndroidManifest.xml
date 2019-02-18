@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.conor.softwareapp">
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,24 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Register" />
         <activity android:name=".Login" />
-        <activity android:name=".chat"/>
-        <activity android:name=".audio"/>
-        <activity android:name=".musicPlayer"/>
-        <activity android:name=".support"/>
-        <activity android:name=".journal"/>
-        <activity android:name=".LoginInHome"/>
-            <activity android:name=".home">
-
-
-        </activity>
-
-
+        <activity android:name=".chat" />
+        <activity android:name=".audio" />
+        <activity android:name=".musicPlayer" />
+        <activity android:name=".support" />
+        <activity android:name=".journal" />
+        <activity android:name=".LoginInHome" />
+        <activity android:name=".home"></activity>
+        <activity android:name=".MessageActivity"></activity>
     </application>
-
-
-
 
 </manifest>
