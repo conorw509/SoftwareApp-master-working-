@@ -75,6 +75,8 @@ public class Register extends AppCompatActivity {
                 email = etEmail.getText().toString().trim();
                 password = etPass.getText().toString().trim();
                 user = userName.getText().toString().trim();
+                checkEmail();
+                checkUserName();
                 if (email.isEmpty() && password.isEmpty() && user.isEmpty()) {
                     Toast.makeText(Register.this, "Fields are empty", Toast.LENGTH_LONG).show();
                     return;
@@ -125,7 +127,6 @@ public class Register extends AppCompatActivity {
                             hashMap.put("userName", userName);
                             hashMap.put("imageUrl", "default");
                             reference.setValue(hashMap);
-
                             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

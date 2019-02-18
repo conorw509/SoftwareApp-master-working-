@@ -36,11 +36,10 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
 
         User user = mUser.get(i);
         viewHolder.userName.setText(user.getUserName());
-        System.out.println(" user here: " +user);
        // if(user.getImgageUrl().equals("default")) {
-            viewHolder.proile_img.setImageResource(R.drawable.ic_launcher_foreground);
+            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
        // }else{
-            Glide.with(mContext).load(user.getImgageUrl()).into(viewHolder.proile_img);
+       //     Glide.with(mContext).load(user.getImgageUrl()).into(viewHolder.proile_img);
        // }
     }
 

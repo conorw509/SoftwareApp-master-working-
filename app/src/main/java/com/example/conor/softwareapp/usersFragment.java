@@ -40,6 +40,7 @@ public class usersFragment extends Fragment {
     private List<User> mUsers;
     private FirebaseUser fireBaseUser;
     private DatabaseReference reference;
+    private FirebaseAuth mAuth;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -103,7 +104,7 @@ public class usersFragment extends Fragment {
                      User user = snapshot.getValue(User.class);
                      assert user != null;
                      assert fireBaseUser != null;
-                     if (!user.getId().equals(fireBaseUser.getUid())){
+                     if (!user.getId().equals(fireBaseUser.getUid()) && mAuth.getCurrentUser().isEmailVerified()){
                          mUsers.add(user);
                      }
                  }
