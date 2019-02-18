@@ -84,39 +84,41 @@ public class usersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_users, container, false);
-       recyclerView = view.findViewById(R.id.usersList);
-       recyclerView.setHasFixedSize(true);
-       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-       mUsers = new ArrayList<>();
-       readUsers();
+        recyclerView = view.findViewById(R.id.usersList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mUsers = new ArrayList<>();
+        readUsers();
         return view;
     }
 
-    private void readUsers(){
+    private void readUsers() {
 
-         fireBaseUser = FirebaseAuth.getInstance().getCurrentUser();
-         reference = FirebaseDatabase.getInstance().getReference("Users");
-         reference.addValueEventListener(new ValueEventListener() {
-             @Override
-             public void onDataChange(DataSnapshot dataSnapshot) {
-                 mUsers.clear();
-                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                     User user = snapshot.getValue(User.class);
-                     assert user != null;
-                     assert fireBaseUser != null;
-                     if (!user.getId().equals(fireBaseUser.getUid()) && mAuth.getCurrentUser().isEmailVerified()){
-                         mUsers.add(user);
-                     }
-                 }
-              usersAdapter = new usersAdapter(getContext(),mUsers);
-                 recyclerView.setAdapter(usersAdapter);
-             }
+        fireBaseUser = mAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    assert user != null;
+                    assert fireBaseUser != null;
+                    if (fireBaseUser.isEmailVerified()) {
+                        mUsers.add(user);
+                    }
+                }
+                if (fireBaseUser.isEmailVerified()) {
+                    usersAdapter = new usersAdapter(getContext(), mUsers);
+                    recyclerView.setAdapter(usersAdapter);
+                }
+            }
 
-             @Override
-             public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-             }
-         });
+            }
+        });
 
     }
 
