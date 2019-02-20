@@ -28,7 +28,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent journalIntent = new Intent(home.this, LoginInHome.class);
+                Intent journalIntent = new Intent(home.this, loginInHome.class);
                 home.this.startActivity(journalIntent);
                 finish();
             }

@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-public class Register extends AppCompatActivity {
+public class register extends AppCompatActivity {
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit
@@ -63,8 +63,8 @@ public class Register extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register.this, LoginInHome.class);
-                Register.this.startActivity(intent);
+                Intent intent = new Intent(register.this, loginInHome.class);
+                register.this.startActivity(intent);
                 finish();
             }
         });
@@ -78,7 +78,7 @@ public class Register extends AppCompatActivity {
                 checkEmail();
                 checkUserName();
                 if (email.isEmpty() && password.isEmpty() && user.isEmpty()) {
-                    Toast.makeText(Register.this, "Fields are empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(register.this, "Fields are empty", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     if (email.isEmpty()) {
@@ -133,10 +133,10 @@ public class Register extends AppCompatActivity {
 
                                     if (task.isSuccessful()) {
 
-                                        Toast.makeText(Register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
 
                                     } else {
-                                        Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(register.this, "Registration Failed", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -145,7 +145,7 @@ public class Register extends AppCompatActivity {
                                 checkEmail();
                                 checkUserName();
                             } else {
-                                Toast.makeText(Register.this, "Registration failed, please try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(register.this, "Registration failed, please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     }

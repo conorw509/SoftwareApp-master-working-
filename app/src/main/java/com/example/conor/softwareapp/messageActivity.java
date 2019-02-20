@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class MessageActivity extends AppCompatActivity {
+public class messageActivity extends AppCompatActivity {
 
     private TextView userName;
     private Button backBtn, chatBoxSend;
@@ -54,7 +54,7 @@ public class MessageActivity extends AppCompatActivity {
 
                     sendMessage(firebaseUser.getUid(), userUuid, msg);
                 } else {
-                    Toast.makeText(MessageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
+                    Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
                 }
                 chatBoxSend.setText("");
             }
@@ -63,7 +63,7 @@ public class MessageActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MessageActivity.this, chat.class);
+                Intent intent = new Intent(messageActivity.this, chat.class);
                 startActivity(intent);
                 finish();
             }

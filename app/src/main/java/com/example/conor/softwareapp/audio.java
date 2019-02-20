@@ -104,7 +104,7 @@ public class audio extends AppCompatActivity {
             public void onClick(View v) {
 
                 mAuth.signOut();
-                Intent logOutIntent = new Intent(audio.this, LoginInHome.class);
+                Intent logOutIntent = new Intent(audio.this, loginInHome.class);
                 audio.this.startActivity(logOutIntent);
                 finish();
             }

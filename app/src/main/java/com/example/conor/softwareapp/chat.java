@@ -67,7 +67,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent logOutIntent = new Intent(chat.this, LoginInHome.class);
+                Intent logOutIntent = new Intent(chat.this, loginInHome.class);
                 chat.this.startActivity(logOutIntent);
                 finish();
             }

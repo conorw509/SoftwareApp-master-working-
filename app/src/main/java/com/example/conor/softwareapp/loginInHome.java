@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class LoginInHome extends AppCompatActivity {
+public class loginInHome extends AppCompatActivity {
 
     private SignInButton signInButton;
     private FirebaseAuth mAuth;
@@ -51,8 +51,8 @@ public class LoginInHome extends AppCompatActivity {
         regLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginInHome.this, Register.class);
-                LoginInHome.this.startActivity(registerIntent);
+                Intent registerIntent = new Intent(loginInHome.this, register.class);
+                loginInHome.this.startActivity(registerIntent);
                 finish();
             }
         });
@@ -60,8 +60,8 @@ public class LoginInHome extends AppCompatActivity {
         etLogBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(LoginInHome.this, Login.class);
-                LoginInHome.this.startActivity(registerIntent);
+                Intent registerIntent = new Intent(loginInHome.this, Login.class);
+                loginInHome.this.startActivity(registerIntent);
                 finish();
 
             }
@@ -85,7 +85,7 @@ public class LoginInHome extends AppCompatActivity {
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Toast.makeText(LoginInHome.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(loginInHome.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -107,7 +107,7 @@ public class LoginInHome extends AppCompatActivity {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-                Toast.makeText(LoginInHome.this, "Authorization Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(loginInHome.this, "Authorization Failure", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -123,9 +123,9 @@ public class LoginInHome extends AppCompatActivity {
                             Intent i = new Intent(getApplicationContext(), home.class);
                             startActivity(i);
                             finish();
-                            Toast.makeText(LoginInHome.this, "User Logged in with google", Toast.LENGTH_LONG).show();
+                            Toast.makeText(loginInHome.this, "User Logged in with google", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(LoginInHome.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginInHome.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -87,7 +87,7 @@ public class Login extends AppCompatActivity {
         regLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(Login.this, Register.class);
+                Intent registerIntent = new Intent(Login.this, register.class);
                 Login.this.startActivity(registerIntent);
                 finish();
 
@@ -97,7 +97,7 @@ public class Login extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(Login.this, LoginInHome.class);
+                Intent registerIntent = new Intent(Login.this, loginInHome.class);
                 Login.this.startActivity(registerIntent);
                 finish();
 
