@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.List;
 
 public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softwareapp.messageAdapter.ViewHolder> {
@@ -19,31 +17,38 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
     public static final int MSG_TYPE_LEFT = 0;
     public static final int MSG_TYPE_RIGHT = 0;
     private Context mContext;
-    private List<messages> messages;
-    private String imgUrl;
+   private List<messages> messageList;
     private FirebaseUser firebaseUser;
 
-    public messageAdapter(Context mContext, List<messages> messages, String imgUrl) {
+    public messageAdapter(Context mContext, List<messages> messages) {
         this.mContext = mContext;
-        this.messages = messages;
-        this.imgUrl = imgUrl;
+        this.messageList = messages;
     }
 
     @NonNull
     @Override
     public com.example.conor.softwareapp.messageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.users_view, viewGroup, false);
-        return new messageAdapter.ViewHolder(view);
+
+        if (i == MSG_TYPE_RIGHT) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, viewGroup, false);
+            return new messageAdapter.ViewHolder(view);
+        }else{
+            View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, viewGroup, false);
+            return new messageAdapter.ViewHolder(view);
+        }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull messageAdapter.ViewHolder viewHolder, int i) {
+        messages messages = messageList.get(i);
+        viewHolder.show_msg.setText(messages.getMsg());
 
     }
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return messageList.size();
     }
 
 
@@ -62,7 +67,7 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
     @Override
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (messages.get(position).getSend().equals(firebaseUser.getUid())) {
+        if (messageList.get(position).getSend().equals(firebaseUser.getUid())) {
 
             return MSG_TYPE_RIGHT;
         } else {

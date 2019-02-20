@@ -3,6 +3,8 @@ package com.example.conor.softwareapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class messageActivity extends AppCompatActivity {
 
@@ -30,11 +34,22 @@ public class messageActivity extends AppCompatActivity {
     private String userUuid;
     private ImageView profileImg;
     private EditText chatBox;
+    private messageAdapter messageAdapter;
+    private List<messages> messagesList;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setVerticalScrollBarEnabled(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
 
         userName = (TextView) findViewById(R.id.userNameMsg);
         backBtn = (Button) findViewById(R.id.backMsg);
@@ -76,6 +91,7 @@ public class messageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 userName.setText(user.getUserName());
                 profileImg.setImageResource(R.drawable.ic_person_black_24dp);
+                readMessages(firebaseUser.getUid(), userUuid);
             }
 
             @Override
@@ -96,6 +112,32 @@ public class messageActivity extends AppCompatActivity {
 
         reference.child("chats").push().setValue(map);
 
+    }
+
+    private void readMessages(final String myId, final String userUuid) {
+
+        messagesList = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                messagesList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    messages messages = snapshot.getValue(com.example.conor.softwareapp.messages.class);
+                    if (messages.getRecieve().equals(myId) && messages.getSend().equals(userUuid)
+                            || messages.getRecieve().equals(userUuid) && messages.getSend().equals(myId)) {
+                        messagesList.add(messages);
+                    }
+                }
+                messageAdapter = new messageAdapter(messageActivity.this, messagesList);
+                recyclerView.setAdapter(messageAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }
