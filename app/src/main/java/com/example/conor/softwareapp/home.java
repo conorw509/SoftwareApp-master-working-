@@ -6,11 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class home extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button journal,audio,chat,support,signOut;
+    private DatabaseReference reference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +30,13 @@ public class home extends AppCompatActivity {
         audio = (Button) findViewById(R.id.audioBtn);
         signOut = (Button)  findViewById(R.id.LogOut);
         mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent journalIntent = new Intent(home.this, loginInHome.class);
+                Intent journalIntent = new Intent(home.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 home.this.startActivity(journalIntent);
                 finish();
             }
@@ -69,6 +77,23 @@ public class home extends AppCompatActivity {
             }
         });
 
+    } private void status(String status){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("status",status);
+        reference.updateChildren(map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }
 

@@ -10,9 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +36,7 @@ public class chatFragment extends Fragment {
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private List<String> userList;
+    private usersAdapter usersAdapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -82,7 +89,70 @@ public class chatFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setVerticalScrollBarEnabled(true);
 
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        userList = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    messages messages = snapshot.getValue(com.example.conor.softwareapp.messages.class);
+                    if (messages.getSend().equals(firebaseUser.getUid())) {
+                        userList.add(messages.getRecieve());
+                    }
+                    if (messages.getRecieve().equals(firebaseUser.getUid())) {
+                        userList.add(messages.getSend());
+                    }
+                }
+                readChats();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
+        });
+
         return view;
+    }
+
+    private void readChats() {
+        mUsers = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    for (String id : userList) {
+                        if (user.getId().equals(id)) {
+                            if (mUsers.size() != 0) {
+                                for (User user1 : mUsers) {
+                                    if (!user.getId().equals(user1.getId())) {
+                                        mUsers.add(user);
+                                    }
+                                }
+                            } else {
+                                mUsers.add(user);
+                            }
+                        }
+                    }
+                }
+                usersAdapter = new usersAdapter(getContext(),mUsers,true);
+                recyclerView.setAdapter(usersAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

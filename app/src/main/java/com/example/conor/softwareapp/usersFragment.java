@@ -109,7 +109,7 @@ public class usersFragment extends Fragment {
                     }
                 }
                 if (fireBaseUser.isEmailVerified()) {
-                    usersAdapter = new usersAdapter(getContext(), mUsers);
+                    usersAdapter = new usersAdapter(getContext(), mUsers,false);
                     recyclerView.setAdapter(usersAdapter);
                 }
             }

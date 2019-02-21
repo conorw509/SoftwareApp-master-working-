@@ -8,7 +8,12 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class audio extends AppCompatActivity {
 
@@ -18,6 +23,8 @@ public class audio extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ArrayList<music> musicList = new ArrayList<>();
     private ArrayList<String> urls = new ArrayList<>();
+    private DatabaseReference reference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,7 @@ public class audio extends AppCompatActivity {
         backToHome = (Button) findViewById(R.id.BackToHomeAudio);
         listView = findViewById(R.id.mainList);
         mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
 
         //music objects
         music music1 = new music("Calming Harp Music", "Alexander Blu");
@@ -104,7 +112,7 @@ public class audio extends AppCompatActivity {
             public void onClick(View v) {
 
                 mAuth.signOut();
-                Intent logOutIntent = new Intent(audio.this, loginInHome.class);
+                Intent logOutIntent = new Intent(audio.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 audio.this.startActivity(logOutIntent);
                 finish();
             }
@@ -132,5 +140,24 @@ public class audio extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void status(String status){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("status",status);
+        reference.updateChildren(map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }

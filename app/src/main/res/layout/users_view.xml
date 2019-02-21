@@ -3,10 +3,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="#e6e6e6"
-    android:weightSum="100"
-    >
+    android:weightSum="100">
 
     <ImageView
         android:id="@+id/profileImg"
@@ -14,8 +14,8 @@
         android:layout_height="50dp"
         android:layout_weight="70"
         android:gravity="center"
-        android:textAlignment="center"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:src="@drawable/ic_launcher_foreground"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/userView"
@@ -28,6 +28,40 @@
         android:layout_weight="30"
         android:text="UserName"
         />
+
+    <ImageView
+        android:id="@+id/imgOn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userView"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/profileImg"
+        android:layout_toRightOf="@id/profileImg"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"/>
+        <!--app:civ_border_color="#o5df29"-->
+        <!--app:civ_border_width="10dp"-->
+
+
+
+
+    <ImageView
+        android:id="@+id/imgOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userView"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/profileImg"
+        android:layout_toRightOf="@id/profileImg"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"/>
+        <!--android:="#bfbfbf"-->
+        <!--app:civ_border_width="10dp"-->
+
+
+
 
 </LinearLayout>
 

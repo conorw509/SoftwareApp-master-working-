@@ -15,12 +15,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class support extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private final int REQUEST_CALL = 1;
-    private Button signOut, backToHome, num1, num2, num3, num4, num5, num6, num7, num8, num9;
+    private Button signOut, backToHome, num1, num3, num4, num5, num6, num7, num8, num9;
     private TextView txtView;
+    private DatabaseReference reference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,7 @@ public class support extends AppCompatActivity {
         num9 = (Button) findViewById(R.id.row18);
         txtView.setMovementMethod(LinkMovementMethod.getInstance());
         mAuth = FirebaseAuth.getInstance();
+        firebaseUser=mAuth.getCurrentUser();
 
         //mental health ireland
         num1.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +116,7 @@ public class support extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent logOutIntent = new Intent(support.this, loginInHome.class);
+                Intent logOutIntent = new Intent(support.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 support.this.startActivity(logOutIntent);
                 finish();
             }
@@ -212,5 +220,24 @@ public class support extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void status(String status){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("status",status);
+        reference.updateChildren(map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }

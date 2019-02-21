@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class chat extends AppCompatActivity implements com.example.conor.softwareapp.chatFragment.OnFragmentInteractionListener
         ,com.example.conor.softwareapp.usersFragment.OnFragmentInteractionListener {
@@ -25,6 +30,8 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     private chatFragment chatFragment;
     private usersFragment usersFragment;
     private ListView listView;
+    private DatabaseReference reference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -38,9 +45,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         mAuth = FirebaseAuth.getInstance();
         chatFragment = new chatFragment();
         usersFragment = new usersFragment();
-
-//        usersAdapter adapter = new usersAdapter(this, R.layout.custom_listview,);
-//        listView.setAdapter(adapter);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         setFragment(usersFragment);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,7 +72,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent logOutIntent = new Intent(chat.this, loginInHome.class);
+                Intent logOutIntent = new Intent(chat.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 chat.this.startActivity(logOutIntent);
                 finish();
             }
@@ -95,5 +100,24 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+    }
+
+    private void status(String status){
+     reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("status",status);
+        reference.updateChildren(map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }
