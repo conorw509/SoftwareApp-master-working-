@@ -31,14 +31,12 @@ public class home extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private Button journal, audio, chat, support;
-    private TextView userTxt, emailTxt;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
     private android.support.v7.widget.Toolbar toolbar;
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private String username;
     private User user;
     private int navId;
 
@@ -51,8 +49,6 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.home_page2);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
-        userTxt = (TextView) findViewById(R.id.userNameHeader);
-        emailTxt = (TextView) findViewById(R.id.emailHeader);
         journal = (Button) findViewById(R.id.journalBtn);
         chat = (Button) findViewById(R.id.chatBtn);
         support = (Button) findViewById(R.id.supportBtn);
@@ -99,14 +95,12 @@ public class home extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     user = snapshot.getValue(User.class);
                     if (firebaseUser.getUid().equals(user.getId())) {
-                       // username = user.getUserName();
-                        //Toast.makeText(home.this, " Welcome " + username, Toast.LENGTH_SHORT).show();
                         ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
-                      //  userTxt.setText(username);
+                        ((TextView)findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
+
                     }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
