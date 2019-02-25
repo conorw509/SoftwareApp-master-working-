@@ -31,7 +31,8 @@
         <activity android:name=".support" />
         <activity android:name=".journal" />
         <activity android:name=".loginInHome" />
-        <activity android:name=".home" />
+        <activity android:name=".home"
+            android:theme="@style/AppTheme.noActionBar"/>
         <activity android:name=".messageActivity" />
     </application>
 

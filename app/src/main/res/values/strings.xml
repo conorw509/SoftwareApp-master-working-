@@ -8,7 +8,6 @@
         </a>
     </string>
 
-
     <string name="LinkToSite2">
         <a href="https://iacp.ie/?gclid=Cj0KCQiAkMDiBRDNARIsACKP1FELb16Sq7iVqwXfAJe2SBuVP04vJptQioGwBxuxs1T3AxySV_kbf2saAg15EALw_wcB">
 
@@ -31,7 +30,6 @@
 
         </a>
     </string>
-
 
     <string name="LinkToSite5">
         <a href="https://www.aware.ie/">
@@ -70,9 +68,21 @@
     <string name="nav_msg">msg</string>
     <string name="nav_users">Users</string>
     <string name="nav_msgs">Chat</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_nav_drawer">navDrawer</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
 
 </resources>

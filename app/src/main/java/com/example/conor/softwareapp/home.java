@@ -1,46 +1,121 @@
 package com.example.conor.softwareapp;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
 public class home extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button journal,audio,chat,support,signOut;
+    private Button journal, audio, chat, support, signOut;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
+    private User user;
+    private android.support.v7.widget.Toolbar toolbar;
+    private DrawerLayout drawable;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    //    private NavigationView navigationView;
+    private int navId;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page2);
 
+
         journal = (Button) findViewById(R.id.journalBtn);
         chat = (Button) findViewById(R.id.chatBtn);
         support = (Button) findViewById(R.id.supportBtn);
         audio = (Button) findViewById(R.id.audioBtn);
-        signOut = (Button)  findViewById(R.id.LogOut);
+        drawable = (DrawerLayout) findViewById(R.id.drawerLayout);
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolB);
+        setSupportActionBar(toolbar);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
+        // actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        drawable.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+//        navigationView = (NavigationView) findViewById(R.id.navView);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        signOut.setOnClickListener(new View.OnClickListener() {
+        //  navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//
+//                navId = menuItem.getItemId();
+//                if (navId == R.id.profile) {
+//                    Toast.makeText(home.this, "Profile", Toast.LENGTH_SHORT).show();
+//
+//                } else if (navId == R.id.logOut) {
+//                    Toast.makeText(home.this, "LogOut", Toast.LENGTH_SHORT).show();
+//
+//                } else if (navId == R.id.feedBack) {
+//                    Toast.makeText(home.this, "Feedback", Toast.LENGTH_SHORT).show();
+//
+//                }
+//                return true;
+//            }
+//        });
+
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent journalIntent = new Intent(home.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                home.this.startActivity(journalIntent);
-                finish();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    user = snapshot.getValue(User.class);
+                    if (firebaseUser.getUid().equals(user.getId())) {
+                        String username = user.getUserName();
+                        Toast.makeText(home.this, " Welcome " + username, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
+//        signOut.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                mAuth.signOut();
+//                Intent journalIntent = new Intent(home.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                home.this.startActivity(journalIntent);
+//                finish();
+//
+//                if (firebaseUser.getUid().equals(user.getId())) {
+//                    String username = user.getUserName();
+//                    Toast.makeText(home.this, " Logged Out " + username, Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +152,21 @@ public class home extends AppCompatActivity {
             }
         });
 
-    } private void status(String status){
+    }
+    
+    @Override
+    public void onBackPressed() {
+        if (drawable.isDrawerOpen(GravityCompat.START)) {
+            drawable.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("status",status);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
         reference.updateChildren(map);
     }
 

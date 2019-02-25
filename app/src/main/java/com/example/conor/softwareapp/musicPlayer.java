@@ -12,8 +12,15 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class musicPlayer extends AppCompatActivity {
 
@@ -25,6 +32,8 @@ public class musicPlayer extends AppCompatActivity {
     private ArrayList<String> arrayList;
     private ArrayList<music> musicArtistList;
     private String songUrl, songNameDisplay, artistDisplay;
+    private DatabaseReference reference;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +48,7 @@ public class musicPlayer extends AppCompatActivity {
         songName = (TextView) findViewById(R.id.songName);
         artist = (TextView) findViewById(R.id.artist);
         audioBtn = (Button) findViewById(R.id.BackToAudio);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //mediaPlayer
         mediaPlayer = new MediaPlayer();
@@ -284,6 +294,25 @@ public class musicPlayer extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void status(String status) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
+        reference.updateChildren(map);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }
 
