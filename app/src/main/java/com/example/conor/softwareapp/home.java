@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page2);
+        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
 
         journal = (Button) findViewById(R.id.journalBtn);
@@ -153,29 +155,26 @@ public class home extends AppCompatActivity {
         });
 
     }
-    
+
     @Override
     public void onBackPressed() {
-        if (drawable.isDrawerOpen(GravityCompat.START)) {
-            drawable.closeDrawer(GravityCompat.START);
+        if (drawable.isDrawerOpen(Gravity.RIGHT)) {
+            drawable.closeDrawer(Gravity.RIGHT);
         } else {
             super.onBackPressed();
         }
     }
-
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> map = new HashMap<>();
         map.put("status", status);
         reference.updateChildren(map);
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         status("online");
     }
-
     @Override
     protected void onPause() {
         super.onPause();
