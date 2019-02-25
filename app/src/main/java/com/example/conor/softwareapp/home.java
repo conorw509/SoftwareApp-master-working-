@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,13 +30,15 @@ import java.util.HashMap;
 public class home extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button journal, audio, chat, support, signOut;
+    private Button journal, audio, chat, support;
+    private TextView userTxt, emailTxt;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
     private android.support.v7.widget.Toolbar toolbar;
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
+    private String username;
     private User user;
     private int navId;
 
@@ -48,6 +51,8 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.home_page2);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
+        userTxt = (TextView) findViewById(R.id.userNameHeader);
+        emailTxt = (TextView) findViewById(R.id.emailHeader);
         journal = (Button) findViewById(R.id.journalBtn);
         chat = (Button) findViewById(R.id.chatBtn);
         support = (Button) findViewById(R.id.supportBtn);
@@ -59,11 +64,11 @@ public class home extends AppCompatActivity {
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolB);
         setSupportActionBar(toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
-      //  actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        //  actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navView);
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -94,18 +99,20 @@ public class home extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     user = snapshot.getValue(User.class);
                     if (firebaseUser.getUid().equals(user.getId())) {
-                        String username = user.getUserName();
-                        Toast.makeText(home.this, " Welcome " + username, Toast.LENGTH_SHORT).show();
+                       // username = user.getUserName();
+                        //Toast.makeText(home.this, " Welcome " + username, Toast.LENGTH_SHORT).show();
+                        ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
+                      //  userTxt.setText(username);
                     }
                 }
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+
 
         journal.setOnClickListener(new View.OnClickListener() {
             @Override

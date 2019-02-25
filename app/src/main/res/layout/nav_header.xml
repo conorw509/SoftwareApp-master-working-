@@ -12,6 +12,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/profileImg"
         android:src="@drawable/ic_launcher_foreground"
         android:background="@drawable/ic_launcher_background"/>
 
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
+        android:id="@+id/emailHeader"
         android:text="Email"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
       />
@@ -26,6 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="33dp"
+        android:id="@+id/userNameHeader"
         android:text="UserName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
