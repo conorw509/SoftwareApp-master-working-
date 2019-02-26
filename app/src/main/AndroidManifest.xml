@@ -25,11 +25,20 @@
         </activity>
         <activity android:name=".register" />
         <activity android:name=".Login" />
-        <activity android:name=".chat" />
-        <activity android:name=".audio" />
+        <activity
+            android:name=".chat"
+            android:parentActivityName=".home" />
+        <activity
+            android:name=".audio"
+            android:parentActivityName=".home" />
+
         <activity android:name=".musicPlayer" />
-        <activity android:name=".support" />
-        <activity android:name=".journal" />
+        <activity
+            android:name=".support"
+            android:parentActivityName=".home" />
+        <activity
+            android:name=".journal"
+            android:parentActivityName=".home" />
         <activity android:name=".loginInHome" />
         <activity
             android:name=".home"

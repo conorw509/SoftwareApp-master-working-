@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayoutSup"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
+    tools:openDrawer="right"
+    android:weightSum="10">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#42f4cb"
-    android:weightSum="10"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolSup"
+        android:background="@color/colorAccent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp">
 
 
-
-    >
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/supportViw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="top|center"
         android:text="Support"
-        android:layout_marginTop="10dp"
         android:textColor="#ffffff"
         android:textSize="34dp"
         android:visibility="visible" />
-
-    <Button
-        android:id="@+id/LogOutSupport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonstyleselector"
-        android:text="LogOut"
-        android:layout_marginTop="10dp"
-        android:textColor="#ffffff" />
-
-    <Button
-        android:id="@+id/BackToHomeSupport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonstyleselector"
-        android:layout_marginTop="5dp"
-        android:text="Back To Home"
-        android:textColor="#ffffff" />
 
 
     <RelativeLayout
@@ -58,17 +57,7 @@
             android:weightSum="100">
 
 
-            <TextView
-                android:id="@+id/webViw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:layout_weight="50"
 
-                android:gravity="end"
-                android:text="Website"
-                android:textColor="#ffffff"
-                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/numberViw"
@@ -79,6 +68,18 @@
                 android:gravity="end"
 
                 android:text="Direct Call"
+                android:textColor="#ffffff"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/webViw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:layout_weight="50"
+
+                android:gravity="end"
+                android:text="Website"
                 android:textColor="#ffffff"
                 android:textSize="25dp" />
 
@@ -107,6 +108,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+
+                        <Button
+                            android:id="@+id/row2"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+                            android:gravity="end" />
+
                         <TextView
                             android:id="@+id/row1"
                             android:layout_width="match_parent"
@@ -119,30 +131,23 @@
                             android:text="@string/LinkToSite"
                             android:textColor="#CC0066"
                             android:textSize="15dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
 
                         <Button
-                            android:id="@+id/row2"
-                            android:layout_width="150dp"
+                            android:id="@+id/row6"
+                            android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginRight="50dp"
                             android:layout_weight="50"
                             android:background="#42f4cb"
                             android:drawableTop="@mipmap/call"
-
                             android:gravity="end"
-
-
                             />
-
-
-                    </TableRow>
-
-
-
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/row5"
@@ -157,27 +162,24 @@
                             android:textColor="#CC0066"
                             android:textSize="15dp" />
 
-                        <Button
-
-                            android:id="@+id/row6"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginRight="50dp"
-                            android:layout_weight="50"
-                            android:background="#42f4cb"
-                            android:drawableTop="@mipmap/call"
-
-                            android:gravity="end"
-
-
-                            />
-
                     </TableRow>
 
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+
+                        <Button
+                            android:id="@+id/row8"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="50"
+                            android:background="#42f4cb"
+                            android:drawableTop="@mipmap/call"
+                            android:gravity="end"
+                            />
 
                         <TextView
                             android:id="@+id/row7"
@@ -192,39 +194,12 @@
                             android:textColor="#CC0066"
                             android:textSize="15dp" />
 
-                        <Button
-                            android:id="@+id/row8"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginRight="50dp"
-                            android:layout_weight="50"
-                            android:background="#42f4cb"
-                            android:drawableTop="@mipmap/call"
-
-                            android:gravity="end"
-
-
-                            />
-
                     </TableRow>
-
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/row9"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_weight="50"
-
-                            android:gravity="end"
-                            android:text="@string/LinkToSite4"
-                            android:textColor="#CC0066"
-                            android:textSize="15dp" />
 
                         <Button
                             android:id="@+id/row10"
@@ -234,33 +209,26 @@
                             android:layout_weight="50"
                             android:background="#42f4cb"
                             android:drawableTop="@mipmap/call"
-
                             android:gravity="end"
-
-
                             />
 
+                        <TextView
+                            android:id="@+id/row9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite4"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
                     </TableRow>
-
-
-
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/row13"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="48dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_weight="50"
-
-                            android:gravity="end"
-                            android:text="@string/LinkToSite6"
-                            android:textColor="#CC0066"
-                            android:textSize="15dp" />
 
                         <Button
                             android:id="@+id/row14"
@@ -270,31 +238,27 @@
                             android:layout_weight="50"
                             android:background="#42f4cb"
                             android:drawableTop="@mipmap/call"
-
                             android:gravity="end"
-
-
                             />
 
-                    </TableRow>
+                        <TextView
+                            android:id="@+id/row13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="48dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite6"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
 
+                    </TableRow>
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/row11"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="60dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_weight="50"
-
-                            android:gravity="end"
-                            android:text="@string/LinkToSite5"
-                            android:textColor="#CC0066"
-                            android:textSize="15dp" />
 
                         <Button
                             android:id="@+id/row12"
@@ -304,32 +268,28 @@
                             android:layout_weight="50"
                             android:background="#42f4cb"
                             android:drawableTop="@mipmap/call"
-
                             android:gravity="end"
-
-
                             />
 
-                    </TableRow>
+                        <TextView
+                            android:id="@+id/row11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="60dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite5"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
 
+                    </TableRow>
 
 
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/row15"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="40dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_weight="50"
-
-                            android:gravity="end"
-                            android:text="@string/LinkToSite7"
-                            android:textColor="#CC0066"
-                            android:textSize="15dp" />
 
                         <Button
                             android:id="@+id/row16"
@@ -339,10 +299,19 @@
                             android:layout_weight="50"
                             android:background="#42f4cb"
                             android:drawableTop="@mipmap/call"
-
                             android:gravity="end"
-
                             />
+                        <TextView
+                            android:id="@+id/row15"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite7"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
 
                     </TableRow>
 
@@ -350,17 +319,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:id="@+id/row17"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginTop="14dp"
-                            android:layout_weight="50"
-                            android:gravity="end"
-                      android:text="@string/LinkToSite8"
-                            android:textColor="#CC0066"
-                            android:textSize="15dp" />
 
                         <Button
                             android:id="@+id/row18"
@@ -373,6 +331,17 @@
                             android:gravity="end"
 
                             />
+                        <TextView
+                            android:id="@+id/row17"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_weight="50"
+                            android:gravity="end"
+                            android:text="@string/LinkToSite8"
+                            android:textColor="#CC0066"
+                            android:textSize="15dp" />
 
                     </TableRow>
 
@@ -387,3 +356,15 @@
     </RelativeLayout>
 
 </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:id="@+id/navViewSup"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/navigation_menu">
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

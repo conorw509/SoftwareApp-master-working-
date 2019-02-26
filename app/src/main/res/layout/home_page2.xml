@@ -21,21 +21,9 @@
         android:orientation="vertical"
         android:weightSum="10">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/toolB"
-            android:background="@color/colorAccent"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:elevation="4dp">
-
-            <FrameLayout
-                android:id="@+id/fragmentContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </FrameLayout>
-        </android.support.v7.widget.Toolbar>
+  <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
         <RelativeLayout
             android:layout_width="match_parent"

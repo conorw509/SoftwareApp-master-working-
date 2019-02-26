@@ -5,37 +5,47 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
+import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class support extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private final int REQUEST_CALL = 1;
-    private Button signOut, backToHome, num1, num3, num4, num5, num6, num7, num8, num9;
+    private Button num1, num3, num4, num5, num6, num7, num8, num9;
     private TextView txtView;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
+    private android.support.v7.widget.Toolbar toolbar;
+    private DrawerLayout drawable;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.support);
+        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
-        signOut = (Button) findViewById(R.id.LogOutSupport);
-        backToHome = (Button) findViewById(R.id.BackToHomeSupport);
         txtView = (TextView) findViewById(R.id.row1);
         num1 = (Button) findViewById(R.id.row2);
         num3 = (Button) findViewById(R.id.row6);
@@ -47,7 +57,68 @@ public class support extends AppCompatActivity {
         num9 = (Button) findViewById(R.id.row18);
         txtView.setMovementMethod(LinkMovementMethod.getInstance());
         mAuth = FirebaseAuth.getInstance();
-        firebaseUser=mAuth.getCurrentUser();
+        firebaseUser = mAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        drawable = (DrawerLayout) findViewById(R.id.drawerLayoutSup);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolSup);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Support");
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
+        //  actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        drawable.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        navigationView = (NavigationView) findViewById(R.id.navViewSup);
+
+
+
+//        bkTool.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent logOutIntent = new Intent(support.this, home.class);
+//                support.this.startActivity(logOutIntent);
+//                finish();
+//            }
+//        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                int navId = menuItem.getItemId();
+                if (navId == R.id.profile) {
+                    Toast.makeText(support.this, "Profile", Toast.LENGTH_SHORT).show();
+
+                } else if (navId == R.id.logOut) {
+                    mAuth.signOut();
+                    Intent journalIntent = new Intent(support.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    support.this.startActivity(journalIntent);
+                    finish();
+
+                } else if (navId == R.id.feedBack) {
+                    Toast.makeText(support.this, "Feedback", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    user = snapshot.getValue(User.class);
+                    if (firebaseUser.getUid().equals(user.getId())) {
+                        ((TextView) findViewById(R.id.userNameHeader)).setText(user.getUserName());
+                        ((TextView) findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //mental health ireland
         num1.setOnClickListener(new View.OnClickListener() {
@@ -112,25 +183,6 @@ public class support extends AppCompatActivity {
             }
         });
 
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                Intent logOutIntent = new Intent(support.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                support.this.startActivity(logOutIntent);
-                finish();
-            }
-        });
-
-
-        backToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent logOutIntent = new Intent(support.this, home.class);
-                support.this.startActivity(logOutIntent);
-                finish();
-            }
-        });
     }
 
     private void makePhoneCall1() {
