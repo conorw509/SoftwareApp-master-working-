@@ -13,14 +13,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -67,7 +64,6 @@ public class support extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolBarBk = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarBk);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
-        //  actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navViewSup);

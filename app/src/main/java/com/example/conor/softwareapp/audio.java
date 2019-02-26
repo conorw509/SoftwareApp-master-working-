@@ -1,16 +1,27 @@
 package com.example.conor.softwareapp;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,24 +29,85 @@ import java.util.HashMap;
 public class audio extends AppCompatActivity {
 
     private ListView listView;
-    private Button signOut;
-    private Button backToHome;
     private FirebaseAuth mAuth;
     private ArrayList<music> musicList = new ArrayList<>();
     private ArrayList<String> urls = new ArrayList<>();
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
+    private android.support.v7.widget.Toolbar toolbar,toolBarBk;
+    private DrawerLayout drawable;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private NavigationView navigationView;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audio);
+        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
-        signOut = (Button) findViewById(R.id.LogOutAudio);
-        backToHome = (Button) findViewById(R.id.BackToHomeAudio);
         listView = findViewById(R.id.mainList);
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        drawable = (DrawerLayout) findViewById(R.id.drawerLayoutAudio);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolAudio);
+        setSupportActionBar(toolbar);
+        toolBarBk = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarBkA);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
+        drawable.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        navigationView = (NavigationView) findViewById(R.id.navViewAud);
+        toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+
+        toolBarBk.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logOutIntent = new Intent(audio.this, home.class);
+                audio.this.startActivity(logOutIntent);
+                finish();
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                int navId = menuItem.getItemId();
+                if (navId == R.id.profile) {
+                    Toast.makeText(audio.this, "Profile", Toast.LENGTH_SHORT).show();
+
+                } else if (navId == R.id.logOut) {
+                    mAuth.signOut();
+                    Intent journalIntent = new Intent(audio.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    audio.this.startActivity(journalIntent);
+                    finish();
+
+                } else if (navId == R.id.feedBack) {
+                    Toast.makeText(audio.this, "Feedback", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    user = snapshot.getValue(User.class);
+                    if (firebaseUser.getUid().equals(user.getId())) {
+                        ((TextView) findViewById(R.id.userNameHeader)).setText(user.getUserName());
+                        ((TextView) findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         //music objects
         music music1 = new music("Calming Harp Music", "Alexander Blu");
@@ -106,27 +178,6 @@ public class audio extends AppCompatActivity {
         musicListAdapter adapter = new musicListAdapter(this, R.layout.custom_listview, musicList);
         listView.setAdapter(adapter);
 
-        //test button dont think its working
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mAuth.signOut();
-                Intent logOutIntent = new Intent(audio.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                audio.this.startActivity(logOutIntent);
-                finish();
-            }
-        });
-
-        backToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent logOutIntent = new Intent(audio.this, home.class);
-                audio.this.startActivity(logOutIntent);
-                finish();
-            }
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

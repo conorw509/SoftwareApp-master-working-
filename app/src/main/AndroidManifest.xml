@@ -26,19 +26,15 @@
         <activity android:name=".register" />
         <activity android:name=".Login" />
         <activity
-            android:name=".chat"
-            android:parentActivityName=".home" />
+            android:name=".chat" />
         <activity
-            android:name=".audio"
-            android:parentActivityName=".home" />
+            android:name=".audio"/>
 
         <activity android:name=".musicPlayer" />
         <activity
-            android:name=".support"
-            android:parentActivityName=".home" />
+            android:name=".support" />
         <activity
-            android:name=".journal"
-            android:parentActivityName=".home" />
+            android:name=".journal" />
         <activity android:name=".loginInHome" />
         <activity
             android:name=".home"
