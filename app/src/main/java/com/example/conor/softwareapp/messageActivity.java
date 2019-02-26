@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public class messageActivity extends AppCompatActivity {
 
-    private Button chatBoxSend;
+    private ImageButton chatBoxSend;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private Intent intent;
@@ -58,7 +59,7 @@ public class messageActivity extends AppCompatActivity {
         toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
 
-        chatBoxSend = (Button) findViewById(R.id.button_chatbox_send);
+        chatBoxSend = (ImageButton) findViewById(R.id.button_chatbox_send);
         chatBox = (EditText) findViewById(R.id.edittext_chatbox);
         intent = getIntent();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -82,7 +83,7 @@ public class messageActivity extends AppCompatActivity {
                 if (!msg.equals("")) {
 
                     sendMessage(firebaseUser.getUid(), userUuid, msg);
-                    chatBoxSend.setText(" ");
+                    chatBox.setText(" ");
                 } else {
                     Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
                 }
