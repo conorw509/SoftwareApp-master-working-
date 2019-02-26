@@ -1,44 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!-- Header aligned to top -->
-    <RelativeLayout
-        android:id="@+id/header"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayoutMsg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:openDrawer="right"
+    android:weightSum="10">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/appMainColor"
-        android:gravity="center">
+        android:layout_height="match_parent"
+        android:background="#42f4cb"
+        android:orientation="vertical"
+        android:weightSum="10">
+<android.support.v7.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:id="@+id/toolMsg"
+    android:background="#42f4cb"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:elevation="4dp">
 
-        <Button
-            android:id="@+id/backMsg"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/ic_arrow_back_black_24dp" />
-
-        <ImageView
-            android:id="@+id/profileImgMsg"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="90dp"
-            android:gravity="center"
-            android:src="@drawable/ic_person_black_24dp"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/userNameMsg"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="5dp"
-            android:text="userName"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+</android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
             android:layout_marginTop="70dp"
@@ -49,9 +36,7 @@
             ></android.support.v7.widget.RecyclerView>
 
 
-    </RelativeLayout>
-
-
+</LinearLayout>
     <!-- A horizontal line between the chatbox and RecyclerView -->
     <View
         android:layout_width="0dp"
@@ -99,7 +84,4 @@
     </LinearLayout>
 
 
-
-
-
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.DrawerLayout>
