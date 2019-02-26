@@ -61,6 +61,7 @@ public class home extends AppCompatActivity {
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navView);
+        getSupportActionBar().setTitle(" ");
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 

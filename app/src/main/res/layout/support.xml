@@ -10,6 +10,7 @@
     android:orientation="vertical"
     tools:openDrawer="right"
     android:weightSum="10">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -28,6 +29,15 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbarBk"
+        android:layout_marginRight="230dp"
+        android:background="@color/colorAccent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"/>
 
     </android.support.v7.widget.Toolbar>
 
