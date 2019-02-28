@@ -15,14 +15,16 @@ import java.util.List;
 public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softwareapp.messageAdapter.ViewHolder> {
 
     public static final int MSG_TYPE_LEFT = 0;
-    public static final int MSG_TYPE_RIGHT = 0;
+    public static final int MSG_TYPE_RIGHT = 1;
     private Context mContext;
    private List<messages> messageList;
     private FirebaseUser firebaseUser;
+    private String ImgUrl;
 
-    public messageAdapter(Context mContext, List<messages> messages) {
+    public messageAdapter(Context mContext, List<messages> messages,String imgUrl) {
         this.mContext = mContext;
         this.messageList = messages;
+        this.ImgUrl =imgUrl;
     }
 
     @NonNull
@@ -43,6 +45,10 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
     public void onBindViewHolder(@NonNull messageAdapter.ViewHolder viewHolder, int i) {
         messages messages = messageList.get(i);
         viewHolder.show_msg.setText(messages.getMsg());
+
+   //     if(ImgUrl.equals("default")){
+            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
+    //    }
 
     }
 

@@ -66,8 +66,11 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             if (mAuth.getCurrentUser().isEmailVerified()) {
-                                startActivity(new Intent(Login.this, home.class));
-                                finish();
+
+                                    Intent journalIntent = new Intent(Login.this, home.class);
+                                    Login.this.startActivity(journalIntent);
+                                    finish();
+
                             }
 
                             else {

@@ -50,6 +50,12 @@ public class usersFragment extends Fragment {
 
     public usersFragment() {
         // Required empty public constructor
+
+    }
+
+    public void finishActivity() {
+        //getActivity().finish();
+
     }
 
     /**
@@ -73,6 +79,7 @@ public class usersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -89,6 +96,7 @@ public class usersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mUsers = new ArrayList<>();
         readUsers();
+
         return view;
     }
 
@@ -109,7 +117,7 @@ public class usersFragment extends Fragment {
                     }
                 }
                 if (fireBaseUser.isEmailVerified()) {
-                    usersAdapter = new usersAdapter(getContext(), mUsers,false);
+                    usersAdapter = new usersAdapter(getContext(), mUsers, false);
                     recyclerView.setAdapter(usersAdapter);
                 }
             }
@@ -126,6 +134,8 @@ public class usersFragment extends Fragment {
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            //button pressed
         }
     }
 
@@ -144,6 +154,7 @@ public class usersFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
     /**
@@ -160,4 +171,5 @@ public class usersFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

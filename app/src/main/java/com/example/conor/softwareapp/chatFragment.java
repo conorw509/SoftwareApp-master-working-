@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +110,6 @@ public class chatFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-
             }
         });
 
@@ -177,6 +174,7 @@ public class chatFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
     }
 
     /**

@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 
 public class journal extends AppCompatActivity {
@@ -49,6 +47,7 @@ public class journal extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navViewJournal);
         toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mAuth = FirebaseAuth.getInstance();
 
 
         toolBarBk.setNavigationOnClickListener(new View.OnClickListener() {
@@ -67,7 +66,8 @@ public class journal extends AppCompatActivity {
 
                 int navId = menuItem.getItemId();
                 if (navId == R.id.profile) {
-                    Toast.makeText(journal.this, "Profile", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(journal.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    journal.this.startActivity(journalIntent);
 
                 } else if (navId == R.id.logOut) {
                     mAuth.signOut();
@@ -102,6 +102,7 @@ public class journal extends AppCompatActivity {
 
 
     }
+
 
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());

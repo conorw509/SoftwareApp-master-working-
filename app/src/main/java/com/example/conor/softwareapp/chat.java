@@ -14,10 +14,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 
 public class chat extends AppCompatActivity implements com.example.conor.softwareapp.chatFragment.OnFragmentInteractionListener
@@ -36,7 +33,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     private FrameLayout frameLayout;
     private chatFragment chatFragment;
     private usersFragment usersFragment;
-    private ListView listView;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
     private android.support.v7.widget.Toolbar toolbar,toolBarBk;
@@ -52,7 +48,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         frameLayout = (FrameLayout) findViewById(R.id.mainFrame);
         navigationView = (BottomNavigationView) findViewById(R.id.mainNav);
-        listView = findViewById(R.id.usersList);
         mAuth = FirebaseAuth.getInstance();
         chatFragment = new chatFragment();
         usersFragment = new usersFragment();
@@ -78,28 +73,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
             }
         });
 
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                int navId = menuItem.getItemId();
-                if (navId == R.id.profile) {
-                    Toast.makeText(chat.this, "Profile", Toast.LENGTH_SHORT).show();
-
-                } else if (navId == R.id.logOut) {
-                    mAuth.signOut();
-                    Intent journalIntent = new Intent(chat.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    chat.this.startActivity(journalIntent);
-                    finish();
-
-                } else if (navId == R.id.feedBack) {
-                    Toast.makeText(chat.this, "Feedback", Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            }
-        });
-
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -118,11 +91,11 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
             }
         });
 
+        //bug Here
         setFragment(usersFragment);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
                 switch (menuItem.getItemId()) {
                     case R.id.nav_users:
                         navigationView.setBackgroundResource(R.color.colorPrimary);
@@ -139,6 +112,30 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
             }
         });
 
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+                int navId = menuItem.getItemId();
+                if (navId == R.id.profile) {
+                    Intent journalIntent = new Intent(chat.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    chat.this.startActivity(journalIntent);
+
+                } else if (navId == R.id.logOut) {
+                    mAuth.signOut();
+                    Intent journalIntent = new Intent(chat.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    chat.this.startActivity(journalIntent);
+
+                //    usersFragment.finishActivity();
+                    finish();
+
+
+                } else if (navId == R.id.feedBack) {
+                    Toast.makeText(chat.this, "Feedback", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
     }
 
     private void setFragment(Fragment fragment) {

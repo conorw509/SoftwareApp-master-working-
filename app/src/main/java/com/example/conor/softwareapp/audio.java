@@ -73,7 +73,8 @@ public class audio extends AppCompatActivity {
 
                 int navId = menuItem.getItemId();
                 if (navId == R.id.profile) {
-                    Toast.makeText(audio.this, "Profile", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(audio.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    audio.this.startActivity(journalIntent);
 
                 } else if (navId == R.id.logOut) {
                     mAuth.signOut();

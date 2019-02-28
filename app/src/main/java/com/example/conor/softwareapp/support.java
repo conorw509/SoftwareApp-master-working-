@@ -86,7 +86,8 @@ public class support extends AppCompatActivity {
 
                 int navId = menuItem.getItemId();
                 if (navId == R.id.profile) {
-                    Toast.makeText(support.this, "Profile", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(support.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    support.this.startActivity(journalIntent);
 
                 } else if (navId == R.id.logOut) {
                     mAuth.signOut();

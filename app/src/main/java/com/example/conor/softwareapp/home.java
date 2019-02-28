@@ -70,7 +70,8 @@ public class home extends AppCompatActivity {
 
                 navId = menuItem.getItemId();
                 if (navId == R.id.profile) {
-                    Toast.makeText(home.this, "Profile", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(home.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    home.this.startActivity(journalIntent);
 
                 } else if (navId == R.id.logOut) {
                     mAuth.signOut();
@@ -92,9 +93,8 @@ public class home extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     user = snapshot.getValue(User.class);
                     if (firebaseUser.getUid().equals(user.getId())) {
-                        ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
-                        ((TextView)findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
-
+                       ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
+                       ((TextView)findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
                     }
                 }
             }
