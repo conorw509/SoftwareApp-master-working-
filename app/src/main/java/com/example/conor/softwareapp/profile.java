@@ -60,8 +60,11 @@ public class profile extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     user = snapshot.getValue(User.class);
                     if (firebaseUser.getUid().equals(user.getId())) {
-                        ((TextView) findViewById(R.id.userP)).setText(user.getUserName());
                         ((TextView) findViewById(R.id.emailP)).setText(firebaseUser.getEmail());
+                        ((TextView) findViewById(R.id.userP)).setText(user.getUserName());
+                        ((TextView) findViewById(R.id.addr)).setText(user.getAddress());
+                        ((TextView) findViewById(R.id.edc)).setText(user.getEducation());
+                        ((TextView) findViewById(R.id.about)).setText(user.getAbout());
                     }
                 }
             }

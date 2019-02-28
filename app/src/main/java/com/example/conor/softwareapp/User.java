@@ -7,6 +7,34 @@ public class User {
     private String id;
     private String status;
 
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    private String education;
+    private String about;
+    private String address;
+
 
     public User(String userName, String imgageUrl, String id, String status) {
         this.userName = userName;

@@ -56,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="210dp"
+                android:id="@+id/addr"
                 android:layout_centerHorizontal="true"
                 android:text="Address"
                 android:textSize="20dp"/>
@@ -63,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="240dp"
+                android:id="@+id/edc"
                 android:layout_centerHorizontal="true"
                 android:text="Education"
                 android:textSize="20dp"/>
@@ -80,6 +82,7 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="290dp"
                 android:layout_centerHorizontal="true"
+                android:id="@+id/about"
                 android:text=""
                 android:textSize="@dimen/text_size_medium"/>
         </RelativeLayout>
@@ -91,7 +94,7 @@
             android:layout_marginTop="420dp"
             android:background="@drawable/buttonstyleselector"
             android:gravity="center"
-            android:text="Add Additional Information"
+            android:text="Edit Information"
             android:textColor="#fff" />
 
         <Button

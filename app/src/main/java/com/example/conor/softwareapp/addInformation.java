@@ -7,18 +7,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
 public class addInformation extends AppCompatActivity {
 
     private android.support.v7.widget.Toolbar toolbar;
     private EditText address, education, about;
     private Button save;
     private String add, edc, ab;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference reference;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_information);
 
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         save = (Button) findViewById(R.id.saveInfo);
         address = (EditText) findViewById(R.id.addAdrs);
         education = (EditText) findViewById(R.id.addEduc);
@@ -44,7 +56,12 @@ public class addInformation extends AppCompatActivity {
                 ab = about.getText().toString().trim();
                 if (add.isEmpty() && ab.isEmpty() && edc.isEmpty()) {
                     Toast.makeText(addInformation.this, "Fields Are Empty", Toast.LENGTH_LONG).show();
+                } else {
+
+                    addInfo(add, edc, ab);
+                    finish();
                 }
+
             }
         });
 
@@ -59,5 +76,15 @@ public class addInformation extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void addInfo(String addr, String ed, String abo) {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("Address", addr);
+        map.put("education", ed);
+        map.put("about", abo);
+
+        reference.updateChildren(map);
     }
 }
