@@ -87,7 +87,7 @@
         <Button
             android:id="@+id/BackToLoginBtn"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="30dp"
             android:layout_marginTop="420dp"
             android:background="@drawable/buttonstyleselector"
             android:gravity="center"
@@ -97,8 +97,8 @@
         <Button
             android:id="@+id/changePic"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="462dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="450dp"
             android:background="@drawable/buttonstyleselector"
             android:gravity="center"
             android:text="Change Profile Picture"
