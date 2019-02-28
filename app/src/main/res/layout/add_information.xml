@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#42f4cb"
     android:orientation="vertical"
     android:weightSum="10">
 
@@ -15,5 +14,43 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"/>
+
+
+    <EditText
+        android:id="@+id/addAdrs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:maxLength="100"
+        android:maxLines="1"
+        android:hint="Address" />
+
+    <EditText
+        android:id="@+id/addEduc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="100"
+        android:maxLines="1"
+        android:hint="Education" />
+
+    <EditText
+        android:id="@+id/addAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textinputborder"
+        android:hint="About- minimum 200 characters"
+        android:maxLength="200"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Button
+        android:id="@+id/saveInfo"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/buttonstyleselector"
+        android:gravity="center"
+        android:text="Add"
+        android:maxLines="53"
+        android:textColor="#fff" />
 
 </LinearLayout>

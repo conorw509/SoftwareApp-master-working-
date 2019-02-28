@@ -31,7 +31,6 @@
         <activity
             android:name=".profile"
         />
-
         <activity
             android:name=".addInformation"
             />
