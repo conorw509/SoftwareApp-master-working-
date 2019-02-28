@@ -31,6 +31,10 @@
         <activity
             android:name=".profile"
         />
+
+        <activity
+            android:name=".addInformation"
+            />
         <activity
             android:name=".chat" />
         <activity
