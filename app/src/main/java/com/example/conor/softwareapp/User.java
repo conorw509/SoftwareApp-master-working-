@@ -6,6 +6,17 @@ public class User {
     private String imgageUrl;
     private String id;
     private String status;
+    private String education;
+    private String about;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getEducation() {
         return education;
@@ -22,19 +33,6 @@ public class User {
     public void setAbout(String about) {
         this.about = about;
     }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    private String education;
-    private String about;
-    private String address;
-
 
     public User(String userName, String imgageUrl, String id, String status) {
         this.userName = userName;

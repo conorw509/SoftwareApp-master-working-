@@ -62,9 +62,9 @@ public class profile extends AppCompatActivity {
                     if (firebaseUser.getUid().equals(user.getId())) {
                         ((TextView) findViewById(R.id.emailP)).setText(firebaseUser.getEmail());
                         ((TextView) findViewById(R.id.userP)).setText(user.getUserName());
-                        ((TextView) findViewById(R.id.addr)).setText(user.getAddress());
                         ((TextView) findViewById(R.id.edc)).setText(user.getEducation());
                         ((TextView) findViewById(R.id.about)).setText(user.getAbout());
+                        ((TextView) findViewById(R.id.address)).setText(user.getAddress());
                     }
                 }
             }

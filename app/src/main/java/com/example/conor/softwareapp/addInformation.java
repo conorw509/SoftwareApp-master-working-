@@ -81,7 +81,7 @@ public class addInformation extends AppCompatActivity {
     private void addInfo(String addr, String ed, String abo) {
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("Address", addr);
+        map.put("address", addr);
         map.put("education", ed);
         map.put("about", abo);
 

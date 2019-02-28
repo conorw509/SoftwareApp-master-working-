@@ -56,10 +56,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="210dp"
-                android:id="@+id/addr"
+                android:id="@+id/address"
                 android:layout_centerHorizontal="true"
                 android:text="Address"
                 android:textSize="20dp"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +76,8 @@
                 android:paddingTop="268dp"
                 android:layout_centerHorizontal="true"
                 android:text="About"
-                android:textSize="15dp"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="17dp"/>
 
             <TextView
                 android:layout_width="match_parent"
