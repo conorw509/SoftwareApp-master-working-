@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/textinputborder"
-        android:hint="About- maximum 200 characters"
-        android:maxLength="200"
+        android:hint="About- maximum 120 characters"
+        android:maxLength="120"
         android:textSize="@dimen/text_size_medium" />
 
     <Button
@@ -50,7 +50,6 @@
         android:background="@drawable/buttonstyleselector"
         android:gravity="center"
         android:text="Add"
-        android:maxLines="45"
         android:textColor="#fff" />
 
 </LinearLayout>

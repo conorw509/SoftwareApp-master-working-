@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,6 +25,7 @@ public class profile extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private User user;
     private Button addInfo;
+    private ImageView profileImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class profile extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolProf);
+        profileImg =(ImageView) findViewById(R.id.profileImgP);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         addInfo =(Button) findViewById(R.id.addInfo);
         setSupportActionBar(toolbar);
@@ -67,6 +70,7 @@ public class profile extends AppCompatActivity {
                         ((TextView) findViewById(R.id.edc)).setText(user.getEducation());
                         ((TextView) findViewById(R.id.about)).setText(user.getAbout());
                         ((TextView) findViewById(R.id.address)).setText(user.getAddress());
+                        profileImg.setImageResource(R.drawable.ic_launcher_foreground);
                     }
                 }
             }
