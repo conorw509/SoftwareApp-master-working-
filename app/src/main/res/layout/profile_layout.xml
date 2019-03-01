@@ -24,16 +24,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="8dp">s
 
             <ImageView
+                android:layout_marginTop="22dp"
+                android:layout_centerHorizontal="true"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/profileImgP"
-                android:src="@drawable/ic_launcher_foreground"
-                android:background="@drawable/ic_launcher_background"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="22dp"/>
+                android:background="@mipmap/ic_launcher_round"/>
 
             <TextView
                 android:layout_width="match_parent"

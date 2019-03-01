@@ -39,13 +39,13 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
 
         if (isChat) {
             if (user.getStatus().equals("online")) {
-                viewHolder.proile_img.setImageResource(R.drawable.ic_person_green_24dp);
+//                viewHolder.proile_img.setImageResource(R.drawable.ic_person_green_24dp);
 //                viewHolder.imgOn.setVisibility(View.VISIBLE);
 //                viewHolder.imgOff.setVisibility(View.GONE);
       //          Toast.makeText(mContext,"hello",Toast.LENGTH_LONG).show();
             }
         }else {
-            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
+//            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
 //            viewHolder.imgOn.setVisibility(View.GONE);
 //            viewHolder.imgOff.setVisibility(View.GONE);
         }
