@@ -93,7 +93,7 @@ public class messageActivity extends AppCompatActivity {
   //              if(user.getImgageUrl().equals("default")) {
  //                    profileImg.setImageResource(R.drawable.ic_person_black_24dp);
         //        }
-                readMessages(firebaseUser.getUid(), userUuid,user.getImageURL());
+                readMessages(firebaseUser.getUid(), userUuid,user.getImageUrl());
             }
 
             @Override

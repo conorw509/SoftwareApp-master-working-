@@ -8,14 +8,14 @@ public class User {
     private String education;
     private String about;
     private String address;
-    private String imageURL;
+private String imageUrl;
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getAddress() {
@@ -46,7 +46,7 @@ public class User {
         this.userName = userName;
         this.id = id;
         this.status = status;
-        this.imageURL = imageURL;
+        this.imageUrl = imageURL;
     }
 
     public User(){

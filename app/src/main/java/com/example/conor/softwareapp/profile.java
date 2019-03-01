@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -35,6 +36,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.net.URI;
@@ -51,7 +53,6 @@ public class profile extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private User user;
     private Button addInfo, changePic,uploadPic;
-    private ImageView profileImg;
     private StorageReference storageReference;
     private FirebaseStorage storage;
     private static final int IMAGE_REQUEST = 1;
@@ -68,7 +69,6 @@ public class profile extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         reference = FirebaseDatabase.getInstance().getReference("Users");
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolProf);
-        profileImg = (ImageView) findViewById(R.id.profileImgP);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         addInfo = (Button) findViewById(R.id.addInfo);
         changePic = (Button) findViewById(R.id.changePic);
@@ -121,13 +121,14 @@ public class profile extends AppCompatActivity {
                         ((TextView) findViewById(R.id.edc)).setText(user.getEducation());
                         ((TextView) findViewById(R.id.about)).setText(user.getAbout());
                         ((TextView) findViewById(R.id.address)).setText(user.getAddress());
-//                        if (user.getImgageUrl().equals("default")) {
-//                            profileImg.setImageResource(R.drawable.ic_launcher_foreground);
-//                        }
+                       ImageView profileImg = ((ImageView) findViewById(R.id.profileImgP));
+                        String photoUrl = user.getImageUrl();
+                        //Glide.with(profile.this).load("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/1551477785671.jpg?alt=media&token=d58de085-c685-486b-8a61-327a2a056e21").into(profileImg);
+                        Glide.with(profile.this).load(photoUrl).into(profileImg);
                     }
-
                 }
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -151,8 +152,6 @@ public class profile extends AppCompatActivity {
                 && data != null && data.getData() != null )
         {
             imageUri = data.getData();
-
-
                 if (uploadTask != null && uploadTask.isInProgress()) {
                     Toast.makeText(getApplicationContext(), "Upload In Progress", Toast.LENGTH_LONG).show();
                 } else {
@@ -210,20 +209,6 @@ public class profile extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == IMAGE_REQUEST && requestCode == RESULT_OK
-//                && data != null && data.getData() != null) {
-//
-//            imageUri = data.getData();
-//            if (uploadTask != null && uploadTask.isInProgress()) {
-//                Toast.makeText(getApplicationContext(), "Upload In Progress", Toast.LENGTH_LONG).show();
-//            }else{
-//                uploadImg();
-//            }
-//        }
-//    }
 
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
