@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="420dp"
-            android:background="@drawable/buttonstyleselector"
+            android:background="@color/colorAccent"
             android:gravity="center"
             android:text="Edit Information"
             android:textColor="#fff" />
@@ -103,9 +103,20 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="450dp"
-            android:background="@drawable/buttonstyleselector"
+            android:background="@color/colorAccent"
             android:gravity="center"
-            android:text="Change Profile Picture"
+            android:text="Select Profile Picture"
+            android:textColor="#fff" />
+
+
+        <Button
+            android:id="@+id/uploadPic"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="480dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="Upload Selected Profile Picture"
             android:textColor="#fff" />
     </android.support.v7.widget.CardView>
 
