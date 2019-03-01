@@ -50,7 +50,7 @@
         android:background="@drawable/buttonstyleselector"
         android:gravity="center"
         android:text="Add"
-        android:maxLines="53"
+        android:maxLines="45"
         android:textColor="#fff" />
 
 </LinearLayout>
