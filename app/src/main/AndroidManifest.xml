@@ -27,7 +27,8 @@
         <activity android:name=".Login" />
         <activity
             android:name=".home"
-            android:theme="@style/AppTheme.noActionBar" />
+            android:theme="@style/AppTheme.noActionBar" >
+        </activity>
         <activity
             android:name=".profile"
         />

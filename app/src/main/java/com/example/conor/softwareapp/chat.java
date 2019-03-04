@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -40,6 +41,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navView;
     private User user;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
                 Intent logOutIntent = new Intent(chat.this, home.class);
                 chat.this.startActivity(logOutIntent);
                 finish();
+
             }
         });
 
@@ -125,6 +128,8 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
                     mAuth.signOut();
                     Intent journalIntent = new Intent(chat.this, loginInHome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     chat.this.startActivity(journalIntent);
+                    finish();
+
 
                 //    usersFragment.finishActivity();
                     finish();
@@ -139,9 +144,10 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     }
 
     private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.mainFrame, fragment);
         fragmentTransaction.commit();
+
     }
 
     @Override
@@ -151,6 +157,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
+
 
     private void status(String status){
      reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -169,5 +176,8 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     protected void onPause() {
         super.onPause();
         status("offline");
+        fragmentTransaction.detach(usersFragment);
+        fragmentTransaction.detach(chatFragment);
+
     }
 }

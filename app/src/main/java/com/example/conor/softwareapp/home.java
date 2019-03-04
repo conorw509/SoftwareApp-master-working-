@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.FileReader;
 import java.util.HashMap;
 
 public class home extends AppCompatActivity {
@@ -86,23 +89,22 @@ public class home extends AppCompatActivity {
             }
         });
 
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    user = snapshot.getValue(User.class);
-                    if (firebaseUser.getUid().equals(user.getId())) {
-                       ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
-                       ((TextView)findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    user = snapshot.getValue(User.class);
+//                    if (firebaseUser.getUid().equals(user.getId())) {
+//                       ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
+//                       ((TextView)findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
+//                    }
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
         journal.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +142,7 @@ public class home extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     @Override

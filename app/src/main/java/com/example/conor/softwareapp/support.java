@@ -110,6 +110,7 @@ public class support extends AppCompatActivity {
                     if (firebaseUser.getUid().equals(user.getId())) {
                         ((TextView) findViewById(R.id.userNameHeader)).setText(user.getUserName());
                         ((TextView) findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
+
                     }
                 }
             }

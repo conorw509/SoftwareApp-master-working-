@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
         android:id="@+id/emailHeader"
-        android:text="Email"
+        android:text=" "
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
       />
 
@@ -28,6 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:id="@+id/userNameHeader"
-        android:text="UserName"
+        android:text=" "
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 </LinearLayout>

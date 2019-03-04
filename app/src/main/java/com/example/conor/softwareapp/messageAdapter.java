@@ -53,7 +53,6 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
 
         if(i == messageList.size()-1) {
             if (messages.isSeen()) {
-
                 viewHolder.txtSeen.setText(("Seen").toString());
             } else {
                 viewHolder.txtSeen.setText(("Delivered").toString());
