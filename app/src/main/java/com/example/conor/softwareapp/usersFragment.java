@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -41,6 +45,7 @@ public class usersFragment extends Fragment {
     private FirebaseUser fireBaseUser;
     private DatabaseReference reference;
     private FirebaseAuth mAuth;
+    private EditText searchUsers;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -96,8 +101,55 @@ public class usersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mUsers = new ArrayList<>();
         readUsers();
+        searchUsers = view.findViewById(R.id.search);
+        searchUsers.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search(s.toString().toLowerCase());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         return view;
+    }
+
+    private void search(String s) {
+        fireBaseUser = mAuth.getInstance().getCurrentUser();
+        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
+                .startAt(s).endAt(s+"\uf8ff");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    assert user != null;
+                    if (!user.getId().equals(fireBaseUser.getUid())) {
+                        mUsers.add(user);
+
+                    }
+                }
+
+                usersAdapter = new usersAdapter(getContext(), mUsers, false);
+                recyclerView.setAdapter(usersAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     private void readUsers() {
@@ -107,18 +159,21 @@ public class usersFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mUsers.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    assert user != null;
-                    assert fireBaseUser != null;
-                    if (fireBaseUser.isEmailVerified()) {
-                        mUsers.add(user);
+                if (searchUsers.getText().toString().equals("")) {
+
+                    mUsers.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        User user = snapshot.getValue(User.class);
+                        assert user != null;
+                        assert fireBaseUser != null;
+                        if (fireBaseUser.isEmailVerified()&&!user.getId().equals(fireBaseUser.getUid())) {
+                            mUsers.add(user);
+                        }
                     }
-                }
-                if (fireBaseUser.isEmailVerified()) {
-                    usersAdapter = new usersAdapter(getContext(), mUsers, false);
-                    recyclerView.setAdapter(usersAdapter);
+                    if (fireBaseUser.isEmailVerified()) {
+                        usersAdapter = new usersAdapter(getContext(), mUsers, false);
+                        recyclerView.setAdapter(usersAdapter);
+                    }
                 }
             }
 

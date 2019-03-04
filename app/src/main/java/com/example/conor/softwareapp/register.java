@@ -126,6 +126,8 @@ public class register extends AppCompatActivity {
                             hashMap.put("id", userId);
                             hashMap.put("userName", userName);
                             hashMap.put("imageUrl", "default");
+                            hashMap.put("status","offline");
+                            hashMap.put("search",userName.toLowerCase());
                             reference.setValue(hashMap);
                             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

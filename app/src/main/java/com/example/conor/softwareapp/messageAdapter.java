@@ -50,6 +50,10 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
             viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
     //    }
 
+        if(i == messageList.size()-1){
+            
+        }
+
     }
 
     @Override
@@ -62,11 +66,13 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
 
         public TextView show_msg;
         public ImageView proile_img;
+        public TextView txtSeen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             show_msg = itemView.findViewById(R.id.show_msg);
             proile_img = itemView.findViewById(R.id.profileImg);
+            txtSeen = itemView.findViewById(R.id.seen);
         }
     }
 

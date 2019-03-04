@@ -43,6 +43,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.UUID;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.fabric.sdk.android.services.common.SafeToast;
 
 public class profile extends AppCompatActivity {
@@ -121,7 +122,7 @@ public class profile extends AppCompatActivity {
                         ((TextView) findViewById(R.id.edc)).setText(user.getEducation());
                         ((TextView) findViewById(R.id.about)).setText(user.getAbout());
                         ((TextView) findViewById(R.id.address)).setText(user.getAddress());
-                       ImageView profileImg = ((ImageView) findViewById(R.id.profileImgP));
+                       CircleImageView profileImg = ((CircleImageView) findViewById(R.id.profileImgP));
                         String photoUrl = user.getImageUrl();
                         //Glide.with(profile.this).load("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/1551477785671.jpg?alt=media&token=d58de085-c685-486b-8a61-327a2a056e21").into(profileImg);
                         Glide.with(profile.this).load(photoUrl).into(profileImg);

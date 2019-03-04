@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,39 +30,4 @@
         android:id="@+id/userNameHeader"
         android:text="UserName"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-
-    <!--android:layout_weight="100"-->
-
-
-
-
-    <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/profile_image"-->
-        <!--android:layout_width="76dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:gravity="center"-->
-        <!--android:src="@drawable/ic_launcher_foreground"-->
-        <!--android:textAlignment="center"-->
-        <!--app:civ_border_color="#ffffff"-->
-        <!--app:civ_border_width="2dp" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/userView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_marginTop="12dp"-->
-        <!--android:layout_weight="20"-->
-        <!--android:text="UserName"-->
-        <!--android:textSize="20dp"-->
-        <!--android:textStyle="bold" />-->
-
-    <!--<ImageView-->
-        <!--android:layout_width="30dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_weight="5"-->
-        <!--android:src="@drawable/ic_view_list_black_24dp" />-->
-
 </LinearLayout>

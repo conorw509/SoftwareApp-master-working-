@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:background="#e6e6e6"
+    android:orientation="horizontal"
     android:weightSum="100">
 
 
@@ -13,26 +13,57 @@
         android:id="@+id/userView"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:layout_weight="90"
         android:text="UserName"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImg"
         android:layout_width="41dp"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_weight="10"
+        android:layout_toEndOf="@id/userView"
+        android:layout_toRightOf="@id/userView"
         android:background="@mipmap/ic_launcher_round"
         android:gravity="center"
         android:textAlignment="center" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgOn"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/profileImg"
+        android:layout_alignLeft="@id/profileImg"
+        android:layout_alignStart="@+id/profileImg"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:src="@mipmap/ic_launcher_round"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:civ_border_color="#05df29"
+        app:civ_border_width="10dp" />
 
-</LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgOff"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/profileImg"
+        android:layout_alignRight="@id/profileImg"
+        android:layout_alignStart="@+id/profileImg"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:src="@mipmap/ic_launcher_round"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:civ_border_color="#bfbfbf"
+        app:civ_border_width="10dp" />
+
+
+</RelativeLayout>
 
 
 

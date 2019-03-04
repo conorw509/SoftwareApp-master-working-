@@ -35,6 +35,7 @@ public class messageActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar toolBarBk;
     private User user;
     private ImageView profileImg;
+    private ValueEventListener eventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,31 @@ public class messageActivity extends AppCompatActivity {
 
     }
 
+    private void seenMsg(final String userUuid){
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        eventListener =reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    messages msg = snapshot.getValue(messages.class);
+                    if(msg.getRecieve().equals(firebaseUser.getUid())&& msg.getSend().equals(userUuid)){
+                        HashMap<String,Object> map = new HashMap<>();
+                        map.put("isSeen",true);
+                        snapshot.getRef().updateChildren(map);
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     private void sendMessage(String send, String recieve, String msg) {
 
         reference = FirebaseDatabase.getInstance().getReference();
@@ -111,6 +137,7 @@ public class messageActivity extends AppCompatActivity {
         map.put("send", send);
         map.put("recieve", recieve);
         map.put("msg", msg);
+        map.put("isSeen",true);
 
         reference.child("chats").push().setValue(map);
 
@@ -159,6 +186,7 @@ public class messageActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        reference.removeEventListener(eventListener);
         status("offline");
     }
 }
