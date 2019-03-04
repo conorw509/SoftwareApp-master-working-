@@ -1,5 +1,7 @@
 package com.example.conor.softwareapp;
 
+import com.google.firebase.database.PropertyName;
+
 public class messages {
 
     private String msg;
@@ -42,11 +44,13 @@ public class messages {
         this.recieve = recieve;
     }
 
+    //@PropertyName("isSeen")
     public boolean isSeen() {
         return isSeen;
     }
 
+   // @PropertyName("isSeen")
     public void setSeen(boolean seen) {
-        isSeen = seen;
+       this.isSeen = seen;
     }
 }

@@ -101,12 +101,15 @@ public class messageActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
+        seenMsg(userUuid);
+
 
     }
 
     private void seenMsg(final String userUuid){
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference = FirebaseDatabase.getInstance().getReference("chats");
         eventListener =reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -137,7 +140,7 @@ public class messageActivity extends AppCompatActivity {
         map.put("send", send);
         map.put("recieve", recieve);
         map.put("msg", msg);
-        map.put("isSeen",true);
+        map.put("isSeen",false);
 
         reference.child("chats").push().setValue(map);
 

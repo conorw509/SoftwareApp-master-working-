@@ -3,6 +3,7 @@ package com.example.conor.softwareapp;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,20 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
         viewHolder.show_msg.setText(messages.getMsg());
 
    //     if(ImgUrl.equals("default")){
-            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
+//            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
     //    }
 
-        if(i == messageList.size()-1){
-            
+        if(i == messageList.size()-1) {
+            if (messages.isSeen()) {
+
+                viewHolder.txtSeen.setText(("Seen").toString());
+            } else {
+                viewHolder.txtSeen.setText(("Delivered").toString());
+            }
         }
+//        }else{
+//            viewHolder.txtSeen.setVisibility(View.GONE);
+//        }
 
     }
 
@@ -64,15 +73,19 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView txtSeen;
         public TextView show_msg;
         public ImageView proile_img;
-        public TextView txtSeen;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            txtSeen = itemView.findViewById(R.id.seenTxt);
+            itemView.setTag(txtSeen);
             show_msg = itemView.findViewById(R.id.show_msg);
             proile_img = itemView.findViewById(R.id.profileImg);
-            txtSeen = itemView.findViewById(R.id.seen);
+
+            Log.v("GetViewAdapter", "View is null, setup viewholder");
         }
     }
 
