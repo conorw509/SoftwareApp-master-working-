@@ -12,6 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -21,6 +28,7 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
     private Context mContext;
     private List<User> mUser;
     private boolean isChat;
+    private String theLastMsg;
 
     public usersAdapter(Context mContext, List<User> mUser, boolean isChat) {
         this.mContext = mContext;
@@ -42,13 +50,15 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
         viewHolder.userName.setText(user.getUserName());
 
         //image here
-       // if (user.getImageUrl().equals("default")) {
-         //   viewHolder.proile_img.setImageResource(R.mipmap.ic_launcher_round);
-      //  } else {
-            Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.proile_img);
+        // if (user.getImageUrl().equals("default")) {
+        //   viewHolder.proile_img.setImageResource(R.mipmap.ic_launcher_round);
+        //  } else {
+        Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.proile_img);
         //}
 
+
         if (isChat) {
+            lastMsg(user.getId(), viewHolder.lastMsg);
             if (user.getStatus().equals("online")) {
 //                viewHolder.proile_img.setImageResource(R.drawable.ic_person_green_24dp);
                 viewHolder.imgOn.setVisibility(View.VISIBLE);
@@ -81,7 +91,7 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView userName;
+        public TextView userName, lastMsg;
         public ImageView proile_img;
         private ImageView imgOn;
         private ImageView imgOff;
@@ -90,8 +100,40 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
             super(itemView);
             userName = itemView.findViewById(R.id.userView);
             proile_img = itemView.findViewById(R.id.profileImg);
+            lastMsg = itemView.findViewById(R.id.lastMsg);
             imgOn = itemView.findViewById(R.id.imgOn);
             imgOff = itemView.findViewById(R.id.imgOff);
         }
+    }
+
+    //lastMsg
+    private void lastMsg(final String userUuid, final TextView last_msg) {
+        theLastMsg = "default";
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    messages msg = snapshot.getValue(messages.class);
+                    theLastMsg = msg.getMsg();
+                }
+                switch (theLastMsg) {
+                    case "default":
+                        last_msg.setText("No Message");
+                        break;
+                    default:
+                        last_msg.setText(theLastMsg);
+                        break;
+                }
+                theLastMsg = "default";
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

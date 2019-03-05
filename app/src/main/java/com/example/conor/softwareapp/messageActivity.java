@@ -82,10 +82,10 @@ public class messageActivity extends AppCompatActivity {
 
                     sendMessage(firebaseUser.getUid(), userUuid, msg);
                     chatBox.setText(" ");
-                } else {
-                    Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
                 }
-
+                if(msg.isEmpty()){
+                        Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
