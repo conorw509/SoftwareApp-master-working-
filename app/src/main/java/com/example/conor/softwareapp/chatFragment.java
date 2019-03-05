@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class chatFragment extends Fragment {
     private List<User> mUsers;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
-    private List<String> userList;
+    private List<chatList> userList;
     private usersAdapter usersAdapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,22 +91,18 @@ public class chatFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         userList = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("chats");
+
+        reference = FirebaseDatabase.getInstance().getReference("chatList").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
-                    messages messages = snapshot.getValue(com.example.conor.softwareapp.messages.class);
-                    if (messages.getSend().equals(firebaseUser.getUid())) {
-                        userList.add(messages.getRecieve());
-                    }
-                    if (messages.getRecieve().equals(firebaseUser.getUid())) {
-                        userList.add(messages.getSend());
-                    }
+                    chatList chatList = snapshot.getValue(com.example.conor.softwareapp.chatList.class);
+                    userList.add(chatList);
                 }
-                readChats();
+
+                chatLists();
             }
 
             @Override
@@ -113,10 +111,11 @@ public class chatFragment extends Fragment {
             }
         });
 
+
         return view;
     }
 
-    private void readChats() {
+    private void chatLists() {
         mUsers = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
@@ -125,21 +124,12 @@ public class chatFragment extends Fragment {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    for (String id : userList) {
-                        if (user.getId().equals(id)) {
-                            if (mUsers.size() != 0) {
-                                for (User user1 : mUsers) {
-                                    if (!user.getId().equals(user1.getId())) {
-                                        mUsers.add(user);
-                                    }
-                                }
-                            } else {
-                                mUsers.add(user);
-                            }
+                    for (chatList chatList : userList) {
+                        if (user.getId().equals(chatList.getId())) {
+                            mUsers.add(user);
                         }
                     }
-                }
-                usersAdapter = new usersAdapter(getContext(),mUsers,true);
+                } usersAdapter = new usersAdapter(getContext(),mUsers,true);
                 recyclerView.setAdapter(usersAdapter);
             }
 
@@ -148,9 +138,8 @@ public class chatFragment extends Fragment {
 
             }
         });
-
-
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
