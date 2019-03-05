@@ -59,9 +59,14 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
         Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.proile_img);
         //}
 
+        if(isChat){
+            lastMsg(user.getId(), viewHolder.lastMsg);
+        }else {
+            viewHolder.lastMsg.setVisibility(View.GONE);
+        }
 
         if (isChat) {
-            lastMsg(user.getId(), viewHolder.lastMsg);
+
             if (user.getStatus().equals("online")) {
 //                viewHolder.proile_img.setImageResource(R.drawable.ic_person_green_24dp);
                 viewHolder.imgOn.setVisibility(View.VISIBLE);

@@ -68,11 +68,9 @@
         android:id="@+id/lastMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="61dp"
-        android:layout_marginRight="20dp"
+        android:layout_alignEnd="@+id/userView"
+        android:layout_alignRight="@id/userView"
+        android:layout_alignTop="@+id/userView"
         android:maxLines="1"
         android:paddingTop="35dp"
         android:textColor="@color/colorPrimaryDark" />
@@ -85,7 +83,7 @@
         android:layout_alignRight="@id/userView"
         android:layout_alignParentTop="true"
         android:maxLines="1"
-        android:paddingTop="45dp"
+        android:paddingTop="70dp"
         android:text="hello"
         android:textColor="@color/colorPrimaryDark" />
 </RelativeLayout>
