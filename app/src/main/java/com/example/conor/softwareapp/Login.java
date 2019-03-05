@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     private EditText passField;
     private Button etLogBtn;
     private  Button backBtn;
-    private TextView regLink;
+    private TextView regLink,userN,emailN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

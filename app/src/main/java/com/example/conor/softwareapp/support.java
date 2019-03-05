@@ -66,7 +66,7 @@ public class support extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        navigationView = (NavigationView) findViewById(R.id.navViewSup);
+        navigationView = (NavigationView) findViewById(R.id.navView);
         toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
 

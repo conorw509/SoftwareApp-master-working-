@@ -205,7 +205,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:id="@+id/navView"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/nav_hed"
         app:menu="@menu/navigation_menu">
 
     </android.support.design.widget.NavigationView>

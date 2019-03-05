@@ -62,7 +62,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        navView = (NavigationView) findViewById(R.id.navViewChat);
+        navView = (NavigationView) findViewById(R.id.navView);
         toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
 

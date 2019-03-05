@@ -14,18 +14,11 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.io.FileReader;
 import java.util.HashMap;
 
 public class home extends AppCompatActivity {
@@ -40,7 +33,6 @@ public class home extends AppCompatActivity {
     private NavigationView navigationView;
     private User user;
     private int navId;
-
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -66,6 +58,7 @@ public class home extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navView);
         getSupportActionBar().setTitle(" ");
 
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -88,24 +81,6 @@ public class home extends AppCompatActivity {
                 return true;
             }
         });
-
-//        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    user = snapshot.getValue(User.class);
-//                    if (firebaseUser.getUid().equals(user.getId())) {
-//                       ((TextView)findViewById(R.id.userNameHeader)).setText(user.getUserName());
-//                       ((TextView)findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
-//                    }
-//                }
-//            }
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
 
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
