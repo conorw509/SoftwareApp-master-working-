@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.messageAdapter;
 import com.example.conor.softwareapp.fragments.APIService;
