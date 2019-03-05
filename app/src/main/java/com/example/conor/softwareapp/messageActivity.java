@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +37,7 @@ public class messageActivity extends AppCompatActivity {
     private User user;
     private ImageView profileImg;
     private ValueEventListener eventListener;
+    private List<messages> messageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,7 @@ public class messageActivity extends AppCompatActivity {
             }
 
         });
+
         seenMsg(userUuid);
 
 

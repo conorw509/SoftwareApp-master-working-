@@ -44,9 +44,9 @@ public class messages {
         this.recieve = recieve;
     }
 
-    //@PropertyName("isSeen")
+    @PropertyName("isSeen")
     public boolean isSeen() {
-        return isSeen;
+        return this.isSeen;
     }
 
    // @PropertyName("isSeen")

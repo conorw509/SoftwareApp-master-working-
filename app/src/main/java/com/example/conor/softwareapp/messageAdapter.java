@@ -9,8 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softwareapp.messageAdapter.ViewHolder> {
@@ -18,14 +23,15 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
     public static final int MSG_TYPE_LEFT = 0;
     public static final int MSG_TYPE_RIGHT = 1;
     private Context mContext;
-   private List<messages> messageList;
+    private List<messages> messageList;
     private FirebaseUser firebaseUser;
     private String ImgUrl;
+    private DatabaseReference reference;
 
-    public messageAdapter(Context mContext, List<messages> messages,String imgUrl) {
+    public messageAdapter(Context mContext, List<messages> messages, String imgUrl) {
         this.mContext = mContext;
         this.messageList = messages;
-        this.ImgUrl =imgUrl;
+        this.ImgUrl = imgUrl;
     }
 
     @NonNull
@@ -35,7 +41,7 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
         if (i == MSG_TYPE_RIGHT) {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_right, viewGroup, false);
             return new messageAdapter.ViewHolder(view);
-        }else{
+        } else {
             View view = LayoutInflater.from(mContext).inflate(R.layout.chat_item_left, viewGroup, false);
             return new messageAdapter.ViewHolder(view);
         }
@@ -46,22 +52,20 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
     public void onBindViewHolder(@NonNull messageAdapter.ViewHolder viewHolder, int i) {
         messages messages = messageList.get(i);
         viewHolder.show_msg.setText(messages.getMsg());
-
-   //     if(ImgUrl.equals("default")){
+        //     if(ImgUrl.equals("default")){
 //            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
-    //    }
+        //    }
 
-        if(i == messageList.size()-1) {
+        if (i == messageList.size() - 1) {
             if (messages.isSeen()) {
-                viewHolder.txtSeen.setText(("Seen").toString());
-            } else {
-                viewHolder.txtSeen.setText(("Delivered").toString());
+                viewHolder.txtSeen.setText("Seen");
             }
+            if (!messages.isSeen()) {
+                viewHolder.txtSeen.setText("Delivered");
+            }
+        } else {
+            viewHolder.txtSeen.setVisibility(View.GONE);
         }
-//        }else{
-//            viewHolder.txtSeen.setVisibility(View.GONE);
-//        }
-
     }
 
     @Override
@@ -84,7 +88,7 @@ public class messageAdapter extends RecyclerView.Adapter<com.example.conor.softw
             show_msg = itemView.findViewById(R.id.show_msg);
             proile_img = itemView.findViewById(R.id.profileImg);
 
-            Log.v("GetViewAdapter", "View is null, setup viewholder");
+            // Log.v("GetViewAdapter", "View is null, setup viewholder");
         }
     }
 
