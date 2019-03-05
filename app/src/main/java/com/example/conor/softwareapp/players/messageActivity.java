@@ -13,20 +13,31 @@ import android.widget.Toast;
 
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.messageAdapter;
+import com.example.conor.softwareapp.fragments.APIService;
 import com.example.conor.softwareapp.mainActivties.chat;
 import com.example.conor.softwareapp.model.User;
 import com.example.conor.softwareapp.model.messages;
+import com.example.conor.softwareapp.notifications.Client;
+import com.example.conor.softwareapp.notifications.Data;
+import com.example.conor.softwareapp.notifications.Sender;
+import com.example.conor.softwareapp.notifications.Token;
+import com.example.conor.softwareapp.notifications.myResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class messageActivity extends AppCompatActivity {
 
@@ -44,12 +55,15 @@ public class messageActivity extends AppCompatActivity {
     private ImageView profileImg;
     private ValueEventListener eventListener;
     private List<messages> messageList;
+    private APIService apiService;
+    private boolean notify = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        apiService = Client.getClient1("https://fcm.googleapis.com/").create(APIService.class);
         profileImg = (ImageView) findViewById(R.id.profileImg);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -82,14 +96,15 @@ public class messageActivity extends AppCompatActivity {
         chatBoxSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                notify = true;
                 String msg = chatBox.getText().toString();
                 if (!msg.equals("")) {
 
                     sendMessage(firebaseUser.getUid(), userUuid, msg);
                     chatBox.setText(" ");
                 }
-                if(msg.isEmpty()){
-                        Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
+                if (msg.isEmpty()) {
+                    Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -142,7 +157,7 @@ public class messageActivity extends AppCompatActivity {
 
     }
 
-    private void sendMessage(String send, String recieve, String msg) {
+    private void sendMessage(String send, final String recieve, String msg) {
 
         reference = FirebaseDatabase.getInstance().getReference();
         HashMap<String, Object> map = new HashMap<>();
@@ -172,6 +187,64 @@ public class messageActivity extends AppCompatActivity {
             }
         });
 
+        final String message = msg;
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if (notify) {
+                    sendNotification(recieve, user.getUserName(), message);
+                }
+                notify = false;
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void sendNotification(String recieve, final String userName, final String msg) {
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(recieve);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Token token = snapshot.getValue(Token.class);
+                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher_round, userName + " : " + msg, "New Message",
+                            userUuid);
+
+                    Sender sender = new Sender(data, token.getToken());
+                    apiService.sendNotification(sender)
+                            .enqueue(new Callback<myResponse>() {
+                                @Override
+                                public void onResponse(Call<myResponse> call, Response<myResponse> response) {
+                                    if (response.code() == 200) {
+                                        if (response.body().succeess != 1) {
+                                            Toast.makeText(messageActivity.this, "Failed!", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<myResponse> call, Throwable t) {
+
+                                }
+                            });
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
