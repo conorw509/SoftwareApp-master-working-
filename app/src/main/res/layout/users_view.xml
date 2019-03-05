@@ -76,6 +76,18 @@
         android:maxLines="1"
         android:paddingTop="35dp"
         android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/userView"
+        android:layout_alignRight="@id/userView"
+        android:layout_alignParentTop="true"
+        android:maxLines="1"
+        android:paddingTop="45dp"
+        android:text="hello"
+        android:textColor="@color/colorPrimaryDark" />
 </RelativeLayout>
 
 

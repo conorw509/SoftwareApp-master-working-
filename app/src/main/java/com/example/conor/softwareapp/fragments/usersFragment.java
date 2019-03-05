@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.adapters.usersAdapter;
+import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +43,7 @@ public class usersFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
-    private usersAdapter usersAdapter;
+    private com.example.conor.softwareapp.adapters.usersAdapter usersAdapter;
     private List<User> mUsers;
     private FirebaseUser fireBaseUser;
     private DatabaseReference reference;

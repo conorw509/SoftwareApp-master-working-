@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.model.music;
+
 import java.util.ArrayList;
 
 

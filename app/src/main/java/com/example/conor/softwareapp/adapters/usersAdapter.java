@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.players.messageActivity;
+import com.example.conor.softwareapp.model.User;
+import com.example.conor.softwareapp.model.messages;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -127,7 +130,6 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
                         break;
                 }
                 theLastMsg = "default";
-
             }
 
             @Override

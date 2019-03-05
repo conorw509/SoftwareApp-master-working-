@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.mainActivties;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.players.addInformation;
+import com.example.conor.softwareapp.model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

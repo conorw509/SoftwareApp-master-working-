@@ -17,31 +17,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashScreen">
+        <activity android:name=".log.splashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".register" />
+        <activity android:name=".log.register" />
         <activity
-            android:name=".resetPword"
-            android:parentActivityName=".Login" />
-        <activity android:name=".Login" />
+            android:name=".log.resetPword"
+            android:parentActivityName=".log.Login" />
+        <activity android:name=".log.Login" />
         <activity
-            android:name=".home"
+            android:name=".mainActivties.home"
             android:theme="@style/AppTheme.noActionBar"></activity>
-        <activity android:name=".profile" />
-        <activity android:name=".addInformation" />
-        <activity android:name=".chat" />
-        <activity android:name=".audio" />
+        <activity android:name=".mainActivties.profile" />
+        <activity android:name=".players.addInformation" />
+        <activity android:name=".mainActivties.chat" />
+        <activity android:name=".mainActivties.audio" />
 
-        <activity android:name=".musicPlayer" />
-        <activity android:name=".support" />
-        <activity android:name=".journal" />
-        <activity android:name=".loginInHome" />
-        <activity android:name=".messageActivity" />
+        <activity android:name=".players.musicPlayer" />
+        <activity android:name=".mainActivties.support" />
+        <activity android:name=".mainActivties.journal" />
+        <activity android:name=".log.loginInHome" />
+        <activity android:name=".players.messageActivity" />
     </application>
 
 </manifest>

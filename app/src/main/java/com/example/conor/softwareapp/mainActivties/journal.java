@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.mainActivties;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,6 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.log.loginInHome;
+import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.model;
 
 import com.google.firebase.database.PropertyName;
 

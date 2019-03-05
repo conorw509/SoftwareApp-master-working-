@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.adapters.usersAdapter;
+import com.example.conor.softwareapp.model.User;
+import com.example.conor.softwareapp.model.chatList;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +40,7 @@ public class chatFragment extends Fragment {
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private List<chatList> userList;
-    private usersAdapter usersAdapter;
+    private com.example.conor.softwareapp.adapters.usersAdapter usersAdapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -98,7 +102,7 @@ public class chatFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    chatList chatList = snapshot.getValue(com.example.conor.softwareapp.chatList.class);
+                    chatList chatList = snapshot.getValue(com.example.conor.softwareapp.model.chatList.class);
                     userList.add(chatList);
                 }
 

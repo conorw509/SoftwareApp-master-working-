@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.mainActivties;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -15,6 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.log.loginInHome;
+import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -85,7 +89,7 @@ public class home extends AppCompatActivity {
         journal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent journalIntent = new Intent(home.this, journal.class);
+                Intent journalIntent = new Intent(home.this, com.example.conor.softwareapp.mainActivties.journal.class);
                 home.this.startActivity(journalIntent);
                 finish();
             }
@@ -94,7 +98,7 @@ public class home extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent chatIntent = new Intent(home.this, chat.class);
+                Intent chatIntent = new Intent(home.this, com.example.conor.softwareapp.mainActivties.chat.class);
                 home.this.startActivity(chatIntent);
                 finish();
             }
@@ -103,7 +107,7 @@ public class home extends AppCompatActivity {
         support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent supportIntent = new Intent(home.this, support.class);
+                Intent supportIntent = new Intent(home.this, com.example.conor.softwareapp.mainActivties.support.class);
                 home.this.startActivity(supportIntent);
                 finish();
             }
@@ -112,7 +116,7 @@ public class home extends AppCompatActivity {
         audio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent audioIntent = new Intent(home.this, audio.class);
+                Intent audioIntent = new Intent(home.this, com.example.conor.softwareapp.mainActivties.audio.class);
                 home.this.startActivity(audioIntent);
                 finish();
             }

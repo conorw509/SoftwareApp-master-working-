@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.players;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.adapters.messageAdapter;
+import com.example.conor.softwareapp.mainActivties.chat;
+import com.example.conor.softwareapp.model.User;
+import com.example.conor.softwareapp.model.messages;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,7 +36,7 @@ public class messageActivity extends AppCompatActivity {
     private Intent intent;
     private String userUuid;
     private EditText chatBox;
-    private messageAdapter messageAdapter;
+    private com.example.conor.softwareapp.adapters.messageAdapter messageAdapter;
     private List<messages> messagesList;
     private RecyclerView recyclerView;
     private android.support.v7.widget.Toolbar toolBarBk;
@@ -179,7 +184,7 @@ public class messageActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 messagesList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    messages messages = snapshot.getValue(com.example.conor.softwareapp.messages.class);
+                    messages messages = snapshot.getValue(com.example.conor.softwareapp.model.messages.class);
                     if (messages.getRecieve().equals(myId) && messages.getSend().equals(userUuid)
                             || messages.getRecieve().equals(userUuid) && messages.getSend().equals(myId)) {
                         messagesList.add(messages);

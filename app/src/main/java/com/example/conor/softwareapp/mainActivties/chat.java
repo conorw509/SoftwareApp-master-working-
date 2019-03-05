@@ -1,4 +1,4 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.mainActivties;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +16,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.fragments.chatFragment;
+import com.example.conor.softwareapp.fragments.usersFragment;
+import com.example.conor.softwareapp.log.loginInHome;
+import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
-public class chat extends AppCompatActivity implements com.example.conor.softwareapp.chatFragment.OnFragmentInteractionListener
-        ,com.example.conor.softwareapp.usersFragment.OnFragmentInteractionListener {
+public class chat extends AppCompatActivity implements com.example.conor.softwareapp.fragments.chatFragment.OnFragmentInteractionListener
+        , com.example.conor.softwareapp.fragments.usersFragment.OnFragmentInteractionListener {
 
     private FirebaseAuth mAuth;
     private BottomNavigationView navigationView;

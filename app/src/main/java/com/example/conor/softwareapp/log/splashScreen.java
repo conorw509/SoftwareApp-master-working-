@@ -1,8 +1,10 @@
-package com.example.conor.softwareapp;
+package com.example.conor.softwareapp.log;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.conor.softwareapp.R;
 
 public class splashScreen extends AppCompatActivity {
 
