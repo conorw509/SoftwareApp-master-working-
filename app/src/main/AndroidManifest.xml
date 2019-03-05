@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -24,27 +25,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".register" />
+        <activity
+            android:name=".resetPword"
+            android:parentActivityName=".Login" />
         <activity android:name=".Login" />
         <activity
             android:name=".home"
-            android:theme="@style/AppTheme.noActionBar" >
-        </activity>
-        <activity
-            android:name=".profile"
-        />
-        <activity
-            android:name=".addInformation"
-            />
-        <activity
-            android:name=".chat" />
-        <activity
-            android:name=".audio"/>
+            android:theme="@style/AppTheme.noActionBar"></activity>
+        <activity android:name=".profile" />
+        <activity android:name=".addInformation" />
+        <activity android:name=".chat" />
+        <activity android:name=".audio" />
 
         <activity android:name=".musicPlayer" />
-        <activity
-            android:name=".support" />
-        <activity
-            android:name=".journal" />
+        <activity android:name=".support" />
+        <activity android:name=".journal" />
         <activity android:name=".loginInHome" />
         <activity android:name=".messageActivity" />
     </application>

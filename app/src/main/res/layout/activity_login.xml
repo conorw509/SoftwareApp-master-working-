@@ -7,101 +7,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
     android:background="#42f4cb"
-
+    tools:context=".Login"
 
 
     >
 
     <TextView
         android:id="@+id/textGrid"
-        android:text="My Mental Health"
-        android:textSize="34dp"
-        android:layout_centerInParent="true"
-        android:textColor="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:gravity="center"
         android:paddingBottom="40dp"
         android:paddingTop="30dp"
-
+        android:text="My Mental Health"
+        android:textColor="#ffffff"
+        android:textSize="34dp"
 
 
         />
 
-   <LinearLayout
-       android:paddingTop="100dp"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="100dp">
 
 
+        <EditText
+            android:id="@+id/emailFieldEnt"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittextstyle"
+            android:hint="Email"
+            android:maxLines="1"
+            android:textColor="#fff"
+            android:textColorHint="#fff" />
 
 
-       <EditText
-           android:id="@+id/emailFieldEnt"
-           android:layout_width="300dp"
-           android:layout_height="60dp"
-           android:layout_gravity="center"
-           android:background="@drawable/edittextstyle"
-           android:hint="Email"
-           android:maxLines="1"
-           android:textColor="#fff"
-           android:textColorHint="#fff"
-          />
+        <EditText
+            android:id="@+id/RegPword"
+            android:layout_width="299dp"
+            android:layout_height="66dp"
+            android:layout_gravity="center"
+            android:background="@drawable/edittextstyle"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingTop="10dp"
+            android:textColor="#fff"
+            android:textColorHint="#fff" />
+
+        <TextView
+
+            android:id="@+id/forgotPwod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Forgot Password?"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/LoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/buttonstyleselector"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/BackToLoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/buttonstyleselector"
+            android:gravity="center"
+            android:text="Back"
+            android:textColor="#fff" />
 
 
+        <TextView
 
-       <EditText
-android:textColor="#fff"
-           android:id="@+id/RegPword"
-           android:layout_width="299dp"
-           android:layout_height="66dp"
-           android:layout_gravity="center"
-           android:background="@drawable/edittextstyle"
-           android:hint="Password"
-           android:inputType="textPassword"
-           android:paddingTop="10dp"
-           android:maxLines="1"
-           android:textColorHint="#fff" />
-
-       <Button
-           android:id="@+id/LoginBtn"
-           android:layout_width="match_parent"
-           android:layout_height="60dp"
-           android:layout_marginTop="70dp"
-           android:background="@drawable/buttonstyleselector"
-           android:gravity="center"
-           android:text="Login"
-           android:textColor="#fff" />
-
-       <Button
-           android:id="@+id/BackToLoginBtn"
-           android:layout_width="match_parent"
-           android:layout_height="60dp"
-           android:layout_marginTop="20dp"
-           android:background="@drawable/buttonstyleselector"
-           android:gravity="center"
-           android:text="Back"
-           android:textColor="#fff" />
+            android:id="@+id/RegisterBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Register with email address"
+            android:textColor="#fff"
+            android:textSize="20dp" />
 
 
-
-       <TextView
-
-           android:id="@+id/RegisterBtn"
-           android:layout_width="match_parent"
-           android:layout_height="60dp"
-           android:layout_marginTop="20dp"
-       android:textSize="20dp"
-           android:gravity="center"
-           android:text="Register with email address"
-           android:textColor="#fff" />
-
-
-   </LinearLayout>
-
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>
