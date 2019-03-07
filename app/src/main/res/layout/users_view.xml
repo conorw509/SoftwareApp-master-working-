@@ -84,7 +84,7 @@
         android:layout_alignParentTop="true"
         android:maxLines="1"
         android:paddingTop="70dp"
-        android:text="hello"
+        android:text="timestamp"
         android:textColor="@color/colorPrimaryDark" />
 </RelativeLayout>
 

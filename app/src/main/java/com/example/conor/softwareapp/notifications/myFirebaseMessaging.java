@@ -20,18 +20,24 @@ public class myFirebaseMessaging extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+
         String sented = remoteMessage.getData().get("sented");
+//        String user = remoteMessage.getData().get("user");
+//        SharedPreferences preferences = getSharedPreferences("PREFS", MODE_PRIVATE);
+//        String currentUser = preferences.getString("currentuser", "none");
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser != null && sented.equals(firebaseUser.getUid())) {
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                sendOreoNotification(remoteMessage);
-            } else {
-                sendNotification(remoteMessage);
+//            if (!currentUser.equals(user)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    sendOreoNotification(remoteMessage);
+                } else {
+                    sendNotification(remoteMessage);
+                }
             }
         }
-    }
+
+    //}
 
     private void sendOreoNotification(RemoteMessage remoteMessage) {
         String user = remoteMessage.getData().get("user");
@@ -49,7 +55,7 @@ public class myFirebaseMessaging extends FirebaseMessagingService {
 
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         OreoNotification oreoNotification = new OreoNotification(this);
-        Notification.Builder builder = oreoNotification.getOreoNotification(title,body,pendingIntent,defaultSound,icon);
+        Notification.Builder builder = oreoNotification.getOreoNotification(title, body, pendingIntent, defaultSound, icon);
 
         int i = 0;
         if (j > 0) {
