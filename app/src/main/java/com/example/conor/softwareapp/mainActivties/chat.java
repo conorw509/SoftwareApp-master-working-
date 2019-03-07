@@ -157,12 +157,9 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
                                         unread++;
                                     }
                                 }
-                                if (unread == 0) {
-                                    menuItem.setTitle("Chat");
-                                } else {
-                                    menuItem.setTitle(""+(unread));
+                                if (unread != 0) {
+                                    menuItem.setTitle(""+unread);
                                 }
-
                             }
 
                             @Override

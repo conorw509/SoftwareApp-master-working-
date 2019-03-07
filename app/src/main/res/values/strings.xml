@@ -66,8 +66,8 @@
     </string>
     <string name="nav_user">user</string>
     <string name="nav_msg">msg</string>
-    <string name="nav_users">Users</string>
-    <string name="nav_msgs">Chat</string>
+    <string name="nav_users"><font size="15">Users</font></string>
+    <string name="nav_msgs"><font size="15">Chat</font></string>
     <string name="Open">Open</string>
     <string name="Close">Close</string>
 
