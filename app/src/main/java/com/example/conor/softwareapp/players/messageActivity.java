@@ -29,11 +29,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,7 +72,6 @@ public class messageActivity extends AppCompatActivity {
         toolBarBk = (android.support.v7.widget.Toolbar) findViewById(R.id.toolMsg);
         setSupportActionBar(toolBarBk);
         toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-
         chatBoxSend = (ImageButton) findViewById(R.id.button_chatbox_send);
         chatBox = (EditText) findViewById(R.id.edittext_chatbox);
         intent = getIntent();
@@ -128,7 +125,6 @@ public class messageActivity extends AppCompatActivity {
 
         seenMsg(userUuid);
 
-
     }
 
     private void seenMsg(final String userUuid) {
@@ -175,8 +171,6 @@ public class messageActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
                     chatRef.child("id").setValue(userUuid);
-
-
                 }
             }
 
@@ -234,7 +228,6 @@ public class messageActivity extends AppCompatActivity {
 
                                 }
                             });
-
                 }
 
             }
@@ -262,6 +255,7 @@ public class messageActivity extends AppCompatActivity {
                         messagesList.add(messages);
                     }
                 }
+
                 messageAdapter = new messageAdapter(messageActivity.this, messagesList, imgUrl);
                 recyclerView.setAdapter(messageAdapter);
             }

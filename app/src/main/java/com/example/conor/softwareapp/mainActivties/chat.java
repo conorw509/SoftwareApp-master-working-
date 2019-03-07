@@ -6,11 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,10 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.adapters.usersAdapter;
 import com.example.conor.softwareapp.fragments.chatFragment;
 import com.example.conor.softwareapp.fragments.usersFragment;
 import com.example.conor.softwareapp.log.loginInHome;
 import com.example.conor.softwareapp.model.User;
+import com.example.conor.softwareapp.model.messages;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 
 public class chat extends AppCompatActivity implements com.example.conor.softwareapp.fragments.chatFragment.OnFragmentInteractionListener
@@ -41,7 +46,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     private usersFragment usersFragment;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
-    private android.support.v7.widget.Toolbar toolbar,toolBarBk;
+    private android.support.v7.widget.Toolbar toolbar, toolBarBk;
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navView;
@@ -99,11 +104,39 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
             }
         });
 
-        //bug Here
+
+
+
+
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                int unread = 0;
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    messages messages = snapshot.getValue(com.example.conor.softwareapp.model.messages.class);
+//                    if (messages.getRecieve().equals(firebaseUser.getUid()) && !messages.isSeen()) {
+//                        unread++;
+//                    }
+//                }
+//
+//                if (unread == 0) {
+//                    setFragment(chatFragment, "");
+//                } else {
+//                    setFragment(chatFragment, "Chat" + unread);
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
         setFragment(usersFragment);
         navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull final MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_users:
                         navigationView.setBackgroundResource(R.color.colorPrimary);
@@ -113,6 +146,30 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
                     case R.id.nav_chats:
                         navigationView.setBackgroundResource(R.color.colorAccent);
                         setFragment(chatFragment);
+                        reference = FirebaseDatabase.getInstance().getReference("chats");
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                int unread = 0;
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    messages msg = snapshot.getValue(messages.class);
+                                    if (msg.getRecieve().equals(firebaseUser.getUid()) && !msg.isSeen()) {
+                                        unread++;
+                                    }
+                                }
+                                if (unread == 0) {
+                                    menuItem.setTitle("Chat");
+                                } else {
+                                    menuItem.setTitle(""+(unread));
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                         return true;
                     default:
                         return false;
@@ -136,7 +193,7 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
                     finish();
 
 
-                //    usersFragment.finishActivity();
+                    //    usersFragment.finishActivity();
                     finish();
 
 
@@ -164,10 +221,10 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
     }
 
 
-    private void status(String status){
-     reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("status",status);
+    private void status(String status) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
         reference.updateChildren(map);
     }
 
