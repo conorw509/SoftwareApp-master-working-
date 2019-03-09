@@ -38,7 +38,7 @@ public class support extends AppCompatActivity {
     private TextView txtView;
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
-    private android.support.v7.widget.Toolbar toolbar,toolBarBk;
+    private android.support.v7.widget.Toolbar toolbar;
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
@@ -64,24 +64,14 @@ public class support extends AppCompatActivity {
         firebaseUser = mAuth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         drawable = (DrawerLayout) findViewById(R.id.drawerLayoutSup);
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolSup);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolBarBk = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarBk);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navView);
-        toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        getSupportActionBar().setTitle("Support");
 
-
-        toolBarBk.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent logOutIntent = new Intent(support.this, home.class);
-                support.this.startActivity(logOutIntent);
-                finish();
-            }
-        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -89,6 +79,11 @@ public class support extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 int navId = menuItem.getItemId();
+                if (navId == R.id.Home) {
+                    Intent logOutIntent = new Intent(support.this, home.class);
+                    support.this.startActivity(logOutIntent);
+                    finish();
+                }
                 if (navId == R.id.profile) {
                     Intent journalIntent = new Intent(support.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     support.this.startActivity(journalIntent);

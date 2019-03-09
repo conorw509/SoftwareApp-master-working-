@@ -18,21 +18,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <service android:name=".notifications.MyFirebaseIdService"
+        <service
+            android:name=".notifications.MyFirebaseIdService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".notifications.myFirebaseMessaging"
+        <service
+            android:name=".notifications.myFirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity android:name=".log.splashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +44,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".log.register" />
+        <activity
+            android:name=".players.journalEntry"
+            android:parentActivityName=".mainActivties.journal" />
         <activity
             android:name=".log.resetPword"
             android:parentActivityName=".log.Login" />

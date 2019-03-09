@@ -60,7 +60,7 @@ public class home extends AppCompatActivity {
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navView);
-        getSupportActionBar().setTitle(" ");
+        getSupportActionBar().setTitle("Home");
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -69,6 +69,9 @@ public class home extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 navId = menuItem.getItemId();
+                if (navId == R.id.Home) {
+                    Toast.makeText(home.this, "Already on Home Page", Toast.LENGTH_SHORT).show();
+                }
                 if (navId == R.id.profile) {
                     Intent journalIntent = new Intent(home.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     home.this.startActivity(journalIntent);

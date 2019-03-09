@@ -3,13 +3,13 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayoutJournal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawerLayoutJournal"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:openDrawer="right"
-    android:weightSum="10">
+    android:weightSum="10"
+    tools:openDrawer="right">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -17,44 +17,36 @@
         android:background="#42f4cb"
         android:orientation="vertical"
         android:weightSum="10">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/toolJournal"
-            android:background="@color/colorAccent"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:elevation="4dp">
-
-            <android.support.v7.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:id="@+id/toolbarBkJournal"
-                android:layout_marginRight="230dp"
-                android:background="@color/colorAccent"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:elevation="4dp"/>
-
-        </android.support.v7.widget.Toolbar>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewJ"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="20dp"
             android:background="#80ffffff">
 
         </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:backgroundTint="@color/colorAccent"
+            app:fabSize="normal"
+            android:src="@drawable/ic_add_black_24dp"
+            android:id="@+id/journalAdd"
+            />
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/navView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:id="@+id/navView"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/navigation_menu">
-    </android.support.design.widget.NavigationView>
+        app:menu="@menu/navigation_menu"></android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

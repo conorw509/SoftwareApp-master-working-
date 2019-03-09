@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.musicListAdapter;
 import com.example.conor.softwareapp.log.loginInHome;
@@ -38,7 +37,7 @@ public class audio extends AppCompatActivity {
     private ArrayList<String> urls = new ArrayList<>();
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
-    private android.support.v7.widget.Toolbar toolbar,toolBarBk;
+    private android.support.v7.widget.Toolbar toolbar;
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
@@ -55,23 +54,15 @@ public class audio extends AppCompatActivity {
         firebaseUser = mAuth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         drawable = (DrawerLayout) findViewById(R.id.drawerLayoutAudio);
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolAudio);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolBarBk = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarBkA);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
         drawable.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+        toolbar.setTitle("Audio");
         navigationView = (NavigationView) findViewById(R.id.navView);
-        toolBarBk.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        getSupportActionBar().setTitle("Audio");
 
-        toolBarBk.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent logOutIntent = new Intent(audio.this, home.class);
-                audio.this.startActivity(logOutIntent);
-                finish();
-            }
-        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -79,6 +70,11 @@ public class audio extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 int navId = menuItem.getItemId();
+                if (navId == R.id.Home) {
+                    Intent logOutIntent = new Intent(audio.this, home.class);
+                    audio.this.startActivity(logOutIntent);
+                    finish();
+                }
                 if (navId == R.id.profile) {
                     Intent journalIntent = new Intent(audio.this, profile.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     audio.this.startActivity(journalIntent);
@@ -198,10 +194,10 @@ public class audio extends AppCompatActivity {
         });
     }
 
-    private void status(String status){
+    private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("status",status);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
         reference.updateChildren(map);
     }
 

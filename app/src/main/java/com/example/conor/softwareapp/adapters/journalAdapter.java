@@ -6,17 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.journalContent;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHolder> {
-
     private List<journalContent> journalList;
     private Context mContext;
 
@@ -26,13 +23,12 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
         this.journalList = journalList;
     }
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.journal_view, parent, false);
+        return new journalAdapter.MyViewHolder(itemView);
 
-        return new MyViewHolder(itemView);
     }
 
     @Override
@@ -56,7 +52,6 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
         return journalList.size();
     }
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView date, contents, tag;
 
@@ -65,7 +60,6 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
             date = view.findViewById(R.id.dateView);
             contents = view.findViewById(R.id.journalContent);
             tag = view.findViewById(R.id.tags);
-
 
         }
     }
