@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.music;
-
 import java.util.ArrayList;
 
 
