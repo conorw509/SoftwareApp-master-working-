@@ -23,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
-
 public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> {
 
     private Context mContext;

@@ -38,6 +38,15 @@
                 android:elevation="4dp"/>
 
         </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewJ"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginTop="70dp"
+            android:background="#80ffffff">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
