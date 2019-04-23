@@ -24,7 +24,6 @@ public class addInformation extends AppCompatActivity {
     private String add, edc, ab;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +65,7 @@ public class addInformation extends AppCompatActivity {
 
             }
         });
+
 
         address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override

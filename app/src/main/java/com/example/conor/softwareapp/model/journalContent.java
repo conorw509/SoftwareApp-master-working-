@@ -1,6 +1,5 @@
 package com.example.conor.softwareapp.model;
 
-import java.util.Date;
 
 public class journalContent {
     private long date;

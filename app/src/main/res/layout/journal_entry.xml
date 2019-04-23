@@ -17,39 +17,43 @@
 
 
     <EditText
-        android:id="@+id/addAdrs"
+        android:id="@+id/addEntry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:maxLength="100"
         android:maxLines="1"
-        android:hint="Address" />
+        android:hint="Entry Name" />
 
-    <EditText
-        android:id="@+id/addEduc"
+    <TextView
+        android:id="@+id/addDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="5dp"
         android:maxLength="100"
         android:maxLines="1"
-        android:hint="Education" />
+        android:hint="Date" />
 
     <EditText
-        android:id="@+id/addAbout"
+        android:id="@+id/addContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@drawable/textinputborder"
-        android:hint="About- maximum 120 characters"
+        android:hint="Content- maximum 120 characters"
         android:maxLength="120"
         android:textSize="@dimen/text_size_medium" />
 
     <Button
-        android:id="@+id/saveInfo"
+        android:id="@+id/saveEntry"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/buttonstyleselector"
         android:gravity="center"
-        android:text="Add"
+        android:text="Add Entry"
         android:textColor="#fff" />
 
 </LinearLayout>
