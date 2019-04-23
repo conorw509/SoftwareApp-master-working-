@@ -70,6 +70,7 @@
     <string name="nav_msgs"><font size="15">Chat</font></string>
     <string name="Open">Open</string>
     <string name="Close">Close</string>
+    <string name="how">How Are You Feeling?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

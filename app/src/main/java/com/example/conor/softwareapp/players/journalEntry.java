@@ -1,6 +1,7 @@
 package com.example.conor.softwareapp.players;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,19 +9,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.mainActivties.journal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -37,6 +37,7 @@ public class journalEntry extends AppCompatActivity {
     private static final String TAG = "journalEntry";
     private Calendar cal;
     private int year, month, day;
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class journalEntry extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Journal Entry");
-
 
         addEntry.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -77,7 +77,6 @@ public class journalEntry extends AppCompatActivity {
                 }
             }
         });
-
 
         addDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,11 +122,12 @@ public class journalEntry extends AppCompatActivity {
                     return;
                 }
 
-                if(content.isEmpty()){
+                if (content.isEmpty()) {
                     addContent.setError("Please Make an entry");
                     return;
-                }
-                else {
+                } else {
+                    boolean poppedUp = happinessDialog();
+                    if (poppedUp) {
                         boolean added = addInfo(entry, date, content);
                         if (added) {
                             Toast.makeText(journalEntry.this, "Entry Added Successfully", Toast.LENGTH_LONG).show();
@@ -136,11 +136,11 @@ public class journalEntry extends AppCompatActivity {
                             Toast.makeText(journalEntry.this, "Something went wrong,Entry not added", Toast.LENGTH_LONG).show();
 
                         }
-
-                    finish();
+                    }
                 }
-
             }
+
+
         });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -151,8 +151,50 @@ public class journalEntry extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private Boolean happinessDialog() {
+        dialog = new Dialog(journalEntry.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_design);
+        Button happy = (Button) dialog.findViewById(R.id.happyBtn);
+        Button bored = (Button) dialog.findViewById(R.id.boredBtn);
+        Button sad = (Button) dialog.findViewById(R.id.sadBtn);
+        happy.setEnabled(true);
+        sad.setEnabled(true);
+        bored.setEnabled(true);
+        happy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(journalEntry.this, "Hello", Toast.LENGTH_LONG).show();
+            }
+        });
 
+        sad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(journalEntry.this, "Hello", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        bored.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(journalEntry.this, "Hello", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        dialog.show();
+        return null;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
+        }
     }
 
     private Boolean addInfo(String addEnt, String date, String content) {
