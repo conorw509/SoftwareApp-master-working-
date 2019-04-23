@@ -6,21 +6,27 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.mainActivties.journal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -126,16 +132,14 @@ public class journalEntry extends AppCompatActivity {
                     addContent.setError("Please Make an entry");
                     return;
                 } else {
-                    boolean poppedUp = happinessDialog();
-                    if (poppedUp) {
-                        boolean added = addInfo(entry, date, content);
-                        if (added) {
-                            Toast.makeText(journalEntry.this, "Entry Added Successfully", Toast.LENGTH_LONG).show();
+                    happinessDialog();
+                    boolean added = addInfo(entry, date, content);
+                    if (added) {
+                        Toast.makeText(journalEntry.this, "Entry Added Successfully", Toast.LENGTH_LONG).show();
 
-                        } else {
-                            Toast.makeText(journalEntry.this, "Something went wrong,Entry not added", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(journalEntry.this, "Something went wrong,Entry not added", Toast.LENGTH_LONG).show();
 
-                        }
                     }
                 }
             }
@@ -153,52 +157,92 @@ public class journalEntry extends AppCompatActivity {
         });
     }
 
-    private Boolean happinessDialog() {
+    private void happinessDialog() {
         dialog = new Dialog(journalEntry.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_design);
-        Button happy = (Button) dialog.findViewById(R.id.happyBtn);
-        Button bored = (Button) dialog.findViewById(R.id.boredBtn);
-        Button sad = (Button) dialog.findViewById(R.id.sadBtn);
+        final ImageView happy = (ImageView) dialog.findViewById(R.id.happyBtn);
+        final ImageView bored = (ImageView) dialog.findViewById(R.id.boredBtn);
+        final ImageView sad = (ImageView) dialog.findViewById(R.id.sadBtn);
         happy.setEnabled(true);
         sad.setEnabled(true);
         bored.setEnabled(true);
         happy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(journalEntry.this, "Hello", Toast.LENGTH_LONG).show();
+                feeling("Happy");
+                Toast.makeText(journalEntry.this, "Thank You", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
             }
         });
 
         sad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(journalEntry.this, "Hello", Toast.LENGTH_LONG).show();
+                feeling("Sad");
+                Toast.makeText(journalEntry.this, "Thank You", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
             }
         });
 
         bored.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(journalEntry.this, "Hello", Toast.LENGTH_LONG).show();
+                feeling("Bored");
+                Toast.makeText(journalEntry.this, "Thank You", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
             }
         });
 
+//        happy.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    happy.setColorFilter(getResources().getColor(R.color.colorAccent));
+//                }
+//                return false;
+//            }
+//        });
+//
+//        sad.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    sad.setColorFilter(getResources().getColor(R.color.colorAccent));
+//                }
+//                return false;
+//            }
+//        });
+//        bored.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    bored.setColorFilter(getResources().getColor(R.color.colorAccent));
+//                }
+//                return false;
+//            }
+//        });
+
         dialog.show();
-        return null;
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
-        }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (dialog != null) {
+//            dialog.dismiss();
+//            dialog = null;
+//        }
+//    }
+
+    private void feeling(String feeling) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("feeling", feeling);
+        reference.updateChildren(map);
     }
 
     private Boolean addInfo(String addEnt, String date, String content) {
-
         HashMap<String, Object> map = new HashMap<>();
         map.put("entryName", addEnt);
         map.put("Date", date);

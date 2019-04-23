@@ -11,6 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+
         android:text="@string/how"
         android:textColor="@color/colorAccent" />
 
@@ -19,7 +20,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
+        <ImageView
             android:id="@+id/happyBtn"
             android:layout_width="40dp"
             android:layout_height="30dp"
@@ -27,7 +28,7 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/happy" />
 
-        <Button
+        <ImageView
             android:id="@+id/boredBtn"
             android:layout_width="40dp"
             android:layout_height="30dp"
@@ -35,7 +36,7 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/bored" />
 
-        <Button
+        <ImageView
             android:id="@+id/sadBtn"
             android:layout_width="40dp"
             android:layout_height="30dp"
