@@ -10,7 +10,6 @@ import android.content.ContextWrapper;
 import android.net.Uri;
 import android.os.Build;
 
-import java.net.URI;
 
 public class OreoNotification extends ContextWrapper {
 

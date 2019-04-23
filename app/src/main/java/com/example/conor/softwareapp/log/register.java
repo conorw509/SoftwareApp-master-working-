@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,7 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -172,7 +170,6 @@ public class register extends AppCompatActivity {
 
     public void checkUserName() {
         reference = database.getReference().child("Users");
-
         reference.orderByChild("userName").equalTo(user)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

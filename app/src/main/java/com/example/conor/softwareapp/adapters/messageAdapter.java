@@ -8,13 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.messages;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-
 import java.util.List;
 
 public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHolder> {

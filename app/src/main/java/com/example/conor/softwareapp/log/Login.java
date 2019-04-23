@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.mainActivties.home;
 import com.google.android.gms.tasks.OnCompleteListener;
