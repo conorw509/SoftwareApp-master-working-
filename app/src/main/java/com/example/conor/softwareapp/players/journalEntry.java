@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 public class journalEntry extends AppCompatActivity {
@@ -31,8 +30,7 @@ public class journalEntry extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
     private Button save;
-    private String entry, content;
-    private Date date;
+    private String entry, date, content;
     private EditText addEntry, addContent;
     private TextView addDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
@@ -47,7 +45,7 @@ public class journalEntry extends AppCompatActivity {
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolAdd);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference();
         save = (Button) findViewById(R.id.saveEntry);
         addEntry = (EditText) findViewById(R.id.addEntry);
         addDate = (TextView) findViewById(R.id.addDate);
@@ -55,6 +53,30 @@ public class journalEntry extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Journal Entry");
+
+
+        addEntry.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (addEntry.getText().length() > 20 || addEntry.getText().length() < 0) {
+                        addEntry.setError("Entry name to Long");
+                    }
+                }
+            }
+        });
+
+
+        addContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    if (addEntry.getText().length() > 120 || addEntry.getText().length() < 0) {
+                        addEntry.setError("Content to Long Maximum 120 Characters");
+                    }
+                }
+            }
+        });
 
 
         addDate.setOnClickListener(new View.OnClickListener() {
@@ -79,29 +101,47 @@ public class journalEntry extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 Log.d(TAG, "onDateSet dd/mm/yyy:" + dayOfMonth + "/" + month + "/" + year);
-                String date =  + dayOfMonth + "/" + month + "/" + year;
+                String date = +dayOfMonth + "/" + month + "/" + year;
                 addDate.setText(date);
-
             }
         };
 
 
-//        save.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                entry = addEntry.getText().toString().trim();
-//
-//                content = addContent.getText().toString().trim();
-//                if (add.isEmpty() && ab.isEmpty() && edc.isEmpty()) {
-//                    Toast.makeText(journalEntry.this, "Fields Are Empty", Toast.LENGTH_LONG).show();
-//                } else {
-//
-//                    addInfo(add, edc, ab);
-//                    finish();
-//                }
-//
-//            }
-//        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                entry = addEntry.getText().toString().trim();
+                date = addDate.getText().toString().trim();
+                content = addContent.getText().toString().trim();
+                if (entry.isEmpty()) {
+                    addEntry.setError("Entry Name Required");
+                    addEntry.requestFocus();
+                    return;
+                }
+                if (date.isEmpty()) {
+                    addDate.setError("Date Required");
+                    return;
+                }
+
+                if(content.isEmpty()){
+                    addContent.setError("Please Make an entry");
+                    return;
+                }
+                else {
+                        boolean added = addInfo(entry, date, content);
+                        if (added) {
+                            Toast.makeText(journalEntry.this, "Entry Added Successfully", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(journalEntry.this, "Something went wrong,Entry not added", Toast.LENGTH_LONG).show();
+
+                        }
+
+                    finish();
+                }
+
+            }
+        });
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,14 +153,16 @@ public class journalEntry extends AppCompatActivity {
         });
 
 
-//        private void addInfo (String addr, String ed, String abo){
-//
-//            HashMap<String, Object> map = new HashMap<>();
-//            map.put("address", addr);
-//            map.put("education", ed);
-//            map.put("about", abo);
-//
-//            reference.updateChildren(map);
-//        }
+    }
+
+    private Boolean addInfo(String addEnt, String date, String content) {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("entryName", addEnt);
+        map.put("Date", date);
+        map.put("Content", content);
+
+        reference.child("journalEntries").push().setValue(map);
+        return true;
     }
 }

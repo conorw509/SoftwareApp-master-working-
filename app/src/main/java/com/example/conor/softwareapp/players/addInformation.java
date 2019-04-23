@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.conor.softwareapp.R;
-import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -55,11 +54,27 @@ public class addInformation extends AppCompatActivity {
                 add = address.getText().toString().trim();
                 edc = education.getText().toString().trim();
                 ab = about.getText().toString().trim();
-                if (add.isEmpty() && ab.isEmpty() && edc.isEmpty()) {
-                    Toast.makeText(addInformation.this, "Fields Are Empty", Toast.LENGTH_LONG).show();
-                } else {
+                if (add.isEmpty()) {
+                 address.setError("Please Enter and Address");
+                 address.requestFocus();
+                 return;
+                }
+                if (edc.isEmpty()) {
+                    education.setError("Please Enter area of Education");
+                    education.requestFocus();
+                    return;
+                }
+                    else {
 
-                    addInfo(add, edc, ab);
+                    Boolean added = addInfo(add, edc, ab);
+                    if (added) {
+                        Toast.makeText(addInformation.this, "Information Added Successfully", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(addInformation.this, "Something went wrong,Infornation not updated", Toast.LENGTH_LONG).show();
+
+                    }
+
                     finish();
                 }
 
@@ -80,7 +95,7 @@ public class addInformation extends AppCompatActivity {
 
     }
 
-    private void addInfo(String addr, String ed, String abo) {
+    private Boolean addInfo(String addr, String ed, String abo) {
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("address", addr);
@@ -88,12 +103,13 @@ public class addInformation extends AppCompatActivity {
         map.put("about", abo);
 
         reference.updateChildren(map);
+        return true;
     }
 
-    private void status(String status){
+    private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("status",status);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("status", status);
         reference.updateChildren(map);
     }
 

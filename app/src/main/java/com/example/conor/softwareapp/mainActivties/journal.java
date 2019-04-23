@@ -75,7 +75,7 @@ public class journal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent logOutIntent = new Intent(journal.this, journalEntry.class);
                 journal.this.startActivity(logOutIntent);
-                finish();
+
             }
         });
 

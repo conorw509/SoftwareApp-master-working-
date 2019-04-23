@@ -1,7 +1,6 @@
 package com.example.conor.softwareapp.players;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.messageAdapter;
 import com.example.conor.softwareapp.fragments.APIService;
@@ -31,11 +29,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -99,7 +95,6 @@ public class messageActivity extends AppCompatActivity {
                 notify = true;
                 String msg = chatBox.getText().toString();
                 if (!msg.equals("")) {
-
                     sendMessage(firebaseUser.getUid(), userUuid, msg);
                     chatBox.setText(" ");
                 }
@@ -114,9 +109,6 @@ public class messageActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 user = dataSnapshot.getValue(User.class);
                 toolBarBk.setTitle(user.getUserName());
-                //              if(user.getImgageUrl().equals("default")) {
-                //                    profileImg.setImageResource(R.drawable.ic_person_black_24dp);
-                //        }
                 readMessages(firebaseUser.getUid(), userUuid, user.getImageUrl());
             }
 
@@ -272,13 +264,6 @@ public class messageActivity extends AppCompatActivity {
 
     }
 
-//    private void currentUser(String userUuid) {
-//        SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-//        editor.putString("currentuser", userUuid);
-//        editor.apply();
-//
-//    }
-
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> map = new HashMap<>();
@@ -290,7 +275,6 @@ public class messageActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         status("online");
-//        currentUser(userUuid);
     }
 
     @Override
@@ -298,7 +282,6 @@ public class messageActivity extends AppCompatActivity {
         super.onPause();
         reference.removeEventListener(eventListener);
         status("offline");
-//        currentUser("none");
     }
 }
 

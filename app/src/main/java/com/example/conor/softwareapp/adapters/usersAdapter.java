@@ -48,28 +48,20 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
 
         final User user = mUser.get(i);
         viewHolder.userName.setText(user.getUserName());
-
-        //image here
-        // if (user.getImageUrl().equals("default")) {
-        //   viewHolder.proile_img.setImageResource(R.mipmap.ic_launcher_round);
-        //  } else {
         Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.proile_img);
-        //}
 
-        if(isChat){
+        if (isChat) {
             lastMsg(user.getId(), viewHolder.lastMsg);
-        }else {
+        } else {
             viewHolder.lastMsg.setVisibility(View.GONE);
         }
 
         if (isChat) {
 
             if (user.getStatus().equals("online")) {
-//                viewHolder.proile_img.setImageResource(R.drawable.ic_person_green_24dp);
                 viewHolder.imgOn.setVisibility(View.VISIBLE);
                 viewHolder.imgOff.setVisibility(View.GONE);
             } else {
-//            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
                 viewHolder.imgOn.setVisibility(View.GONE);
                 viewHolder.imgOff.setVisibility(View.VISIBLE);
             }

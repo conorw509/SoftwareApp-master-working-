@@ -25,7 +25,6 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
     private List<messages> messageList;
     private FirebaseUser firebaseUser;
     private String ImgUrl;
-    private DatabaseReference reference;
 
     public messageAdapter(Context mContext, List<messages> messages, String imgUrl) {
         this.mContext = mContext;
@@ -51,9 +50,6 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
     public void onBindViewHolder(@NonNull messageAdapter.ViewHolder viewHolder, int i) {
         messages messages = messageList.get(i);
         viewHolder.show_msg.setText(messages.getMsg());
-        //     if(ImgUrl.equals("default")){
-//            viewHolder.proile_img.setImageResource(R.drawable.ic_person_black_24dp);
-        //    }
 
         if (i == messageList.size() - 1) {
             if (messages.isSeen()) {
@@ -86,8 +82,6 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
             itemView.setTag(txtSeen);
             show_msg = itemView.findViewById(R.id.show_msg);
             proile_img = itemView.findViewById(R.id.profileImg);
-
-            // Log.v("GetViewAdapter", "View is null, setup viewholder");
         }
     }
 
