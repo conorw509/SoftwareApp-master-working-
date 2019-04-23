@@ -1,5 +1,6 @@
 package com.example.conor.softwareapp.mainActivties;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -12,8 +13,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.journalAdapter;
 import com.example.conor.softwareapp.log.loginInHome;
@@ -27,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,18 +49,20 @@ public class journal extends AppCompatActivity {
     private User user;
     private List<journalContent> mContent;
     private journalAdapter journalAdapter;
-   private FloatingActionButton journalAdd;
+    private FloatingActionButton journalAdd;
+    private Dialog dialog;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.journal);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-        firebaseUser=  FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         drawable = (DrawerLayout) findViewById(R.id.drawerLayoutJournal);
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        journalAdd = (FloatingActionButton)findViewById(R.id.journalAdd);
+        journalAdd = (FloatingActionButton) findViewById(R.id.journalAdd);
         setSupportActionBar(toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawable, toolbar, R.string.Open, R.string.Close);
         drawable.addDrawerListener(actionBarDrawerToggle);
@@ -73,9 +80,7 @@ public class journal extends AppCompatActivity {
         journalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent logOutIntent = new Intent(journal.this, journalEntry.class);
-                journal.this.startActivity(logOutIntent);
-
+                happinessDialog();
             }
         });
 
@@ -129,6 +134,88 @@ public class journal extends AppCompatActivity {
 
     }
 
+    private void happinessDialog() {
+        count++;
+        dialog = new Dialog(journal.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_design);
+        final ImageView happy = (ImageView) dialog.findViewById(R.id.happyBtn);
+        final ImageView bored = (ImageView) dialog.findViewById(R.id.boredBtn);
+        final ImageView sad = (ImageView) dialog.findViewById(R.id.sadBtn);
+        happy.setEnabled(true);
+        sad.setEnabled(true);
+        bored.setEnabled(true);
+        happy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                feeling("Happy");
+                Toast.makeText(journal.this, "Thank You", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+                Intent logOutIntent = new Intent(journal.this, journalEntry.class);
+                journal.this.startActivity(logOutIntent);
+            }
+        });
+
+        sad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                feeling("Sad");
+                Toast.makeText(journal.this, "Thank You", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+                Intent logOutIntent = new Intent(journal.this, journalEntry.class);
+                journal.this.startActivity(logOutIntent);
+            }
+        });
+
+        bored.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                feeling("Bored");
+                Toast.makeText(journal.this, "Thank You", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+                Intent logOutIntent = new Intent(journal.this, journalEntry.class);
+                journal.this.startActivity(logOutIntent);
+            }
+        });
+
+//        happy.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    happy.setColorFilter(getResources().getColor(R.color.colorAccent));
+//                }
+//                return false;
+//            }
+//        });
+//
+//        sad.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    sad.setColorFilter(getResources().getColor(R.color.colorAccent));
+//                }
+//                return false;
+//            }
+//        });
+//        bored.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_UP) {
+//                    bored.setColorFilter(getResources().getColor(R.color.colorAccent));
+//                }
+//                return false;
+//            }
+//        });
+
+        dialog.show();
+    }
+
+    private void feeling(String feeling) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("feeling", feeling);
+        reference.updateChildren(map);
+    }
 
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
