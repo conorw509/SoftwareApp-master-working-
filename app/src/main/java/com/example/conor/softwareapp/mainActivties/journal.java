@@ -32,7 +32,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 
 public class journal extends AppCompatActivity implements com.example.conor.softwareapp.fragments.journalFragment.OnFragmentInteractionListener {
@@ -49,14 +48,8 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
     private FrameLayout frameLayout;
     private FragmentTransaction fragmentTransaction;
     private journalFragment journalFragment;
-
-
-    //    private RecyclerView recyclerView;
-//    private List<journalContent> journalEntries;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
-//    private List<chatList> userList;
-//    private journalAdapter journalAdapter;
 
 
     @Override
@@ -219,62 +212,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
 
         dialog.show();
     }
-
-//    private void readUsers() {
-//        firebaseUser = mAuth.getInstance().getCurrentUser();
-//        reference = FirebaseDatabase.getInstance().getReference("journalEntries");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                journalEntries.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    journalContent user = snapshot.getValue(journalContent.class);
-//                    assert user != null;
-//                    assert firebaseUser != null;
-//                    // if (chatList.getId().equals(firebaseUser.getUid())) {
-//                    journalEntries.add(user);
-//                    // }
-//                }
-//                //  if (firebaseUser.isEmailVerified()) {
-//                journalAdapter = new journalAdapter(getApplicationContext(), journalEntries);
-//                recyclerView.setAdapter(journalAdapter);
-//                //  }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//    }
-//    private void chatLists() {
-//        mUsers = new ArrayList<>();
-//        reference = FirebaseDatabase.getInstance().getReference("Users");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                mUsers.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    User user = snapshot.getValue(User.class);
-//                    for (chatList chatList : userList) {
-//                        if (user.getId().equals(chatList.getId())) {
-//                            mUsers.add(user);
-//                        }
-//                    }
-//                }
-//                usersAdapter = new usersAdapter(getApplicationContext(), mUsers, true);
-//                recyclerView.setAdapter(usersAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 
     private void feeling(String feeling) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());

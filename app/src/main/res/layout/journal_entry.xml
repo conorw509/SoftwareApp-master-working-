@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:id="@+id/toolAdd"
         android:background="@color/colorAccent"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -33,8 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/textinputborder"
-        android:hint="Content- maximum 120 characters"
-        android:maxLength="120"
+        android:hint="Content- maximum 500 characters"
+        android:maxLength="500"
         android:textSize="@dimen/text_size_medium" />
 
     <Button

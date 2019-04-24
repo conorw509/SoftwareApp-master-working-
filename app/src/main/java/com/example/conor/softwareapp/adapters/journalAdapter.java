@@ -1,14 +1,19 @@
 package com.example.conor.softwareapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.journalContent;
+import com.example.conor.softwareapp.players.journal_item_view;
+import com.example.conor.softwareapp.players.messageActivity;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHolder> {
@@ -32,21 +37,20 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        journalContent content = journalList.get(position);
-
-//        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//        long post_time = content.getDate();
-//        Date date = null;
-//        try {
-//            date = new Date(post_time);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        final journalContent content = journalList.get(position);
         holder.date.setText(content.getDate());
         holder.content.setText(content.getContent());
 
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, journal_item_view.class);
+                intent.putExtra("date", content.getDate()).putExtra("content", content.getContent());
+                mContext.startActivity(intent);
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -54,7 +58,7 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView date, entryName,content;
+        public TextView date, entryName, content;
 
         public MyViewHolder(View view) {
             super(view);

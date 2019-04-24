@@ -58,6 +58,8 @@
         <activity android:name=".players.addInformation" />
         <activity android:name=".mainActivties.chat" />
         <activity android:name=".mainActivties.audio" />
+        <activity android:name=".players.journal_item_view"
+            android:parentActivityName=".mainActivties.journal"/>
 
         <activity android:name=".players.musicPlayer" />
         <activity android:name=".mainActivties.support" />
