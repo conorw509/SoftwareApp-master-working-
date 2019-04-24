@@ -43,8 +43,9 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
 //            e.printStackTrace();
 //        }
         holder.date.setText(content.getDate());
-        holder.contents.setText(content.getContent());
-        holder.tag.setText(content.getTag());
+        holder.content.setText(content.getContent());
+
+
     }
 
     @Override
@@ -53,13 +54,13 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView date, contents, tag;
+        public TextView date, entryName,content;
 
         public MyViewHolder(View view) {
             super(view);
-            date = view.findViewById(R.id.dateView);
-            contents = view.findViewById(R.id.journalContent);
-            tag = view.findViewById(R.id.tags);
+            date = view.findViewById(R.id.dateV);
+            content = view.findViewById(R.id.journalContent);
+
 
         }
     }

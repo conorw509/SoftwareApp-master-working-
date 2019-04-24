@@ -2,41 +2,33 @@ package com.example.conor.softwareapp.model;
 
 
 public class journalContent {
-    private String date;
-    private String content;
-    private String name;
+    private String Date;
+    private String Content;
+;
 
     public journalContent(){
 
     }
 
-    public journalContent(String date, String content, String tag) {
-        this.date = date;
-        this.content = content;
-        this.name = tag;
+    public journalContent(String Date, String Content) {
+        this.Date = Date;
+        this.Content = Content;
     }
 
     public String getDate() {
-        return date;
+        return Date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate(String Date) {
+        this.Date = Date;
     }
 
     public String getContent() {
-        return content;
+        return Content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContent(String Content) {
+        this.Content = Content;
     }
 
-    public String getTag() {
-        return name;
-    }
-
-    public void setTag(String tag) {
-        this.name = tag;
-    }
 }

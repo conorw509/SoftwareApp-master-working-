@@ -29,7 +29,7 @@ public class journalEntry extends AppCompatActivity {
     private DatabaseReference reference;
     private Button save;
     private String entry, date, content;
-    private EditText addEntry, addContent;
+    private EditText addContent;
     private TextView addDate;
     private DatePickerDialog.OnDateSetListener dateSetListener;
     private static final String TAG = "journalEntry";
@@ -45,32 +45,18 @@ public class journalEntry extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference();
         save = (Button) findViewById(R.id.saveEntry);
-        addEntry = (EditText) findViewById(R.id.addEntry);
         addDate = (TextView) findViewById(R.id.addDate);
         addContent = (EditText) findViewById(R.id.addContent);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Journal Entry");
 
-
-        addEntry.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    if (addEntry.getText().length() > 20 || addEntry.getText().length() < 0) {
-                        addEntry.setError("Entry name to Long");
-                    }
-                }
-            }
-        });
-
-
         addContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    if (addEntry.getText().length() > 120 || addEntry.getText().length() < 0) {
-                        addEntry.setError("Content to Long Maximum 120 Characters");
+                    if (addContent.getText().length() > 120 || addContent.getText().length() < 0) {
+                        addContent.setError("Content to Long Maximum 120 Characters");
                     }
                 }
             }
@@ -107,14 +93,8 @@ public class journalEntry extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                entry = addEntry.getText().toString().trim();
                 date = addDate.getText().toString().trim();
                 content = addContent.getText().toString().trim();
-                if (entry.isEmpty()) {
-                    addEntry.setError("Entry Name Required");
-                    addEntry.requestFocus();
-                    return;
-                }
                 if (date.isEmpty()) {
                     addDate.setError("Date Required");
                     return;
@@ -125,7 +105,7 @@ public class journalEntry extends AppCompatActivity {
                     return;
                 } else {
 
-                    boolean added = addInfo(entry, date, content);
+                    boolean added = addInfo(date, content);
                     if (added) {
                         Toast.makeText(journalEntry.this, "Entry Added Successfully", Toast.LENGTH_LONG).show();
                         finish();
@@ -150,9 +130,8 @@ public class journalEntry extends AppCompatActivity {
         });
     }
 
-    private Boolean addInfo(String addEnt, String date, String content) {
+    private Boolean addInfo(String date, String content) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("entryName", addEnt);
         map.put("Date", date);
         map.put("Content", content);
 
