@@ -1,24 +1,16 @@
 package com.example.conor.softwareapp.mainActivties;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.players.addInformation;
 import com.example.conor.softwareapp.model.User;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,7 +31,7 @@ public class profile extends AppCompatActivity {
     private DatabaseReference reference;
     private FirebaseUser firebaseUser;
     private User user;
-    private Button addInfo, changePic,uploadPic;
+    private Button addInfo;
     private StorageReference storageReference;
     private FirebaseStorage storage;
     private static final int IMAGE_REQUEST = 1;
@@ -59,29 +50,11 @@ public class profile extends AppCompatActivity {
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolProf);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         addInfo = (Button) findViewById(R.id.addInfo);
-        changePic = (Button) findViewById(R.id.changePic);
-        uploadPic = (Button) findViewById(R.id.uploadPic);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");
-
-        uploadPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              uploadImg();
-
-            }
-        });
-
-       changePic.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               openImage();
-
-           }
-       });
 
         addInfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +84,6 @@ public class profile extends AppCompatActivity {
                         ((TextView) findViewById(R.id.address)).setText(user.getAddress());
                        CircleImageView profileImg = ((CircleImageView) findViewById(R.id.profileImg));
                         String photoUrl = user.getImageUrl();
-                        //Glide.with(profile.this).load("https://firebasestorage.googleapis.com/v0/b/softwareappworkplz.appspot.com/o/1551477785671.jpg?alt=media&token=d58de085-c685-486b-8a61-327a2a056e21").into(profileImg);
                         Glide.with(profile.this).load(photoUrl).into(profileImg);
                     }
                 }
@@ -126,76 +98,76 @@ public class profile extends AppCompatActivity {
 
     }
 
-    private void openImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Picture"), IMAGE_REQUEST);
-    }
+//    private void openImage() {
+//        Intent intent = new Intent();
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent,"Select Picture"), IMAGE_REQUEST);
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
-            imageUri = data.getData();
-                if (uploadTask != null && uploadTask.isInProgress()) {
-                    Toast.makeText(getApplicationContext(), "Upload In Progress", Toast.LENGTH_LONG).show();
-                } else {
-                    uploadImg();
-                }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
+//                && data != null && data.getData() != null )
+//        {
+//            imageUri = data.getData();
+//                if (uploadTask != null && uploadTask.isInProgress()) {
+//                    Toast.makeText(getApplicationContext(), "Upload In Progress", Toast.LENGTH_LONG).show();
+//                } else {
+//                    uploadImg();
+//                }
+//        }
+//    }
 
-
-    private String getFileExtension(Uri uri) {
-        ContentResolver contentResolver = getApplicationContext().getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
-    }
-
-    private void uploadImg() {
-
-        if (imageUri != null) {
-            final StorageReference fileRef = storageReference.child(System.currentTimeMillis()
-                    + "." + getFileExtension(imageUri));
-            uploadTask = fileRef.putFile(imageUri);
-            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    }
-                    return fileRef.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downLoadUri = task.getResult();
-                        String mUri = downLoadUri.toString();
-                        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("imageUrl ", mUri);
-                        reference.updateChildren(map);
-                        Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
-
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            Toast.makeText(getApplicationContext(), "No Image Selected", Toast.LENGTH_LONG).show();
-        }
-
-    }
+//
+//    private String getFileExtension(Uri uri) {
+//        ContentResolver contentResolver = getApplicationContext().getContentResolver();
+//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+//        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+//    }
+//
+//    private void uploadImg() {
+//
+//        if (imageUri != null) {
+//            final StorageReference fileRef = storageReference.child(System.currentTimeMillis()
+//                    + "." + getFileExtension(imageUri));
+//            uploadTask = fileRef.putFile(imageUri);
+//            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+//                @Override
+//                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+//                    if (!task.isSuccessful()) {
+//                        throw task.getException();
+//                    }
+//                    return fileRef.getDownloadUrl();
+//                }
+//            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Uri> task) {
+//                    if (task.isSuccessful()) {
+//                        Uri downLoadUri = task.getResult();
+//                        String mUri = downLoadUri.toString();
+//                        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+//                        HashMap<String, Object> map = new HashMap<>();
+//                        map.put("imageUrl ", mUri);
+//                        reference.updateChildren(map);
+//                        Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                }
+//            });
+//        } else {
+//            Toast.makeText(getApplicationContext(), "No Image Selected", Toast.LENGTH_LONG).show();
+//        }
+//
+//    }
 
 
     private void status(String status) {

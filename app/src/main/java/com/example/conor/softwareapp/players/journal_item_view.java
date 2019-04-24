@@ -1,12 +1,16 @@
 package com.example.conor.softwareapp.players;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.conor.softwareapp.R;
-import com.example.conor.softwareapp.model.User;
 import com.example.conor.softwareapp.model.journalContent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,14 +30,17 @@ public class journal_item_view extends AppCompatActivity {
     private DatabaseReference reference;
     private journalContent journalContent;
     private TextView dateItemV,journalContentItem;
+    private Button deleteEnrty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.journal_item_view);
 
-//        dateItemV = (TextView) findViewById(R.id.dateItemV);
-//        journalContentItem = (TextView) findViewById(R.id.journalContentItem);
+        dateItemV = (TextView) findViewById(R.id.dateItemV);
+        journalContentItem = (TextView) findViewById(R.id.journalContentItem);
+        deleteEnrty = (Button) findViewById(R.id.deleteEntry);
+        journalContentItem.setMovementMethod(new ScrollingMovementMethod());
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolAddItem);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         setSupportActionBar(toolbar);
@@ -61,6 +68,31 @@ public class journal_item_view extends AppCompatActivity {
             }
 
         });
+
+     deleteEnrty.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             AlertDialog.Builder dialog = new AlertDialog.Builder(journal_item_view.this);
+             dialog.setMessage("Are you sure you want to delete this entry?").setCancelable(false)
+
+                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                         @Override
+                         public void onClick(DialogInterface dialog, int which) {
+                             dialog.cancel();
+                         }
+                     })
+                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                         @Override
+                         public void onClick(DialogInterface dialog, int which) {
+
+                         }
+                     });
+
+             AlertDialog alertDialog = dialog.create();
+             alertDialog.setTitle("Delete Entry");
+             alertDialog.show();
+         }
+     });
 
 
 

@@ -41,8 +41,9 @@
         android:id="@+id/saveEntry"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/buttonstyleselector"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/journalContentItem"
+        android:background="@color/colorAccent"
         android:gravity="center"
         android:text="Add Entry"
         android:textColor="#fff" />
