@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.journalContent;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHolder> {
     private List<journalContent> journalList;
     private Context mContext;
+    private FirebaseUser firebaseUser;
 
 
     public journalAdapter(Context mContext, List<journalContent> journalList) {
@@ -25,7 +24,7 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        View itemView = LayoutInflater.from(mContext)
                 .inflate(R.layout.journal_view, parent, false);
         return new journalAdapter.MyViewHolder(itemView);
 
@@ -34,15 +33,16 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         journalContent content = journalList.get(position);
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        long post_time = content.getDate();
-        Date date = null;
-        try {
-            date = new Date(post_time);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        holder.date.setText(dateFormat.format(date));
+
+//        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+//        long post_time = content.getDate();
+//        Date date = null;
+//        try {
+//            date = new Date(post_time);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        holder.date.setText(content.getDate());
         holder.contents.setText(content.getContent());
         holder.tag.setText(content.getTag());
     }

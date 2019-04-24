@@ -21,14 +21,14 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewJ"
+        <FrameLayout
+            android:id="@+id/mainFrame1"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:layout_marginTop="20dp"
             android:background="#80ffffff">
 
-        </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"

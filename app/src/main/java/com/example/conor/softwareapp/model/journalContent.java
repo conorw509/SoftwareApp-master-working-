@@ -2,25 +2,25 @@ package com.example.conor.softwareapp.model;
 
 
 public class journalContent {
-    private long date;
+    private String date;
     private String content;
-    private String tag;
+    private String name;
 
     public journalContent(){
 
     }
 
-    public journalContent(long date, String content, String tag) {
+    public journalContent(String date, String content, String tag) {
         this.date = date;
         this.content = content;
-        this.tag = tag;
+        this.name = tag;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -33,10 +33,10 @@ public class journalContent {
     }
 
     public String getTag() {
-        return tag;
+        return name;
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        this.name = tag;
     }
 }

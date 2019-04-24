@@ -2,26 +2,28 @@ package com.example.conor.softwareapp.mainActivties;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
-import com.example.conor.softwareapp.adapters.journalAdapter;
+import com.example.conor.softwareapp.fragments.journalFragment;
 import com.example.conor.softwareapp.log.loginInHome;
 import com.example.conor.softwareapp.model.User;
-import com.example.conor.softwareapp.model.journalContent;
 import com.example.conor.softwareapp.players.journalEntry;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,26 +32,32 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 
-public class journal extends AppCompatActivity {
+public class journal extends AppCompatActivity implements com.example.conor.softwareapp.fragments.journalFragment.OnFragmentInteractionListener {
 
-    private DatabaseReference reference;
-    private FirebaseUser firebaseUser;
     private FirebaseAuth mAuth;
-    private RecyclerView recyclerView;
     private android.support.v7.widget.Toolbar toolbar;
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
     private User user;
-    private List<journalContent> mContent;
-    private journalAdapter journalAdapter;
     private FloatingActionButton journalAdd;
     private Dialog dialog;
     int count = 0;
+    private FrameLayout frameLayout;
+    private FragmentTransaction fragmentTransaction;
+    private journalFragment journalFragment;
+
+
+    //    private RecyclerView recyclerView;
+//    private List<journalContent> journalEntries;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference reference;
+//    private List<chatList> userList;
+//    private journalAdapter journalAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,7 @@ public class journal extends AppCompatActivity {
         setContentView(R.layout.journal);
         getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        frameLayout = (FrameLayout) findViewById(R.id.mainFrame1);
         reference = FirebaseDatabase.getInstance().getReference("Users");
         drawable = (DrawerLayout) findViewById(R.id.drawerLayoutJournal);
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
@@ -67,13 +76,11 @@ public class journal extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navView);
         mAuth = FirebaseAuth.getInstance();
-        recyclerView = findViewById(R.id.recyclerViewJ);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mContent = new ArrayList<>();
-        journalAdapter = new journalAdapter(getApplicationContext(), mContent);
-        recyclerView.setAdapter(journalAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
         getSupportActionBar().setTitle("Journal");
+        journalFragment = new journalFragment();
+
 
         journalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +89,7 @@ public class journal extends AppCompatActivity {
             }
         });
 
-
+        setFragment(journalFragment);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -128,7 +135,12 @@ public class journal extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void setFragment(Fragment fragment) {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.mainFrame1, fragment);
+        fragmentTransaction.commit();
 
     }
 
@@ -208,6 +220,62 @@ public class journal extends AppCompatActivity {
         dialog.show();
     }
 
+//    private void readUsers() {
+//        firebaseUser = mAuth.getInstance().getCurrentUser();
+//        reference = FirebaseDatabase.getInstance().getReference("journalEntries");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                journalEntries.clear();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    journalContent user = snapshot.getValue(journalContent.class);
+//                    assert user != null;
+//                    assert firebaseUser != null;
+//                    // if (chatList.getId().equals(firebaseUser.getUid())) {
+//                    journalEntries.add(user);
+//                    // }
+//                }
+//                //  if (firebaseUser.isEmailVerified()) {
+//                journalAdapter = new journalAdapter(getApplicationContext(), journalEntries);
+//                recyclerView.setAdapter(journalAdapter);
+//                //  }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//    }
+//    private void chatLists() {
+//        mUsers = new ArrayList<>();
+//        reference = FirebaseDatabase.getInstance().getReference("Users");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                mUsers.clear();
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    User user = snapshot.getValue(User.class);
+//                    for (chatList chatList : userList) {
+//                        if (user.getId().equals(chatList.getId())) {
+//                            mUsers.add(user);
+//                        }
+//                    }
+//                }
+//                usersAdapter = new usersAdapter(getApplicationContext(), mUsers, true);
+//                recyclerView.setAdapter(usersAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+
     private void feeling(String feeling) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> map = new HashMap<>();
@@ -232,5 +300,13 @@ public class journal extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         status("offline");
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
     }
 }
