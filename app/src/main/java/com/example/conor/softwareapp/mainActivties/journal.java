@@ -75,6 +75,7 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
         journalFragment = new journalFragment();
 
 
+
         journalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +137,8 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
         fragmentTransaction.commit();
 
     }
+
+
 
     private void happinessDialog() {
         count++;
