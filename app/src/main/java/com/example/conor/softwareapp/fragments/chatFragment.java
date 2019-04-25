@@ -105,13 +105,11 @@ public class chatFragment extends Fragment {
                     chatList chatList = snapshot.getValue(com.example.conor.softwareapp.model.chatList.class);
                     userList.add(chatList);
                 }
-
                 chatLists();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
         updateToken(FirebaseInstanceId.getInstance().getToken());
@@ -122,7 +120,6 @@ public class chatFragment extends Fragment {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token1 = new Token(token);
         reference.child(firebaseUser.getUid()).setValue(token1);
-
     }
 
     private void chatLists() {
@@ -146,7 +143,6 @@ public class chatFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

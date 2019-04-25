@@ -59,7 +59,6 @@ public class register extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.userName);
         view = (TextView) findViewById(R.id.LoginBk);
 
-        //back to login button
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

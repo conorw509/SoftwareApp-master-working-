@@ -111,16 +111,11 @@ public class messageActivity extends AppCompatActivity {
                 toolBarBk.setTitle(user.getUserName());
                 readMessages(firebaseUser.getUid(), userUuid, user.getImageUrl());
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
-
         });
-
         seenMsg(userUuid);
-
     }
 
     private void seenMsg(final String userUuid) {
@@ -134,34 +129,27 @@ public class messageActivity extends AppCompatActivity {
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("isSeen", true);
                         snapshot.getRef().updateChildren(map);
-
                     }
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
     private void sendMessage(String send, final String recieve, String msg) {
-
         reference = FirebaseDatabase.getInstance().getReference();
         HashMap<String, Object> map = new HashMap<>();
         map.put("send", send);
         map.put("recieve", recieve);
         map.put("msg", msg);
         map.put("isSeen", false);
-
         reference.child("chats").push().setValue(map);
-        //add user to chat fragment
+
         final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("chatList")
                 .child(firebaseUser.getUid()).child(userUuid);
-
         chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -172,7 +160,6 @@ public class messageActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -186,12 +173,9 @@ public class messageActivity extends AppCompatActivity {
                     sendNotification(recieve, user.getUserName(), message);
                 }
                 notify = false;
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -206,7 +190,6 @@ public class messageActivity extends AppCompatActivity {
                     Token token = snapshot.getValue(Token.class);
                     Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher_round, userName + " : " + msg, "New Message",
                             userUuid);
-
                     Sender sender = new Sender(data, token.getToken());
                     apiService.sendNotification(sender)
                             .enqueue(new Callback<myResponse>() {
@@ -221,23 +204,18 @@ public class messageActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<myResponse> call, Throwable t) {
-
                                 }
                             });
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
     private void readMessages(final String myId, final String userUuid, final String imgUrl) {
-
         messagesList = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("chats");
         reference.addValueEventListener(new ValueEventListener() {
@@ -251,17 +229,13 @@ public class messageActivity extends AppCompatActivity {
                         messagesList.add(messages);
                     }
                 }
-
                 messageAdapter = new messageAdapter(messageActivity.this, messagesList, imgUrl);
                 recyclerView.setAdapter(messageAdapter);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
     }
 
     private void status(String status) {

@@ -51,7 +51,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +72,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
         linearLayoutManager.setStackFromEnd(true);
         getSupportActionBar().setTitle("Journal");
         journalFragment = new journalFragment();
-
-
 
         journalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +124,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }
@@ -136,7 +132,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.mainFrame1, fragment);
         fragmentTransaction.commit();
-
     }
 
 
@@ -213,7 +208,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
 //                return false;
 //            }
 //        });
-
         dialog.show();
     }
 

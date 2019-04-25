@@ -6,13 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import javax.mail.Session;
-
 import com.example.conor.softwareapp.players.sendMail;
 
 public class feedback extends AppCompatActivity {

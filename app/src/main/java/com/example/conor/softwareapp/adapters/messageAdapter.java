@@ -86,12 +86,10 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.ViewHold
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (messageList.get(position).getSend().equals(firebaseUser.getUid())) {
-
             return MSG_TYPE_RIGHT;
         } else {
             return MSG_TYPE_LEFT;
         }
-
     }
 }
 

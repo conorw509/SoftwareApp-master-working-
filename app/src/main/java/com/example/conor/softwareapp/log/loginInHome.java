@@ -34,7 +34,6 @@ public class loginInHome extends AppCompatActivity {
 //        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mAuth = FirebaseAuth.getInstance();
 
-
         regLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +49,6 @@ public class loginInHome extends AppCompatActivity {
                 Intent registerIntent = new Intent(loginInHome.this, Login.class);
                 loginInHome.this.startActivity(registerIntent);
                 finish();
-
             }
         });
 

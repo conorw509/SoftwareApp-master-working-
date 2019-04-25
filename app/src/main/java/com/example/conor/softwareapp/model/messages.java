@@ -49,7 +49,6 @@ public class messages {
         return this.isSeen;
     }
 
-   // @PropertyName("isSeen")
     public void setSeen(boolean seen) {
        this.isSeen = seen;
     }

@@ -23,7 +23,6 @@ public class musicListAdapter extends ArrayAdapter<music> {
     static class ViewHolder {
         TextView name;
         TextView artist;
-
     }
 
     public musicListAdapter(Context context, int resource, ArrayList<music> objects) {
@@ -63,7 +62,6 @@ public class musicListAdapter extends ArrayAdapter<music> {
         lastPos = position;
         holder.name.setText(songName);
         holder.artist.setText(artist);
-
         return convertView;
     }
 }

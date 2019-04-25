@@ -1,6 +1,5 @@
 package com.example.conor.softwareapp.players;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 
 public class journal_item_view extends AppCompatActivity {
 
@@ -62,14 +60,11 @@ public class journal_item_view extends AppCompatActivity {
                 journalContent = dataSnapshot.getValue(journalContent.class);
                 ((TextView) findViewById(R.id.dateItemV)).setText(date);
                 ((TextView) findViewById(R.id.journalContentItem)).setText(content);
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
-
         });
 
         deleteEnrty.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +72,6 @@ public class journal_item_view extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(journal_item_view.this);
                 dialog.setMessage("Are you sure you want to delete this entry?").setCancelable(false)
-
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -101,14 +95,10 @@ public class journal_item_view extends AppCompatActivity {
                                         journal_item_view.this.startActivity(journalIntent);
                                         finish();
                                     }
-
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
-
                                     }
                                 });
-
-
                             }
                         });
 
@@ -117,7 +107,5 @@ public class journal_item_view extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-
-
     }
 }

@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
-import com.example.conor.softwareapp.log.Login;
 import com.example.conor.softwareapp.log.loginInHome;
 import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +34,6 @@ public class home extends AppCompatActivity {
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private User user;
     private int navId;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -62,7 +60,6 @@ public class home extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navView);
         getSupportActionBar().setTitle("Home");
 
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -85,7 +82,6 @@ public class home extends AppCompatActivity {
                 } else if (navId == R.id.feedBack) {
                     Intent journalIntent = new Intent(home.this, feedback.class);
                     home.this.startActivity(journalIntent);
-
                 }
                 return true;
             }

@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-
 public class Login extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -102,7 +101,6 @@ public class Login extends AppCompatActivity {
                 Intent registerIntent = new Intent(Login.this, register.class);
                 Login.this.startActivity(registerIntent);
                 finish();
-
             }
         });
 
@@ -112,8 +110,6 @@ public class Login extends AppCompatActivity {
                 Intent registerIntent = new Intent(Login.this, loginInHome.class);
                 Login.this.startActivity(registerIntent);
                 finish();
-
-
             }
         });
     }

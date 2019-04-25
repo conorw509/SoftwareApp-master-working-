@@ -112,7 +112,6 @@ public class journalEntry extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(journalEntry.this, "Something went wrong,Entry not added", Toast.LENGTH_LONG).show();
-
                     }
                 }
             }
@@ -135,9 +134,7 @@ public class journalEntry extends AppCompatActivity {
         map.put("Date", date);
         map.put("Content", content);
         map.put("id",firebaseUser.getUid());
-
         reference.child("journalEntries").push().setValue(map);
         return true;
     }
-
 }

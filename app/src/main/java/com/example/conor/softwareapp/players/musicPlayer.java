@@ -50,8 +50,6 @@ public class musicPlayer extends AppCompatActivity {
         artist = (TextView) findViewById(R.id.artist);
         audioBtn = (Button) findViewById(R.id.BackToAudio);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        //mediaPlayer
         mediaPlayer = new MediaPlayer();
 
         position = getIntent().getExtras().getInt("songPosition", 0);
@@ -111,7 +109,6 @@ public class musicPlayer extends AppCompatActivity {
             }
         });
 
-        //song position on ListView Click
         if (position == 0) {
             songName.setText(songNameDisplay);
             artist.setText(artistDisplay);
@@ -203,7 +200,6 @@ public class musicPlayer extends AppCompatActivity {
             playSong(songUrl);
         }
 
-        //seekBar Click
         positionBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

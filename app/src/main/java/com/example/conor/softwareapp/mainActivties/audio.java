@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.musicListAdapter;
 import com.example.conor.softwareapp.log.loginInHome;
@@ -62,7 +61,6 @@ public class audio extends AppCompatActivity {
         toolbar.setTitle("Audio");
         navigationView = (NavigationView) findViewById(R.id.navView);
         getSupportActionBar().setTitle("Audio");
-
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -179,7 +177,6 @@ public class audio extends AppCompatActivity {
 
         musicListAdapter adapter = new musicListAdapter(this, R.layout.custom_listview, musicList);
         listView.setAdapter(adapter);
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

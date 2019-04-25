@@ -53,7 +53,6 @@ public class resetPword extends AppCompatActivity {
                             } else {
                                 String error = task.getException().getMessage();
                                 Toast.makeText(resetPword.this, error, Toast.LENGTH_SHORT).show();
-
                             }
                         }
                     });

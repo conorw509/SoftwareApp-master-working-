@@ -15,7 +15,6 @@ public class journalContent {
     }
 
     public journalContent(){
-
     }
 
     public journalContent(String Date, String Content) {

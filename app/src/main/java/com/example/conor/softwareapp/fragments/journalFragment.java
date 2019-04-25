@@ -9,12 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.journalAdapter;
-import com.example.conor.softwareapp.adapters.usersAdapter;
 import com.example.conor.softwareapp.model.User;
-import com.example.conor.softwareapp.model.chatList;
 import com.example.conor.softwareapp.model.journalContent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,8 +21,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,9 +96,7 @@ public class journalFragment extends Fragment {
         journalContents = new ArrayList<>();
         mUser = new ArrayList<>();
 
-
         reference = FirebaseDatabase.getInstance().getReference();
-
         Query orderByDate = reference.child("journalEntries").orderByChild("date");
 
         orderByDate.addValueEventListener(new ValueEventListener() {
@@ -120,32 +113,10 @@ public class journalFragment extends Fragment {
                 recyclerView.setAdapter(journalAdapter);
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
-//        reference = FirebaseDatabase.getInstance().getReference().child("journalEntries");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                journalContents.clear();
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    journalContent chatList = snapshot.getValue(journalContent.class);
-//                    journalContents.add(chatList);
-//                }
-//                journalAdapter = new journalAdapter(getContext(), journalContents);
-//                recyclerView.setAdapter(journalAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
         return view;
     }
 
@@ -167,51 +138,6 @@ public class journalFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
-//
-//    private void chatLists() {
-//        reference = FirebaseDatabase.getInstance().getReference("Users");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    User user = snapshot.getValue(User.class);
-//                    for (chatList chatList : userList) {
-//                        if (user.getId().equals(chatList.getId())) {
-//                            showEntries();
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-//    private void showEntries() {
-//        journalContents = new ArrayList<>();
-//        reference = FirebaseDatabase.getInstance().getReference("journalEntries");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                    journalContent user = snapshot.getValue(journalContent.class);
-//                    journalContents.add(user);
-//                }
-//                journalAdapter = new journalAdapter(getContext(), journalContents);
-//                recyclerView.setAdapter(journalAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
-
     @Override
     public void onDetach() {
         super.onDetach();

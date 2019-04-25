@@ -18,7 +18,6 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
     private Context mContext;
     private FirebaseUser firebaseUser;
 
-
     public journalAdapter(Context mContext, List<journalContent> journalList) {
         this.mContext = mContext;
         this.journalList = journalList;
@@ -47,7 +46,6 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

@@ -102,7 +102,6 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
         }
     }
 
-    //lastMsg
     private void lastMsg(final String userUuid, final TextView last_msg) {
         theLastMsg = "default";
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -127,7 +126,6 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

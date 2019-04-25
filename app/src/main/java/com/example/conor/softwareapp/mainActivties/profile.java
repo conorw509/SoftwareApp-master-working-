@@ -92,7 +92,6 @@ public class profile extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -168,8 +167,7 @@ public class profile extends AppCompatActivity {
 //        }
 //
 //    }
-
-
+    
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> map = new HashMap<>();

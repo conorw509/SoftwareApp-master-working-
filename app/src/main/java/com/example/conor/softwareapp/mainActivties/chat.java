@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.fragments.chatFragment;
 import com.example.conor.softwareapp.fragments.usersFragment;
@@ -69,8 +68,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         navView = (NavigationView) findViewById(R.id.navView);
         getSupportActionBar().setTitle("Chat");
 
-
-
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,7 +82,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
 
@@ -120,7 +116,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
                             }
                         });
                         return true;
@@ -133,7 +128,6 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
                 int navId = menuItem.getItemId();
 
                 if(navId == R.id.Home){
@@ -194,6 +188,5 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
         status("offline");
         fragmentTransaction.detach(usersFragment);
         fragmentTransaction.detach(chatFragment);
-
     }
 }

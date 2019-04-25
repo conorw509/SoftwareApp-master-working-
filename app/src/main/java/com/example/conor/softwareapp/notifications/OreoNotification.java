@@ -10,7 +10,6 @@ import android.content.ContextWrapper;
 import android.net.Uri;
 import android.os.Build;
 
-
 public class OreoNotification extends ContextWrapper {
 
     private static final String CHANNEL_ID = "com.example.conor.softwareapp";
