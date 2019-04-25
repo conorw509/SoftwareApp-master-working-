@@ -134,6 +134,7 @@ public class journalEntry extends AppCompatActivity {
         HashMap<String, Object> map = new HashMap<>();
         map.put("Date", date);
         map.put("Content", content);
+        map.put("id",firebaseUser.getUid());
 
         reference.child("journalEntries").push().setValue(map);
         return true;

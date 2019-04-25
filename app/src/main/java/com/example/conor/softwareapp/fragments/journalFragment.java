@@ -101,7 +101,9 @@ public class journalFragment extends Fragment {
         journalContents = new ArrayList<>();
         mUser = new ArrayList<>();
 
+
         reference = FirebaseDatabase.getInstance().getReference();
+
         Query orderByDate = reference.child("journalEntries").orderByChild("date");
 
         orderByDate.addValueEventListener(new ValueEventListener() {
@@ -110,7 +112,9 @@ public class journalFragment extends Fragment {
                 journalContents.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     journalContent chatList = snapshot.getValue(journalContent.class);
-                    journalContents.add(chatList);
+                    if(chatList.getId().equals(firebaseUser.getUid())) {
+                        journalContents.add(chatList);
+                    }
                 }
                 journalAdapter = new journalAdapter(getContext(), journalContents);
                 recyclerView.setAdapter(journalAdapter);

@@ -7,15 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.conor.softwareapp.R;
-import com.example.conor.softwareapp.log.Login;
-import com.example.conor.softwareapp.mainActivties.home;
 import com.example.conor.softwareapp.mainActivties.journal;
 import com.example.conor.softwareapp.model.journalContent;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +34,6 @@ public class journal_item_view extends AppCompatActivity {
     private journalContent journalContent;
     private TextView dateItemV, journalContentItem;
     private Button deleteEnrty;
-    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
