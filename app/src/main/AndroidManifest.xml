@@ -61,6 +61,9 @@
         <activity android:name=".players.journal_item_view"
             android:parentActivityName=".mainActivties.journal"/>
 
+        <activity android:name=".mainActivties.feedback"
+            android:parentActivityName=".mainActivties.home"/>
+
         <activity android:name=".players.musicPlayer" />
         <activity android:name=".mainActivties.support" />
         <activity android:name=".mainActivties.journal" />

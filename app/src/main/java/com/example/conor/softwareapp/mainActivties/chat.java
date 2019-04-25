@@ -151,7 +151,8 @@ public class chat extends AppCompatActivity implements com.example.conor.softwar
                     chat.this.startActivity(journalIntent);
                     finish();
                 } else if (navId == R.id.feedBack) {
-                    Toast.makeText(chat.this, "Feedback", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(chat.this, feedback.class);
+                    chat.this.startActivity(journalIntent);
                 }
                 return true;
             }

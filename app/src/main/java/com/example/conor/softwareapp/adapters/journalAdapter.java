@@ -7,13 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.journalContent;
 import com.example.conor.softwareapp.players.journal_item_view;
-import com.example.conor.softwareapp.players.messageActivity;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.List;
 
 public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHolder> {
@@ -64,7 +61,6 @@ public class journalAdapter extends RecyclerView.Adapter<journalAdapter.MyViewHo
             super(view);
             date = view.findViewById(R.id.dateV);
             content = view.findViewById(R.id.journalContent);
-
 
         }
     }

@@ -86,7 +86,8 @@ public class audio extends AppCompatActivity {
                     finish();
 
                 } else if (navId == R.id.feedBack) {
-                    Toast.makeText(audio.this, "Feedback", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(audio.this, feedback.class);
+                    audio.this.startActivity(journalIntent);
                 }
                 return true;
             }

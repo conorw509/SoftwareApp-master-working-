@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.log.Login;
 import com.example.conor.softwareapp.log.loginInHome;
 import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -82,7 +83,9 @@ public class home extends AppCompatActivity {
                     finish();
 
                 } else if (navId == R.id.feedBack) {
-                    Toast.makeText(home.this, "Feedback", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(home.this, feedback.class);
+                    home.this.startActivity(journalIntent);
+
                 }
                 return true;
             }

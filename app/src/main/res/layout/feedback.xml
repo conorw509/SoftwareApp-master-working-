@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/toolAddf"
+        android:background="@color/colorAccent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="4dp"/>
+
+
+    <EditText
+        android:id="@+id/emailFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="5dp"
+        android:maxLength="100"
+        android:maxLines="1"
+        android:hint="Email" />
+
+
+    <EditText
+        android:id="@+id/subjectFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="5dp"
+        android:maxLength="100"
+        android:maxLines="1"
+        android:hint="Subject" />
+
+    <EditText
+        android:id="@+id/messageFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textinputborder"
+        android:hint="Message- maximum 500 characters"
+        android:maxLength="500"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Button
+        android:id="@+id/sendMail"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/journalContentItem"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="Send"
+        android:textColor="#fff" />
+
+</LinearLayout>

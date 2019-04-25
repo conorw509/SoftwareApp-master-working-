@@ -94,7 +94,8 @@ public class support extends AppCompatActivity {
                     finish();
 
                 } else if (navId == R.id.feedBack) {
-                    Toast.makeText(support.this, "Feedback", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(support.this, feedback.class);
+                    support.this.startActivity(journalIntent);
                 }
                 return true;
             }

@@ -106,7 +106,8 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
                     finish();
 
                 } else if (navId == R.id.feedBack) {
-                    Toast.makeText(journal.this, "Feedback", Toast.LENGTH_SHORT).show();
+                    Intent journalIntent = new Intent(journal.this, feedback.class);
+                    journal.this.startActivity(journalIntent);
                 }
                 return true;
             }
