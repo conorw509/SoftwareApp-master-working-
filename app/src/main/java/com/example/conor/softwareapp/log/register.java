@@ -1,6 +1,5 @@
 package com.example.conor.softwareapp.log;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
-import com.example.conor.softwareapp.mainActivties.audio;
-import com.example.conor.softwareapp.players.musicPlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,8 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class register extends AppCompatActivity {
@@ -118,11 +113,10 @@ public class register extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
                                         Intent goToPlayer = new Intent(getApplicationContext(), userNameSelect.class);
                                         goToPlayer.putExtra("id",userId);
                                         register.this.startActivity(goToPlayer);
-                                        //startActivity(new Intent(register.this, userNameSelect.class));
+                                        finish();
                                     } else {
                                         Toast.makeText(register.this, "Registration Failed", Toast.LENGTH_LONG).show();
                                     }
@@ -137,10 +131,6 @@ public class register extends AppCompatActivity {
                 });
     }
 
-
-
-
-
     public void checkEmail() {
         mAuth.fetchProvidersForEmail(etEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
             @Override
@@ -154,8 +144,6 @@ public class register extends AppCompatActivity {
             }
         });
     }
-
-
 }
 
 

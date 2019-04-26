@@ -70,26 +70,26 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override //checks status of task thats proceeded
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
 
-                            if (mAuth.getCurrentUser().isEmailVerified()) {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override //checks status of task thats proceeded
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                final String userId = getIntent().getStringExtra("id");
+                                if (mAuth.getCurrentUser().isEmailVerified() && mAuth.getCurrentUser().getUid().equals(userId)) {
+                                    Intent journalIntent = new Intent(Login.this, home.class);
+                                    Login.this.startActivity(journalIntent);
+                                    finish();
 
-                                Intent journalIntent = new Intent(Login.this, home.class);
-                                Login.this.startActivity(journalIntent);
-                                finish();
+                                } else {
+                                    Toast.makeText(Login.this, "Please verify your email or Continue the Registration Process By entering a Username", Toast.LENGTH_LONG).show();
+                                }
 
-                            } else {
-                                Toast.makeText(Login.this, "Please verify your email", Toast.LENGTH_LONG).show();
+                            } else if (!task.isSuccessful()) {
+                                Toast.makeText(Login.this, "Sign in Problem", Toast.LENGTH_LONG).show();
                             }
-
-                        } else if (!task.isSuccessful()) {
-                            Toast.makeText(Login.this, "Sign in Problem", Toast.LENGTH_LONG).show();
                         }
-                    }
-                });
+                    });
 
             }
         });
