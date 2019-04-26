@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity {
     private EditText passField;
     private Button etLogBtn;
     private Button backBtn;
-    private TextView regLink, forgotP;
+    private TextView forgotP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,6 @@ public class Login extends AppCompatActivity {
         emailField = (EditText) findViewById(R.id.emailFieldEnt);
         passField = (EditText) findViewById(R.id.RegPword);
         etLogBtn = (Button) findViewById(R.id.LoginBtn);
-        regLink = (TextView) findViewById(R.id.RegisterBtn);
         forgotP = (TextView) findViewById(R.id.forgotPwod);
         backBtn = (Button) findViewById(R.id.BackToLoginBtn);
         mAuth = FirebaseAuth.getInstance();
@@ -92,15 +91,6 @@ public class Login extends AppCompatActivity {
                     }
                 });
 
-            }
-        });
-
-        regLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(Login.this, register.class);
-                Login.this.startActivity(registerIntent);
-                finish();
             }
         });
 

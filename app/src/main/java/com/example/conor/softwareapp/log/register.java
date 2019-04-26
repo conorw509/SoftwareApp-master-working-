@@ -1,5 +1,6 @@
 package com.example.conor.softwareapp.log;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,17 +12,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.mainActivties.audio;
+import com.example.conor.softwareapp.players.musicPlayer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.ProviderQueryResult;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -41,7 +42,7 @@ public class register extends AppCompatActivity {
     private Button bRegister;
     private TextView view;
     private FirebaseAuth mAuth;
-    private String email, password, user;
+    private String email, password;
     private DatabaseReference reference;
     private FirebaseDatabase database;
     private FirebaseUser firebaseUser;
@@ -50,13 +51,13 @@ public class register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Users");
         bRegister = (Button) findViewById(R.id.RegBtn);
         etEmail = (EditText) findViewById(R.id.RegEmail);
         etPass = (EditText) findViewById(R.id.RegPword);
-        userName = (EditText) findViewById(R.id.userName);
         view = (TextView) findViewById(R.id.LoginBk);
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -73,10 +74,8 @@ public class register extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString().trim();
                 password = etPass.getText().toString().trim();
-                user = userName.getText().toString().trim();
                 checkEmail();
-                checkUserName();
-                if (email.isEmpty() && password.isEmpty() && user.isEmpty()) {
+                if (email.isEmpty() && password.isEmpty()) {
                     Toast.makeText(register.this, "Fields are empty", Toast.LENGTH_LONG).show();
                     return;
                 } else {
@@ -90,11 +89,6 @@ public class register extends AppCompatActivity {
                         etPass.requestFocus();
                         return;
                     }
-                    if (user.isEmpty()) {
-                        userName.setError("Please enter a Username");
-                        userName.requestFocus();
-                        return;
-                    }
                 }
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     etEmail.setError("Please enter a Valid email");
@@ -106,13 +100,13 @@ public class register extends AppCompatActivity {
                     etEmail.requestFocus();
                     return;
                 } else {
-                    registerUser(user, email, password);
+                    registerUser(email, password);
                 }
             }
         });
     }
 
-    private void registerUser(final String userName, final String email, String password) {
+    private void registerUser(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -120,22 +114,15 @@ public class register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             firebaseUser = mAuth.getCurrentUser();
                             final String userId = firebaseUser.getUid();
-                            reference = database.getReference("Users").child(userId);
-                            HashMap<String, String> hashMap = new HashMap<>();
-                            hashMap.put("id", userId);
-                            hashMap.put("userName", userName);
-                            hashMap.put("imageUrl", "default");
-                            hashMap.put("status","offline");
-                            hashMap.put("search",userName.toLowerCase());
-                            reference.setValue(hashMap);
                             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-
                                     if (task.isSuccessful()) {
-
                                         Toast.makeText(register.this, "Please check your email for verification", Toast.LENGTH_LONG).show();
-
+                                        Intent goToPlayer = new Intent(getApplicationContext(), userNameSelect.class);
+                                        goToPlayer.putExtra("id",userId);
+                                        register.this.startActivity(goToPlayer);
+                                        //startActivity(new Intent(register.this, userNameSelect.class));
                                     } else {
                                         Toast.makeText(register.this, "Registration Failed", Toast.LENGTH_LONG).show();
                                     }
@@ -144,14 +131,15 @@ public class register extends AppCompatActivity {
                         } else {
                             if (!task.isSuccessful()) {
                                 checkEmail();
-                                checkUserName();
-                            } else {
-                                Toast.makeText(register.this, "Registration failed, please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
                 });
     }
+
+
+
+
 
     public void checkEmail() {
         mAuth.fetchProvidersForEmail(etEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
@@ -167,23 +155,7 @@ public class register extends AppCompatActivity {
         });
     }
 
-    public void checkUserName() {
-        reference = database.getReference().child("Users");
-        reference.orderByChild("userName").equalTo(user)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            userName.setError("Username Already in use please choose a different username");
-                            userName.requestFocus();
-                            return;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-    }
+
 }
 
 

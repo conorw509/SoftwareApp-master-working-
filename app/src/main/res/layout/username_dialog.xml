@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+
+        android:text="Firstly Make a Username!"
+        android:textColor="@color/colorAccent" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/enterUserName"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:hint="Please Enter a UserName"
+        android:inputType="textEmailAddress"
+        app:met_floatingLabel="normal">
+
+    </com.rengwuxian.materialedittext.MaterialEditText>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter"
+            android:id="@+id/selectUserName"
+            android:textColor="#ffffff"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="10dp"
+            />
+
+    <!--<TextView-->
+        <!--android:id="@+id/backToLog"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="Back"-->
+        <!--android:textColor="@color/colorAccent"-->
+        <!--android:textSize="15dp" />-->
+
+
+
+</LinearLayout>

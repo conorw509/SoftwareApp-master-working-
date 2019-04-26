@@ -64,7 +64,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Register with email address"
+            android:text="Register"
             android:textColor="#fff"
             android:textSize="20dp" />
 

@@ -91,19 +91,6 @@
             android:text="Back"
             android:textColor="#fff" />
 
-
-        <TextView
-
-            android:id="@+id/RegisterBtn"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Register with email address"
-            android:textColor="#fff"
-            android:textSize="20dp" />
-
-
     </LinearLayout>
 
 

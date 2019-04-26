@@ -51,6 +51,7 @@
             android:name=".log.resetPword"
             android:parentActivityName=".log.Login" />
         <activity android:name=".log.Login" />
+        <activity android:name=".log.userNameSelect" />
         <activity
             android:name=".mainActivties.home"
             android:theme="@style/AppTheme.noActionBar"></activity>
