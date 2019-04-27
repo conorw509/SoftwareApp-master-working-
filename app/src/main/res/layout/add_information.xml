@@ -15,12 +15,19 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"/>
 
+    <EditText
+        android:id="@+id/changeUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:maxLength="100"
+        android:maxLines="1"
+        android:hint="Username" />
 
     <EditText
         android:id="@+id/addAdrs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:maxLength="100"
         android:maxLines="1"
         android:hint="Address" />

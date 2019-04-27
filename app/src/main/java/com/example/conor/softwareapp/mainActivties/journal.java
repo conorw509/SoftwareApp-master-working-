@@ -44,7 +44,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
     private User user;
     private FloatingActionButton journalAdd;
     private Dialog dialog;
-    int count = 0;
     private FrameLayout frameLayout;
     private FragmentTransaction fragmentTransaction;
     private journalFragment journalFragment;
@@ -137,7 +136,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
 
 
     private void happinessDialog() {
-        count++;
         dialog = new Dialog(journal.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_design);

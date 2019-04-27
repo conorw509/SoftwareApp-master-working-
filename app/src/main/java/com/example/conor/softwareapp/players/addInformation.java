@@ -9,16 +9,19 @@ import android.widget.Toast;
 import com.example.conor.softwareapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class addInformation extends AppCompatActivity {
 
     private android.support.v7.widget.Toolbar toolbar;
-    private EditText address, education, about;
+    private EditText address, education, about,userName;
     private Button save;
-    private String add, edc, ab;
+    private String add, edc, ab,userN;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
 
@@ -33,6 +36,7 @@ public class addInformation extends AppCompatActivity {
         address = (EditText) findViewById(R.id.addAdrs);
         education = (EditText) findViewById(R.id.addEduc);
         about = (EditText) findViewById(R.id.addAbout);
+        userName = (EditText) findViewById(R.id.changeUserName);
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolAdd);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         setSupportActionBar(toolbar);
@@ -52,6 +56,7 @@ public class addInformation extends AppCompatActivity {
                 add = address.getText().toString().trim();
                 edc = education.getText().toString().trim();
                 ab = about.getText().toString().trim();
+                userN = userName.getText().toString().trim();
                 if (add.isEmpty()) {
                  address.setError("Please Enter and Address");
                  address.requestFocus();
@@ -64,7 +69,7 @@ public class addInformation extends AppCompatActivity {
                 }
                     else {
 
-                    Boolean added = addInfo(add, edc, ab);
+                    Boolean added = addInfo( userN,add, edc, ab);
                     if (added) {
                         Toast.makeText(addInformation.this, "Information Added Successfully", Toast.LENGTH_LONG).show();
 
@@ -92,12 +97,14 @@ public class addInformation extends AppCompatActivity {
 
     }
 
-    private Boolean addInfo(String addr, String ed, String abo) {
+    private Boolean addInfo(String userName,String addr, String ed, String abo) {
 
         HashMap<String, Object> map = new HashMap<>();
+        map.put("userName",userName);
         map.put("address", addr);
         map.put("education", ed);
         map.put("about", abo);
+        map.put("search",userName);
 
         reference.updateChildren(map);
         return true;
@@ -120,5 +127,24 @@ public class addInformation extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         status("offline");
+    }
+
+    public boolean checkUser() {
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference.orderByChild("userName").equalTo(userN)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            userName.setError("Username Already Exists Please Select Another");
+                            userName.requestFocus();
+                            return;
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+        return true;
     }
 }

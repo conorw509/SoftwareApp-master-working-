@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class register extends AppCompatActivity {
@@ -109,14 +110,20 @@ public class register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             firebaseUser = mAuth.getCurrentUser();
                             final String userId = firebaseUser.getUid();
+                            final String userNam = "user"+Math.random();
                             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Intent goToPlayer = new Intent(getApplicationContext(), userNameSelect.class);
-                                        goToPlayer.putExtra("id",userId);
-                                        register.this.startActivity(goToPlayer);
-                                        finish();
+                                        Toast.makeText(register.this, "Check Email for Verification", Toast.LENGTH_LONG).show();
+                                        reference = database.getReference("Users").child(userId);
+                                        HashMap<String, String> hashMap = new HashMap<>();
+                                        hashMap.put("id", userId);
+                                        hashMap.put("imageUrl", "default");
+                                        hashMap.put("status", "offline");
+                                        hashMap.put("userName", userNam);
+                                        hashMap.put("search", userNam.toLowerCase());
+                                        reference.setValue(hashMap);
                                     } else {
                                         Toast.makeText(register.this, "Registration Failed", Toast.LENGTH_LONG).show();
                                     }
