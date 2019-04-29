@@ -57,6 +57,14 @@ public class addInformation extends AppCompatActivity {
                 edc = education.getText().toString().trim();
                 ab = about.getText().toString().trim();
                 userN = userName.getText().toString().trim();
+                checkUser();
+
+                if(userN.isEmpty()){
+                    userName.setError("Please Enter a Username");
+                    userName.requestFocus();
+                    return;
+                }
+
                 if (add.isEmpty()) {
                  address.setError("Please Enter and Address");
                  address.requestFocus();
@@ -67,10 +75,12 @@ public class addInformation extends AppCompatActivity {
                     education.requestFocus();
                     return;
                 }
+
                     else {
 
-                    Boolean added = addInfo( userN,add, edc, ab);
-                    if (added) {
+                    Boolean added = addInfo(add, edc, ab);
+                    Boolean chnged = changeUsername(userN);
+                    if (added && chnged) {
                         Toast.makeText(addInformation.this, "Information Added Successfully", Toast.LENGTH_LONG).show();
 
                     } else {
@@ -97,18 +107,26 @@ public class addInformation extends AppCompatActivity {
 
     }
 
-    private Boolean addInfo(String userName,String addr, String ed, String abo) {
-
+    private Boolean addInfo(String addr, String ed, String abo) {
+        reference = FirebaseDatabase.getInstance().getReference("Profiles");
         HashMap<String, Object> map = new HashMap<>();
-        map.put("userName",userName);
+        map.put("id",firebaseUser.getUid());
         map.put("address", addr);
         map.put("education", ed);
         map.put("about", abo);
-        map.put("search",userName);
-
         reference.updateChildren(map);
         return true;
     }
+
+    private Boolean changeUsername(String userName) {
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userName", userName);
+        map.put("search",userName);
+        reference.updateChildren(map);
+        return true;
+    }
+
 
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());

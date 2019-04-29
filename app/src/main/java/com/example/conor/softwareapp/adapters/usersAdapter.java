@@ -83,8 +83,7 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
     public int getItemCount() {
         return mUser.size();
     }
-
-
+    
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView userName, lastMsg;

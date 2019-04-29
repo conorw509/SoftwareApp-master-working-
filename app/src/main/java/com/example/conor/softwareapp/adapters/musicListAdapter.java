@@ -13,7 +13,6 @@ import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.music;
 import java.util.ArrayList;
 
-
 public class musicListAdapter extends ArrayAdapter<music> {
 
     private Context mContext;

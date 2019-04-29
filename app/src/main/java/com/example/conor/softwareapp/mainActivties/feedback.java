@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.example.conor.softwareapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import javax.mail.Session;
 import com.example.conor.softwareapp.players.sendMail;
 
 public class feedback extends AppCompatActivity {
@@ -19,7 +18,6 @@ public class feedback extends AppCompatActivity {
     private Button sendMail;
     private String em, sub, msg;
     private FirebaseUser firebaseUser;
-    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -32,11 +32,6 @@ public class profile extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private User user;
     private Button addInfo;
-    private StorageReference storageReference;
-    private FirebaseStorage storage;
-    private static final int IMAGE_REQUEST = 1;
-    private Uri imageUri;
-    private StorageTask uploadTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +40,10 @@ public class profile extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
         reference = FirebaseDatabase.getInstance().getReference("Users");
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolProf);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         addInfo = (Button) findViewById(R.id.addInfo);
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");

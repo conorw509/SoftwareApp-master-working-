@@ -20,7 +20,6 @@ public class OreoNotification extends ContextWrapper {
         super(base);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P || Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
             createChannel();
         }
     }
