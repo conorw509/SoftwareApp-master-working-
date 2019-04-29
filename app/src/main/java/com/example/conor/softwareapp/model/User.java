@@ -5,25 +5,47 @@ public class User {
     private String userName;
     private String id;
     private String status;
+    private String imageUrl;
+    private String search;
     private String education;
     private String about;
     private String address;
-    private String imageUrl;
-    private String search;
 
-    public User(String userName, String id, String status, String education, String about, String address, String imageUrl, String search) {
+    public User(String userName, String id, String status, String imageUrl, String search) {
         this.userName = userName;
         this.id = id;
         this.status = status;
-        this.education = education;
-        this.about = about;
-        this.address = address;
         this.imageUrl = imageUrl;
         this.search = search;
     }
 
     public User() {
 
+    }
+
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getUserName() {
@@ -50,29 +72,6 @@ public class User {
         this.status = status;
     }
 
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getAbout() {
-        return about;
-    }
-
-    public void setAbout(String about) {
-        this.about = about;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getImageUrl() {
         return imageUrl;

@@ -123,6 +123,9 @@ public class register extends AppCompatActivity {
                                         hashMap.put("status", "offline");
                                         hashMap.put("userName", userNam);
                                         hashMap.put("search", userNam.toLowerCase());
+                                        hashMap.put("address", "");
+                                        hashMap.put("education", "");
+                                        hashMap.put("about", "");
                                         reference.setValue(hashMap);
                                     } else {
                                         Toast.makeText(register.this, "Registration Failed", Toast.LENGTH_LONG).show();

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
+import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,7 +58,25 @@ public class addInformation extends AppCompatActivity {
                 edc = education.getText().toString().trim();
                 ab = about.getText().toString().trim();
                 userN = userName.getText().toString().trim();
-                checkUser();
+
+                reference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            User user = snapshot.getValue(User.class);
+                            if(userN.equals(user.getUserName())){
+                                userName.setError("Username Already Exists Please Enter Another");
+                                userName.requestFocus();
+                                return;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
                 if(userN.isEmpty()){
                     userName.setError("Please Enter a Username");
@@ -70,14 +89,13 @@ public class addInformation extends AppCompatActivity {
                  address.requestFocus();
                  return;
                 }
+
                 if (edc.isEmpty()) {
                     education.setError("Please Enter area of Education");
                     education.requestFocus();
                     return;
                 }
-
                     else {
-
                     Boolean added = addInfo(add, edc, ab);
                     Boolean chnged = changeUsername(userN);
                     if (added && chnged) {
@@ -87,7 +105,6 @@ public class addInformation extends AppCompatActivity {
                         Toast.makeText(addInformation.this, "Something went wrong,Infornation not updated", Toast.LENGTH_LONG).show();
 
                     }
-
                     finish();
                 }
 
@@ -108,9 +125,8 @@ public class addInformation extends AppCompatActivity {
     }
 
     private Boolean addInfo(String addr, String ed, String abo) {
-        reference = FirebaseDatabase.getInstance().getReference("Profiles");
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> map = new HashMap<>();
-        map.put("id",firebaseUser.getUid());
         map.put("address", addr);
         map.put("education", ed);
         map.put("about", abo);
@@ -145,24 +161,5 @@ public class addInformation extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         status("offline");
-    }
-
-    public boolean checkUser() {
-        reference = FirebaseDatabase.getInstance().getReference().child("Users");
-        reference.orderByChild("userName").equalTo(userN)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            userName.setError("Username Already Exists Please Select Another");
-                            userName.requestFocus();
-                            return;
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-        return true;
     }
 }
