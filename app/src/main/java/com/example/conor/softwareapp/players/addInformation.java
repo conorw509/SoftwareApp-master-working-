@@ -20,9 +20,9 @@ import java.util.HashMap;
 public class addInformation extends AppCompatActivity {
 
     private android.support.v7.widget.Toolbar toolbar;
-    private EditText address, education, about,userName;
+    private EditText address, education, about, userName;
     private Button save;
-    private String add, edc, ab,userN;
+    private String add, edc, ab, userN;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
 
@@ -59,43 +59,38 @@ public class addInformation extends AppCompatActivity {
                 ab = about.getText().toString().trim();
                 userN = userName.getText().toString().trim();
 
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            User user = snapshot.getValue(User.class);
-                            if(userN.equals(user.getUserName())){
-                                userName.setError("Username Already Exists Please Enter Another");
-                                userName.requestFocus();
-                                return;
+                if(!userN.isEmpty()) {
+                    readData(new FirebaseCallback() {
+                        @Override
+                        public void CallBack(String value) {
+                            if (value.equals(userN)) {
+                                userName.setError("Username Already Exists Please Enter another one");
+                                   userName.requestFocus();
+//                            Toast.makeText(addInformation.this, "Username Already Exists,Please Try again", Toast.LENGTH_LONG).show();
+
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    });
+                }
 
-                    }
-                });
-
-                if(userN.isEmpty()){
+                if (userN.isEmpty()) {
                     userName.setError("Please Enter a Username");
                     userName.requestFocus();
                     return;
                 }
 
                 if (add.isEmpty()) {
-                 address.setError("Please Enter and Address");
-                 address.requestFocus();
-                 return;
+                    address.setError("Please Enter and Address");
+                    address.requestFocus();
+                    return;
                 }
 
                 if (edc.isEmpty()) {
                     education.setError("Please Enter area of Education");
                     education.requestFocus();
-                    return;
-                }
-                    else {
+
+                } else {
                     Boolean added = addInfo(add, edc, ab);
                     Boolean chnged = changeUsername(userN);
                     if (added && chnged) {
@@ -115,8 +110,9 @@ public class addInformation extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    if (address.getText().length() > 100 || address.getText().length() < 0) {
+                    if (address.getText().length() > 3 || address.getText().length() < 0) {
                         address.setError("Incorrect Details Entered");
+
                     }
                 }
             }
@@ -138,7 +134,7 @@ public class addInformation extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
         HashMap<String, Object> map = new HashMap<>();
         map.put("userName", userName);
-        map.put("search",userName);
+        map.put("search", userName);
         reference.updateChildren(map);
         return true;
     }
@@ -161,5 +157,28 @@ public class addInformation extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         status("offline");
+    }
+
+    private void readData(final FirebaseCallback firebaseCallback) {
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    firebaseCallback.CallBack(user.getUserName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println(databaseError.getMessage());
+            }
+        });
+    }
+
+
+    private interface FirebaseCallback {
+        void CallBack(String value);
     }
 }

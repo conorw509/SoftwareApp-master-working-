@@ -31,10 +31,10 @@ public class register extends AppCompatActivity {
                     "(?=.*[a-zA-Z])" +      //any letter
                     //   "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
-                    ".{6,}" +               //at least 6 characters
+                    ".{10,}" +               //at least 10 characters
                     "$");
 
-    private EditText etEmail, etPass, userName;
+    private EditText etEmail, etPass;
     private Button bRegister;
     private TextView view;
     private FirebaseAuth mAuth;
@@ -154,6 +154,8 @@ public class register extends AppCompatActivity {
             }
         });
     }
+
+
 }
 
 
