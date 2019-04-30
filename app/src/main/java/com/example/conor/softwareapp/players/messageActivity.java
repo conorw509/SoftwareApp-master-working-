@@ -51,7 +51,6 @@ public class messageActivity extends AppCompatActivity {
     private User user;
     private ImageView profileImg;
     private ValueEventListener eventListener;
-    private List<messages> messageList;
     private APIService apiService;
     private boolean notify = false;
 

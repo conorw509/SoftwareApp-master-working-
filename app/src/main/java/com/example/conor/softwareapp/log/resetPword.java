@@ -41,7 +41,6 @@ public class resetPword extends AppCompatActivity {
                 email = sendEmail.getText().toString();
                 if (email.isEmpty()) {
                     sendEmail.setError("Please Enter An Email");
-
                 } else {
                     mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -51,6 +50,7 @@ public class resetPword extends AppCompatActivity {
                                 startActivity(new Intent(resetPword.this, Login.class));
                                 finish();
                             } else {
+                                Toast.makeText(resetPword.this, "Something Happened", Toast.LENGTH_LONG).show();
                                 String error = task.getException().getMessage();
                                 Toast.makeText(resetPword.this, error, Toast.LENGTH_SHORT).show();
                             }

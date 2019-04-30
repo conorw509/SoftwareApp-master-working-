@@ -41,10 +41,8 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
     private DrawerLayout drawable;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
-    private User user;
     private FloatingActionButton journalAdd;
     private Dialog dialog;
-    int count = 0;
     private FrameLayout frameLayout;
     private FragmentTransaction fragmentTransaction;
     private journalFragment journalFragment;
@@ -114,7 +112,7 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    user = snapshot.getValue(User.class);
+                   User user = snapshot.getValue(User.class);
                     if (firebaseUser.getUid().equals(user.getId())) {
                         ((TextView) findViewById(R.id.userNameHeader)).setText(user.getUserName());
                         ((TextView) findViewById(R.id.emailHeader)).setText(firebaseUser.getEmail());
@@ -137,7 +135,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
 
 
     private void happinessDialog() {
-        count++;
         dialog = new Dialog(journal.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_design);
@@ -179,35 +176,6 @@ public class journal extends AppCompatActivity implements com.example.conor.soft
                 journal.this.startActivity(logOutIntent);
             }
         });
-
-//        happy.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    happy.setColorFilter(getResources().getColor(R.color.colorAccent));
-//                }
-//                return false;
-//            }
-//        });
-//
-//        sad.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    sad.setColorFilter(getResources().getColor(R.color.colorAccent));
-//                }
-//                return false;
-//            }
-//        });
-//        bored.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_UP) {
-//                    bored.setColorFilter(getResources().getColor(R.color.colorAccent));
-//                }
-//                return false;
-//            }
-//        });
         dialog.show();
     }
 

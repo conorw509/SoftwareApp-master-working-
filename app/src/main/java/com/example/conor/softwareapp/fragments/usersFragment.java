@@ -56,12 +56,10 @@ public class usersFragment extends Fragment {
 
     public usersFragment() {
         // Required empty public constructor
-
     }
 
     public void finishActivity() {
         //getActivity().finish();
-
     }
 
     /**
@@ -191,7 +189,6 @@ public class usersFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
             getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-            //button pressed
         }
     }
 

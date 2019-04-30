@@ -42,7 +42,6 @@ public class journalFragment extends Fragment {
     private List<journalContent> journalContents;
     private FirebaseUser firebaseUser;
     private DatabaseReference reference;
-    //    private List<chatList> userList;
     private journalAdapter journalAdapter;
     private List<User> mUser;
 

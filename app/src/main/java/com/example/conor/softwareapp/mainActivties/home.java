@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.log.loginInHome;
-import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
