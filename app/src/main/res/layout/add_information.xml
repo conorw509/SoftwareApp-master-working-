@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:maxLength="100"
+        android:maxLength="1"
         android:maxLines="1"
         android:hint="Username" />
 
@@ -28,7 +28,7 @@
         android:id="@+id/addAdrs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="100"
+        android:maxLength="15"
         android:maxLines="1"
         android:hint="Address" />
 
@@ -36,7 +36,7 @@
         android:id="@+id/addEduc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLength="100"
+        android:maxLength="15"
         android:maxLines="1"
         android:hint="Education" />
 

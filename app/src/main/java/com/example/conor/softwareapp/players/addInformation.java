@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 
 public class addInformation extends AppCompatActivity {
@@ -59,15 +61,14 @@ public class addInformation extends AppCompatActivity {
                 ab = about.getText().toString().trim();
                 userN = userName.getText().toString().trim();
 
-                if(!userN.isEmpty()) {
+                if (!userN.isEmpty()) {
                     readData(new FirebaseCallback() {
                         @Override
                         public void CallBack(String value) {
                             if (value.equals(userN)) {
                                 userName.setError("Username Already Exists Please Enter another one");
-                                   userName.requestFocus();
-//                            Toast.makeText(addInformation.this, "Username Already Exists,Please Try again", Toast.LENGTH_LONG).show();
-
+                                userName.requestFocus();
+                                return;
                             }
                         }
 
@@ -85,11 +86,10 @@ public class addInformation extends AppCompatActivity {
                     address.requestFocus();
                     return;
                 }
-
                 if (edc.isEmpty()) {
                     education.setError("Please Enter area of Education");
                     education.requestFocus();
-
+                    return;
                 } else {
                     Boolean added = addInfo(add, edc, ab);
                     Boolean chnged = changeUsername(userN);
@@ -105,19 +105,6 @@ public class addInformation extends AppCompatActivity {
 
             }
         });
-
-        address.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    if (address.getText().length() > 3 || address.getText().length() < 0) {
-                        address.setError("Incorrect Details Entered");
-
-                    }
-                }
-            }
-        });
-
     }
 
     private Boolean addInfo(String addr, String ed, String abo) {
