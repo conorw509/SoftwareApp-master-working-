@@ -63,17 +63,6 @@
         android:visibility="gone"
         app:civ_border_color="#bfbfbf"
         app:civ_border_width="10dp" />
-
-    <TextView
-        android:id="@+id/lastMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/userView"
-        android:layout_alignRight="@id/userView"
-        android:layout_alignTop="@+id/userView"
-        android:maxLines="1"
-        android:paddingTop="35dp"
-        android:textColor="@color/colorPrimaryDark" />
 </RelativeLayout>
 
 

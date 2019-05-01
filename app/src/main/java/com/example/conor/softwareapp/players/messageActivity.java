@@ -95,7 +95,7 @@ public class messageActivity extends AppCompatActivity {
                 String msg = chatBox.getText().toString();
                 if (!msg.equals("")) {
                     sendMessage(firebaseUser.getUid(), userUuid, msg);
-                    chatBox.setText(" ");
+                    chatBox.setText("");
                 }
                 if (msg.isEmpty()) {
                     Toast.makeText(messageActivity.this, "You can't send a blank Message", Toast.LENGTH_LONG).show();
@@ -131,7 +131,6 @@ public class messageActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -196,7 +195,7 @@ public class messageActivity extends AppCompatActivity {
                                 public void onResponse(Call<myResponse> call, Response<myResponse> response) {
                                     if (response.code() == 200) {
                                         if (response.body().succeess != 1) {
-                                            Toast.makeText(messageActivity.this, "Failed!", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(messageActivity.this, "", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }

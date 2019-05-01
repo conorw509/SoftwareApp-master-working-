@@ -28,7 +28,6 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
     private Context mContext;
     private List<User> mUser;
     private boolean isChat;
-    private String theLastMsg;
 
     public usersAdapter(Context mContext, List<User> mUser, boolean isChat) {
         this.mContext = mContext;
@@ -49,12 +48,6 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
         final User user = mUser.get(i);
         viewHolder.userName.setText(user.getUserName());
         Glide.with(mContext).load(user.getImageUrl()).into(viewHolder.proile_img);
-
-        if (isChat) {
-            lastMsg(user.getId(), viewHolder.lastMsg);
-        } else {
-            viewHolder.lastMsg.setVisibility(View.GONE);
-        }
 
         if (isChat) {
             if (user.getStatus().equals("online")) {
@@ -86,7 +79,7 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
     
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView userName, lastMsg;
+        public TextView userName;
         public ImageView proile_img;
         private ImageView imgOn;
         private ImageView imgOff;
@@ -95,37 +88,8 @@ public class usersAdapter extends RecyclerView.Adapter<usersAdapter.ViewHolder> 
             super(itemView);
             userName = itemView.findViewById(R.id.userView);
             proile_img = itemView.findViewById(R.id.profileImg);
-            lastMsg = itemView.findViewById(R.id.lastMsg);
             imgOn = itemView.findViewById(R.id.imgOn);
             imgOff = itemView.findViewById(R.id.imgOff);
         }
-    }
-
-    private void lastMsg(final String userUuid, final TextView last_msg) {
-        theLastMsg = "default";
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("chats");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    messages msg = snapshot.getValue(messages.class);
-                    theLastMsg = msg.getMsg();
-                }
-                switch (theLastMsg) {
-                    case "default":
-                        last_msg.setText("No Message");
-                        break;
-                    default:
-                        last_msg.setText(theLastMsg);
-                        break;
-                }
-                theLastMsg = "default";
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
     }
 }

@@ -63,7 +63,8 @@
         <activity android:name=".mainActivties.feedback"
             android:parentActivityName=".mainActivties.home"/>
 
-        <activity android:name=".players.musicPlayer" />
+        <activity android:name=".players.musicPlayer"
+            android:parentActivityName=".mainActivties.audio"/>
         <activity android:name=".mainActivties.support" />
         <activity android:name=".mainActivties.journal" />
         <activity android:name=".log.loginInHome" />

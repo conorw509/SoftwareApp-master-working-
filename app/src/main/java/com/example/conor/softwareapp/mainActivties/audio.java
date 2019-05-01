@@ -186,7 +186,6 @@ public class audio extends AppCompatActivity {
                     Intent goToPlayer = new Intent(getApplicationContext(), musicPlayer.class);
                     goToPlayer.putExtra("songPosition", position).putExtra("urls", urls).putParcelableArrayListExtra("music/art", musicList);
                     audio.this.startActivity(goToPlayer);
-                    finish();
                 }
             }
         });

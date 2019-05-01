@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:11.6.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'

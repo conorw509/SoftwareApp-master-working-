@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 public class musicPlayer extends AppCompatActivity {
 
-    private Button playBtn, audioBtn, nextBtn, prevBtn;
+    private Button playBtn,audioBtn,nextBtn, prevBtn;
     private SeekBar positionBar;
     private TextView elapsedTimeLabel, remainingTime, songName, artist;
     private MediaPlayer mediaPlayer;
@@ -51,7 +51,6 @@ public class musicPlayer extends AppCompatActivity {
         audioBtn = (Button) findViewById(R.id.BackToAudio);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mediaPlayer = new MediaPlayer();
-
         position = getIntent().getExtras().getInt("songPosition", 0);
         arrayList = getIntent().getExtras().getStringArrayList("urls");
         songUrl = arrayList.get(position);
