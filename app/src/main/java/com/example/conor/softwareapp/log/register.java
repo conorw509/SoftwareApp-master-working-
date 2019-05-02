@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.conor.softwareapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -70,32 +72,30 @@ public class register extends AppCompatActivity {
             public void onClick(View v) {
                 email = etEmail.getText().toString().trim();
                 password = etPass.getText().toString().trim();
-                checkEmail();
-                if (email.isEmpty() && password.isEmpty()) {
-                    Toast.makeText(register.this, "Fields are empty", Toast.LENGTH_LONG).show();
+
+                if (email.isEmpty()) {
+                    etEmail.setError("Please enter an Email");
+                    etEmail.requestFocus();
                     return;
-                } else {
-                    if (email.isEmpty()) {
-                        etEmail.setError("Please enter an Email");
-                        etEmail.requestFocus();
-                        return;
-                    }
-                    if (password.isEmpty()) {
-                        etPass.setError("Please enter a Password");
-                        etPass.requestFocus();
-                        return;
-                    }
                 }
+                if (password.isEmpty()) {
+                    etPass.setError("Please enter a Password");
+                    etPass.requestFocus();
+                    return;
+                }
+
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     etEmail.setError("Please enter a Valid email");
                     etEmail.requestFocus();
                     return;
                 }
+
                 if (!PASSWORD_PATTERN.matcher(password).matches()) {
                     etPass.setError("Password is to weak");
                     etEmail.requestFocus();
                     return;
                 } else {
+                    checkEmail();
                     registerUser(email, password);
                 }
             }
@@ -110,7 +110,7 @@ public class register extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             firebaseUser = mAuth.getCurrentUser();
                             final String userId = firebaseUser.getUid();
-                            final String userNam = "user"+Math.random();
+                            final String userNam = "user" + Math.random();
                             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
