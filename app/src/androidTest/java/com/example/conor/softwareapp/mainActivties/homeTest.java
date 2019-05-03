@@ -65,7 +65,8 @@ public class homeTest {
     public void shouldCheckIfNavViewDisplayed() throws Exception{
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         rule.launchActivity(new Intent());
-        Espresso.onView(withId(R.id.navView)).check(matches(isClosed(Gravity.RIGHT)))
+        Espresso.onView(withId(R.id.drawerLayout)).check(matches(isClosed(Gravity.RIGHT)))
                 .perform(DrawerActions.open()).check(matches(isOpen()));
     }
+
 }
