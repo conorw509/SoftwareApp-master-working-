@@ -49,12 +49,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:11.6.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // Espresso UI Testing
     androidTestImplementation "com.android.support.test.espresso:espresso-core:2.2.1"
-// Optional if you need to detect intents.
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:2.2.1"
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-
+    implementation group: 'com.android.support.test.espresso', name: 'espresso-contrib', version: '3.0.1'
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
