@@ -17,7 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,8 +75,7 @@ public class profile extends AppCompatActivity {
                         Glide.with(profile.this).load(photoUrl).into(profileImg);
                     }
                 }
-            }
-
+           }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
