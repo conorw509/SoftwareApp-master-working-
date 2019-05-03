@@ -61,12 +61,12 @@ public class homeTest {
         Espresso.onView(withId(R.id.textGrid)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void shouldCheckIfNavViewDisplayed() throws Exception{
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        rule.launchActivity(new Intent());
-        Espresso.onView(withId(R.id.drawerLayout)).check(matches(isClosed(Gravity.RIGHT)))
-                .perform(DrawerActions.open()).check(matches(isOpen()));
-    }
+//    @Test
+//    public void shouldCheckIfNavViewDisplayed() throws Exception{
+//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        rule.launchActivity(new Intent());
+//        Espresso.onView(withId(R.id.drawerLayout)).check(matches(isClosed(Gravity.RIGHT)))
+//                .perform(DrawerActions.open()).check(matches(isOpen()));
+//    }
 
 }
