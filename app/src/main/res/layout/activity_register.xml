@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/textGrid"
-        android:text="Register"
+        android:text="@string/register"
         android:textSize="34dp"
         android:layout_centerInParent="true"
         android:textColor="#ffffff"
@@ -36,7 +36,7 @@
             android:layout_gravity="center"
             android:maxLines="1"
             android:background="@drawable/edittextstyle"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColor="#fff"
             android:textColorHint="#fff" />
 
@@ -46,17 +46,18 @@
             android:layout_height="66dp"
             android:layout_gravity="center"
             android:background="@drawable/edittextstyle"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingTop="10dp"
             android:textColor="#fff"
             android:textColorHint="#fff" />
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="15dp"
-            android:text="Password must be at least 10 characters with no spaces"
+            android:text="@string/password_must_be_at_least_10_characters_with_no_spaces"
             android:textColor="#fff"
             android:textStyle="bold" />
 
@@ -64,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:text="Password must have at least one Capital Letter"
+            android:text="@string/password_must_have_at_least_one_capital_letter"
             android:textColor="#fff"
             android:textStyle="bold"
             />
@@ -73,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="5dp"
-            android:text="Password must have at least one Number"
+            android:text="@string/password_must_have_at_least_one_number"
             android:textColor="#fff"
             android:textStyle="bold"
             />
@@ -86,7 +87,7 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/buttonstyleselector"
             android:gravity="center"
-            android:text="Register"
+            android:text="@string/register"
             android:textColor="#fff" />
 
         <TextView
@@ -95,7 +96,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="Return To Login"
+            android:text="@string/return_to_login"
             android:textColor="#fff"
             android:textSize="20dp" />
 

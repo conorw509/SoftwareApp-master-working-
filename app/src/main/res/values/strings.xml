@@ -85,5 +85,19 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="my_mental_health">My Mental Health</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="back">Back</string>
+    <string name="register">Register</string>
+    <string name="password_must_be_at_least_10_characters_with_no_spaces">Password must be at least 10 characters with no spaces</string>
+    <string name="password_must_have_at_least_one_capital_letter">Password must have at least one Capital Letter</string>
+    <string name="password_must_have_at_least_one_number">Password must have at least one Number</string>
+    <string name="return_to_login">Return To Login</string>
+    <string name="please_enter_your_email">Please Enter your Email</string>
+    <string name="reset">Reset</string>
+    <string name="by_clicking_reset_you_will_receive_an_email_to_reset_your_password">By clicking RESET, you will receive an email to reset your password</string>
 
 </resources>

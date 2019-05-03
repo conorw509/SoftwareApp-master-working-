@@ -122,7 +122,7 @@ public class usersFragment extends Fragment {
     }
 
     private void search(String s) {
-        fireBaseUser = mAuth.getInstance().getCurrentUser();
+        fireBaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
                 .startAt(s).endAt(s+"\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
@@ -153,7 +153,7 @@ public class usersFragment extends Fragment {
 
     private void readUsers() {
 
-        fireBaseUser = mAuth.getInstance().getCurrentUser();
+        fireBaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         reference.addValueEventListener(new ValueEventListener() {
             @Override

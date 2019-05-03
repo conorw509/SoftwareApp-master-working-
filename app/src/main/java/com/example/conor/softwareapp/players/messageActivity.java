@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.conor.softwareapp.R;
 import com.example.conor.softwareapp.adapters.messageAdapter;
-import com.example.conor.softwareapp.fragments.APIService;
+import com.example.conor.softwareapp.notifications.APIService;
 import com.example.conor.softwareapp.mainActivties.chat;
 import com.example.conor.softwareapp.model.User;
 import com.example.conor.softwareapp.model.messages;

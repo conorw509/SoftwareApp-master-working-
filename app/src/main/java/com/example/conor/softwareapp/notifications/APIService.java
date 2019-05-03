@@ -1,7 +1,5 @@
-package com.example.conor.softwareapp.fragments;
+package com.example.conor.softwareapp.notifications;
 
-import com.example.conor.softwareapp.notifications.Sender;
-import com.example.conor.softwareapp.notifications.myResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;

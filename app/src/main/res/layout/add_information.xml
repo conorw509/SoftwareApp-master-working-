@@ -20,9 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:maxLength="1"
+        android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+        android:maxLength="15"
         android:maxLines="1"
-        android:hint="Username" />
+        android:hint="Username(Must be lowercase)" />
 
     <EditText
         android:id="@+id/addAdrs"

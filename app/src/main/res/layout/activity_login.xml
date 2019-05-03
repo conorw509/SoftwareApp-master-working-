@@ -21,7 +21,7 @@
         android:gravity="center"
         android:paddingBottom="40dp"
         android:paddingTop="30dp"
-        android:text="My Mental Health"
+        android:text="@string/my_mental_health"
         android:textColor="#ffffff"
         android:textSize="34dp"
 
@@ -41,7 +41,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:background="@drawable/edittextstyle"
-            android:hint="Email"
+            android:hint="@string/email"
             android:maxLines="1"
             android:textColor="#fff"
             android:textColorHint="#fff" />
@@ -53,7 +53,7 @@
             android:layout_height="66dp"
             android:layout_gravity="center"
             android:background="@drawable/edittextstyle"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:paddingTop="10dp"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="Forgot Password?"
+            android:text="@string/forgot_password"
             android:textColor="@color/colorAccent"
             android:textSize="15dp" />
 
@@ -78,7 +78,7 @@
             android:layout_marginTop="70dp"
             android:background="@drawable/buttonstyleselector"
             android:gravity="center"
-            android:text="Login"
+            android:text="@string/login"
             android:textColor="#fff" />
 
         <Button
@@ -88,7 +88,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/buttonstyleselector"
             android:gravity="center"
-            android:text="Back"
+            android:text="@string/back"
             android:textColor="#fff" />
 
     </LinearLayout>
