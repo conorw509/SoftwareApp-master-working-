@@ -12,7 +12,12 @@ android {
     }
 
 
-
+    android {
+        // [...]
+        packagingOptions {
+            pickFirst 'protobuf.meta'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
